@@ -202,6 +202,53 @@ namespace Kyrsach2WINFORM
             }
         }
 
+        // БЛОК РАБОТЫ С CAPTCHA
+        // Функцция для формирования изображения
+        //Делает картинку
+        Bitmap CreateImage(int W, int H)
+        {
+            // ОЧИЩАЕМ СТРОКУ
+            Text = string.Empty;
+
+            //ФОРМИРУЕМ ИЗОБРАЖЕНИЕ
+            Random random = new Random();
+
+            Bitmap ImageActual = new Bitmap(W, H);
+
+            Brush[] Colors = { Brushes.Black, Brushes.Red, Brushes.Green, Brushes.Purple };
+
+            Graphics G = Graphics.FromImage((Image)ImageActual);
+
+            G.Clear(Color.Gray);
+
+            string Words = "1234567890QWERTYUIOPASDFGHJKLZXCVBNM";
+
+            for (int i = 0; i < 4; i++)
+                Text += Words[random.Next(Words.Length)];
+
+            int X = random.Next(0, W - 90);
+            int Y = random.Next(0, H - 90);
+
+            G.DrawString(Text[0].ToString(), new Font("Atial", 15), Colors[random.Next(Colors.Length)], new PointF(X, Y));
+            G.DrawString(Text[1].ToString(), new Font("Atial", 15), Colors[random.Next(Colors.Length)], new PointF(X + 17, random.Next(Y - 5, Y + 5)));
+            G.DrawString(Text[2].ToString(), new Font("Atial", 15), Colors[random.Next(Colors.Length)], new PointF(X + 33, random.Next(Y - 5, Y + 5)));
+            G.DrawString(Text[3].ToString(), new Font("Atial", 15), Colors[random.Next(Colors.Length)], new PointF(X + 50, random.Next(Y - 5, Y + 5)));
+
+            //ПОМЕХИ
+            G.DrawLine(Pens.Black, new Point(0, 0), new Point(W - 1, H - 1));
+            G.DrawLine(Pens.Black, new Point(0, H - 1), new Point(W - 1, 0));
+
+            G.DrawLine(Pens.Black, new Point(X - 20, Y + 15), new Point(X + 70, Y + 15));
+
+            return ImageActual;
+        }
+
+        // Кнопка для изменения изображеня Captcha
+        private void button4_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = CreateImage(pictureBox1.Width, pictureBox1.Height);
+        }
+
 
         //Закрыть
         private void button3_Click(object sender, EventArgs e)
