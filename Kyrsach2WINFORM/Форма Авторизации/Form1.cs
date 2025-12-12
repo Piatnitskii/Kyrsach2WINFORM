@@ -64,11 +64,14 @@ namespace Kyrsach2WINFORM
             textBox2.Text = "";
             textBox3.Text = "";
             label1.Visible = false;
+        }
 
-            if (Status)
+        // Пытается установить соединение
+        private void Try_Connect()
+        {
+            using (MySqlConnection Con = new MySqlConnection(ConnectAndData.TryConnect))
             {
-                label1.Text = "Введен неверный Логин или Пароль";
-                label1.Visible = true;
+                Con.Open();
             }
         }
 
@@ -110,6 +113,24 @@ namespace Kyrsach2WINFORM
 
                 //Забираем данные из базы в виртуальную таблицу
                 DataTable dt = null;
+
+                if (Login == ConfigurationManager.AppSettings["AccauntName"] && Password == ConfigurationManager.AppSettings["AccauntPassword"])
+                {
+                    Try_Connect();
+
+                    this.Visible = false;
+                    AdminAdminForm Form = new AdminAdminForm();
+                    Form.ShowDialog();
+
+                    // не важно была ли капча
+                    DisableCaptcha();
+                    this.Visible = true;
+                    Clear();
+
+
+                    return;
+                }
+
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();

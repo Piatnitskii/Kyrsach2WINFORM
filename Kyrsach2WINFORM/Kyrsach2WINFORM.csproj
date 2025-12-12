@@ -54,6 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminAdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAdminForm.Designer.cs">
+      <DependentUpon>AdminAdminForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Классы-Объекты\CreateWord.cs" />
     <Compile Include="Классы-Объекты\Optimize.cs" />
     <Compile Include="Классы-Объекты\Client.cs" />
@@ -257,6 +263,9 @@
     <Compile Include="Форма Записи\Zapici.Designer.cs">
       <DependentUpon>Zapici.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminAdminForm.resx">
+      <DependentUpon>AdminAdminForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Форма Записи\AddZapicResult.resx">
       <DependentUpon>AddZapicResult.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,6 +372,12 @@
     <EmbeddedResource Include="Форма Записи\Zapici.resx">
       <DependentUpon>Zapici.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Dump and CSV\Role.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dump and CSV\User.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -796,6 +811,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dump and CSV\BarBerDump.sql" />
     <Content Include="photo\02.11.2025232340_55_ТестТ.Т.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -807,6 +823,9 @@
     </Content>
     <Content Include="photo\picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Structure.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\icons8-обновление-24.png" />
     <None Include="Resources\icons8-дата-70.png" />
