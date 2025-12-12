@@ -1,0 +1,819 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{001F6B68-F885-4107-BEB4-A2C1C4B18367}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Kyrsach2WINFORM</RootNamespace>
+    <AssemblyName>Kyrsach2WINFORM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=9.2.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector NET 9.2\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.2\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Классы-Объекты\CreateWord.cs" />
+    <Compile Include="Классы-Объекты\Optimize.cs" />
+    <Compile Include="Классы-Объекты\Client.cs" />
+    <Compile Include="Классы-Объекты\Emploey.cs" />
+    <Compile Include="Классы-Объекты\FormManager.cs" />
+    <Compile Include="Классы-Объекты\Service.cs" />
+    <Compile Include="Классы-Объекты\User.cs" />
+    <Compile Include="Классы-Объекты\zapici.cs" />
+    <Compile Include="Форма Записи\AddZapicResult.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicResult.Designer.cs">
+      <DependentUpon>AddZapicResult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapiciData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapiciData.Designer.cs">
+      <DependentUpon>AddZapiciData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicYslyga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicYslyga.Designer.cs">
+      <DependentUpon>AddZapicYslyga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapiciMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapiciMaster.Designer.cs">
+      <DependentUpon>AddZapiciMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicClient.Designer.cs">
+      <DependentUpon>AddZapicClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicWiz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapicWiz.Designer.cs">
+      <DependentUpon>AddZapicWiz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Справочники\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Справочники\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Клиенты\AddClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Клиенты\AddClient.Designer.cs">
+      <DependentUpon>AddClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Работники\AddEmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Работники\AddEmp.Designer.cs">
+      <DependentUpon>AddEmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Справочники\AddPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Справочники\AddPost.Designer.cs">
+      <DependentUpon>AddPost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Юзеры\AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Юзеры\AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Услуг\AddYslyga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Услуг\AddYslyga.Designer.cs">
+      <DependentUpon>AddYslyga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\AddZapic.Designer.cs">
+      <DependentUpon>AddZapic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Справочники\books.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Справочники\books.Designer.cs">
+      <DependentUpon>books.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Клиенты\Clients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Клиенты\Clients.Designer.cs">
+      <DependentUpon>Clients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Классы-Объекты\ConnectAndData.cs" />
+    <Compile Include="Форма Работники\Employee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Работники\Employee.Designer.cs">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Авторизации\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Авторизации\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Меню для Менеджера\Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Меню для Менеджера\Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Меню для Админа\MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Меню для Админа\MenuAdmin.Designer.cs">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Оплат\Oplata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Оплат\Oplata.Designer.cs">
+      <DependentUpon>Oplata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Оплат\Otchet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Оплат\Otchet.Designer.cs">
+      <DependentUpon>Otchet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Форма Услуг\ReadctYslyg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Услуг\ReadctYslyg.Designer.cs">
+      <DependentUpon>ReadctYslyg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Справочники\RedactCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Справочники\RedactCategory.Designer.cs">
+      <DependentUpon>RedactCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Клиенты\RedactClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Клиенты\RedactClient.Designer.cs">
+      <DependentUpon>RedactClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Работники\RedactEmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Работники\RedactEmp.Designer.cs">
+      <DependentUpon>RedactEmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Оплат\RedactPlat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Оплат\RedactPlat.Designer.cs">
+      <DependentUpon>RedactPlat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Справочники\RedactRoly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Справочники\RedactRoly.Designer.cs">
+      <DependentUpon>RedactRoly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Юзеры\RedactUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Юзеры\RedactUser.Designer.cs">
+      <DependentUpon>RedactUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\RedactZapici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\RedactZapici.Designer.cs">
+      <DependentUpon>RedactZapici.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Юзеры\User.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Юзеры\User.Designer.cs">
+      <DependentUpon>User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Услуг\Yslygy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Услуг\Yslygy.Designer.cs">
+      <DependentUpon>Yslygy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Форма Записи\Zapici.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Записи\Zapici.Designer.cs">
+      <DependentUpon>Zapici.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Форма Записи\AddZapicResult.resx">
+      <DependentUpon>AddZapicResult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapiciData.resx">
+      <DependentUpon>AddZapiciData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapicYslyga.resx">
+      <DependentUpon>AddZapicYslyga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapiciMaster.resx">
+      <DependentUpon>AddZapiciMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapicClient.resx">
+      <DependentUpon>AddZapicClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapicWiz.resx">
+      <DependentUpon>AddZapicWiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Справочники\AddCategory.resx">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Клиенты\AddClient.resx">
+      <DependentUpon>AddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Работники\AddEmp.resx">
+      <DependentUpon>AddEmp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Справочники\AddPost.resx">
+      <DependentUpon>AddPost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Юзеры\AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Услуг\AddYslyga.resx">
+      <DependentUpon>AddYslyga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\AddZapic.resx">
+      <DependentUpon>AddZapic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Справочники\books.resx">
+      <DependentUpon>books.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Клиенты\Clients.resx">
+      <DependentUpon>Clients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Работники\Employee.resx">
+      <DependentUpon>Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Авторизации\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Меню для Менеджера\Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Меню для Админа\MenuAdmin.resx">
+      <DependentUpon>MenuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Оплат\Oplata.resx">
+      <DependentUpon>Oplata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Оплат\Otchet.resx">
+      <DependentUpon>Otchet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Форма Услуг\ReadctYslyg.resx">
+      <DependentUpon>ReadctYslyg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Справочники\RedactCategory.resx">
+      <DependentUpon>RedactCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Клиенты\RedactClient.resx">
+      <DependentUpon>RedactClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Работники\RedactEmp.resx">
+      <DependentUpon>RedactEmp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Оплат\RedactPlat.resx">
+      <DependentUpon>RedactPlat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Справочники\RedactRoly.resx">
+      <DependentUpon>RedactRoly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Юзеры\RedactUser.resx">
+      <DependentUpon>RedactUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\RedactZapici.resx">
+      <DependentUpon>RedactZapici.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Юзеры\User.resx">
+      <DependentUpon>User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Услуг\Yslygy.resx">
+      <DependentUpon>Yslygy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Форма Записи\Zapici.resx">
+      <DependentUpon>Zapici.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Отчет.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Талон.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-double-right-30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\free-icon-exit-1286969.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-double-right-30 %281%29.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-logout-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-logout-32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-double-left-30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-plus-24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-карандаш-25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-карандаш-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-восклицательный-знак-30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-удалить-48.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-лупа-30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-галочка-50.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Клиенты.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Записи.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Оплата.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Справочники.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Услуги.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Сотрудники.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ЛОГО.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ЛОГОпоменьше.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-лезвие-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-усы-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-100 %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-100 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-96 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-закрыть-23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-настройки-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-настройки-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-настройки-35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-парикмахерская-100 %284%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-45 -2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-45-Коричневый.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-45-Коричневые.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-45-Коричневые.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-45-Корич.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-45 -Биски.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-персонал-60 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-60 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-клиенты-65 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-60 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-записи-65 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-60 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-аватар-пользователя-65 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-ножницы-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-ножницы-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-ножницы-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-ножницы-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-ножницы-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-60 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-оплата-наличными-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-28 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-28 %283%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-28 %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-45 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-выход-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-идея-настроек-55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-идея-настроек-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-идея-настроек-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-идея-настроек-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-55 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-стопка-книг-50 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="photo\02.11.2025232340_55_ТестТ.Т.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photo\49_ДианаФ.Р.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photo\56_НенеборисП.Ю.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="photo\picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\icons8-дата-70.png" />
+    <None Include="Resources\icons8-монеты-50.png" />
+    <None Include="Resources\icons8-монеты-70.png" />
+    <None Include="Resources\icons8-время-50.png" />
+    <None Include="Resources\icons8-время-70.png" />
+    <None Include="Resources\icons8-дата-50.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
