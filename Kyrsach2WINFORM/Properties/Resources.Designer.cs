@@ -723,6 +723,16 @@ namespace Kyrsach2WINFORM.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_обновление_24 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_обновление_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_оплата_наличными_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8_оплата_наличными_45", resourceCulture);

@@ -808,6 +808,7 @@
     <Content Include="photo\picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\icons8-обновление-24.png" />
     <None Include="Resources\icons8-дата-70.png" />
     <None Include="Resources\icons8-монеты-50.png" />
     <None Include="Resources\icons8-монеты-70.png" />
