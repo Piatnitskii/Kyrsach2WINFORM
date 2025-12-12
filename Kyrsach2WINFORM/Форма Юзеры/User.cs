@@ -102,18 +102,38 @@ namespace Kyrsach2WINFORM
         //Скрываем некоторые данные
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
+            if (ShowText)
             {
-                if (e.Value != null)
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО" && e.RowIndex != ThisRow)
                 {
-                    var Val = e.Value.ToString().Split(' ');
-                    string Result;
-                    if (Val.Length == 3 && Val[2].Trim() != "")
-                         Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
-                    else
-                        Result = Val[0] + " " + (Val[1])[0] + ".";
+                    if (e.Value != null)
+                    {
+                        var Val = e.Value.ToString().Split(' ');
+                        string Result;
+                        if (Val.Length == 3 && Val[2].Trim() != "")
+                            Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
+                        else
+                            Result = Val[0] + " " + (Val[1])[0] + ".";
 
-                    e.Value = Result;
+                        e.Value = Result;
+                    }
+                }
+            }
+            else
+            {
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
+                {
+                    if (e.Value != null)
+                    {
+                        var Val = e.Value.ToString().Split(' ');
+                        string Result;
+                        if (Val.Length == 3 && Val[2].Trim() != "")
+                            Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
+                        else
+                            Result = Val[0] + " " + (Val[1])[0] + ".";
+
+                        e.Value = Result;
+                    }
                 }
             }
         }
@@ -193,17 +213,32 @@ namespace Kyrsach2WINFORM
             this.Close();
         }
 
+        bool ShowText = false;
+        int ThisRow;
         //Подсветка строки на которую направлен указатель мыши
         private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex > -1)
+            {
+                
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+
+                ShowText = true;
+                ThisRow = e.RowIndex;
+                dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value;
+            }
         }
         //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
         private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex > -1)
+            {
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                ShowText = false;
+                dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value;
+            }
+                
         }
+
     }
 }
