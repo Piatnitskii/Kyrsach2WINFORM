@@ -27,16 +27,21 @@ namespace Kyrsach2WINFORM
         public Auth()
         {
             InitializeComponent();
+            DisableCaptcha();
+            Size_Min();
+        }
 
-            //Скругляем рамки окна
+        //Скругляем рамки окна
+        void RoundShape()
+        {
             GraphicsPath graphicsPath = new GraphicsPath();
 
             int cornerRadius = 10;
 
             graphicsPath.AddArc(0, 0, cornerRadius, cornerRadius, 180, 90);
             graphicsPath.AddArc(this.Width - cornerRadius, 0, cornerRadius, cornerRadius, 270, 90);
-            graphicsPath.AddArc(this.Width - cornerRadius, this.Height -  cornerRadius, cornerRadius, cornerRadius, 0, 90);
-            graphicsPath.AddArc(0, this.Height - cornerRadius,  cornerRadius, cornerRadius, 90, 90);
+            graphicsPath.AddArc(this.Width - cornerRadius, this.Height - cornerRadius, cornerRadius, cornerRadius, 0, 90);
+            graphicsPath.AddArc(0, this.Height - cornerRadius, cornerRadius, cornerRadius, 90, 90);
 
             Region roundedRegion = new Region(graphicsPath);
             this.Region = roundedRegion;
@@ -57,6 +62,8 @@ namespace Kyrsach2WINFORM
         {
             textBox1.Text = "";
             textBox2.Text = "";
+            textBox3.Text = "";
+            label1.Visible = false;
 
             if (Status)
             {
@@ -76,6 +83,26 @@ namespace Kyrsach2WINFORM
                     label1.Text = "Не заполнено одно из полей!";
                     label1.Visible = true;
                     return;
+                }
+
+                // Проверяем капчу
+                if (ResultAvtorize)
+                {
+                    //капча пустая - выходим
+                    if (textBox3.Text == "")
+                    {
+                        label1.Text = "Не заполнено одно из полей!";
+                        return;
+                    }
+                    else if (!(textBox3.Text == Text)) // капча неверная - выводим сообщение о блокировке
+                    {
+                        MessageBox.Show($"Введена неверная Captcha, форма будет заблокирована на 10 секунд!", "Ошибка авторизации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        Status = false;
+                        Clear();
+                        Effects();
+                        return;
+                    }
                 }
 
                 string Login = textBox1.Text;
@@ -99,10 +126,21 @@ namespace Kyrsach2WINFORM
                 // Нет такого пользователя/ПРОВЕРКА логина
                 if (dt.Rows.Count == 0)
                 {
-                    //Активируем капчу
-                    //MessageBox.Show("Введен неверный Логин или Пароль", "Ошибка доступа, пользователь отсутствует", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Status = true;
+                    Status = false;
                     Clear();
+                    //Активируем капчу
+                    if (ResultAvtorize == false)
+                    {
+                        ResultAvtorize = true;
+                        MessageBox.Show($"Введен не правильный логин или пароль, для продолжения вам необходимо пройти CAPTCHA", "Ошибка авторизации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveCaptcha();
+                    }
+                    else
+                    {
+                        Effects();
+                    }
+                    
+                    
                     return;
                 }
 
@@ -127,6 +165,7 @@ namespace Kyrsach2WINFORM
                     
 
                     Clear();
+                    DisableCaptcha();
                     Status = false;
                     label1.Visible = false;
                     this.Visible = true;
@@ -134,9 +173,20 @@ namespace Kyrsach2WINFORM
                 else //НЕВЕРНЫЙ пароль
                 {
                     //Активируем капчу
-                    //MessageBox.Show("Введен неверный Логин или Пароль", "Ошибка доступа, пользователь отсутствует", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Status = true;
+                    Status = false;
                     Clear();
+
+                    //Активируем капчу
+                    if (ResultAvtorize == false)
+                    {
+                        ResultAvtorize = true;
+                        MessageBox.Show($"Введен не правильный логин или пароль, для продолжения вам необходимо пройти CAPTCHA", "Ошибка авторизации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveCaptcha();
+                    }
+                    else
+                    {
+                        Effects();
+                    }
                     return;
                 }
             }
@@ -203,6 +253,14 @@ namespace Kyrsach2WINFORM
         }
 
         // БЛОК РАБОТЫ С CAPTCHA
+
+        // Для Капчи
+        bool Result = true;
+        string Text;
+        // не прошли авторизацию - true
+        bool ResultAvtorize = false;
+
+
         // Функцция для формирования изображения
         //Делает картинку
         Bitmap CreateImage(int W, int H)
@@ -247,6 +305,97 @@ namespace Kyrsach2WINFORM
         private void button4_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = CreateImage(pictureBox1.Width, pictureBox1.Height);
+        }
+
+
+        // БЛОКИРОВКА
+        int ForTimer = 10;
+
+        // Тикет создается таймером 1 раз в опред период
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = $"Авторизация доступна через {ForTimer--}";
+
+            if (ForTimer == -1)
+            {
+                timer1.Stop();
+                label1.Visible = false;
+                ForTimer = 10;
+
+                UnFreez();
+            }
+        }
+
+
+        // Блокировка экрана
+        private void Effects()
+        {
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = false;
+
+            button1.Enabled = false;
+            button4.Enabled = false;
+
+            textBox3.Text = "";
+            label1.Text = $"Авторизация доступна через ";
+            label1.Visible = true;
+            timer1.Start();
+        }
+
+        // Показываем капчу
+        private void ActiveCaptcha()
+        {
+            pictureBox1.Image = CreateImage(pictureBox1.Width, pictureBox1.Height);
+
+            pictureBox1.Visible = true;
+            textBox3.Enabled = true;
+            label5.Visible = true;
+            button4.Enabled = true;
+            
+            Size_Max();
+        }
+        // Разморозка формы
+        private void UnFreez()
+        {
+            textBox1.Enabled = true;
+            textBox2.Enabled = true;
+            textBox3.Enabled = true;
+
+            button1.Enabled = true;
+            button4.Enabled = true;
+        }
+
+        // Убераем капчу
+        private void DisableCaptcha()
+        {
+            textBox1.Enabled = true;
+            textBox2.Enabled = true;
+            button1.Enabled = true;
+
+            textBox3.Text = "";
+            ResultAvtorize = false;
+            Size_Min();
+
+        }
+
+
+        // Делаем форму меньше
+        void Size_Min()
+        {   // 770; 346
+            button3.Location = new Point(392, 4);
+            this.Size = new Size(346, this.Size.Height);
+            this.Size = new Size(425, this.Size.Width);
+            RoundShape();
+        }
+
+        // Делаем форму больше
+        void Size_Max()
+        {   // 770; 346
+            button3.Location = new Point(735, 4);
+            this.Size = new Size(346, this.Size.Height);
+            this.Size = new Size(770, this.Size.Width);
+            RoundShape();
         }
 
 
