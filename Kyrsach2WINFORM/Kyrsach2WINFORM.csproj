@@ -372,6 +372,12 @@
     <EmbeddedResource Include="Форма Записи\Zapici.resx">
       <DependentUpon>Zapici.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Dump and CSV\Role.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Dump and CSV\User.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -805,6 +811,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dump and CSV\BarBerDump.sql" />
     <Content Include="photo\02.11.2025232340_55_ТестТ.Т.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

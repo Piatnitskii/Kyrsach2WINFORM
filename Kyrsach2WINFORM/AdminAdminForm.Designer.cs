@@ -37,6 +37,7 @@ namespace Kyrsach2WINFORM
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -107,6 +108,7 @@ namespace Kyrsach2WINFORM
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.button3.Enabled = false;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button3.Location = new System.Drawing.Point(258, 199);
@@ -115,6 +117,7 @@ namespace Kyrsach2WINFORM
             this.button3.TabIndex = 2;
             this.button3.Text = "Импортировать";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // comboBox1
             // 
@@ -124,6 +127,7 @@ namespace Kyrsach2WINFORM
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(287, 34);
             this.comboBox1.TabIndex = 3;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -133,6 +137,10 @@ namespace Kyrsach2WINFORM
             this.label1.Size = new System.Drawing.Size(136, 26);
             this.label1.TabIndex = 4;
             this.label1.Text = "Имя таблицы";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // AdminAdminForm
             // 
@@ -147,6 +155,7 @@ namespace Kyrsach2WINFORM
             this.Name = "AdminAdminForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Форма администратора по умолчанию";
+            this.Load += new System.EventHandler(this.AdminAdminForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -165,5 +174,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
