@@ -34,7 +34,7 @@ namespace Kyrsach2WINFORM
         {
             dataGridView2.ClearSelection();
         }
-        // Чистим 
+        // Чистим  от выделения
         private void dataGridView2_Sorted(object sender, EventArgs e)
         {
             dataGridView2.ClearSelection();
@@ -102,6 +102,8 @@ namespace Kyrsach2WINFORM
             }
         }
 
+
+        //РАБОТА С ДАННЫМИ
         // Обновить сотрудника
         private void button1_Click(object sender, EventArgs e)
         {
@@ -165,24 +167,54 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        // Скрываем некоторые данные
+        // Скрываем персональные данные ФИО и номер телефона
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
-            {
-                if (e.Value != null)
-                {
-                    var Val = e.Value.ToString().Split(' ');
-                    string Result;
-                    if (Val.Length == 3 && Val[2].Trim() != "")
-                        Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
-                    else
-                        Result = Val[0] + " " + (Val[1])[0] + ".";
-
-                    e.Value = Result;
-                }
+            if (ShowText)
+            {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО" && e.RowIndex != ThisRow)
+                    Optimize.HideMyFio(e);
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "Телефон" && e.RowIndex != ThisRow)
+                    Optimize.HideMyPhone(e);
+            }
+            else
+            {// прячем все
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
+                    Optimize.HideMyFio(e);
+                if(dataGridView2.Columns[e.ColumnIndex].Name == "Телефон")
+                    Optimize.HideMyPhone(e);
             }
         }
+
+
+        //ВЫДЕЛЕНИЕ СТРОКИ
+        bool ShowText = false;
+        int ThisRow;
+
+        //Подсветка строки на которую направлен указатель мыши
+        private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.RowIndex > -1)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+                ShowText = true;
+                ThisRow = e.RowIndex;
+                dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value;
+            }    
+                
+        }
+        //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
+        private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                ShowText = false;
+                dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value;
+            }
+        }
+
+
 
         //Закрываем форму
         private void button3_Click(object sender, EventArgs e)
@@ -190,19 +222,6 @@ namespace Kyrsach2WINFORM
             MenuAdmin.DisableButton();
             this.Dispose();
             this.Close();
-        }
-
-        //Подсветка строки на которую направлен указатель мыши
-        private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if(e.RowIndex > -1)
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
-        }
-        //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
-        private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex > -1)
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
         }
     }
 }
