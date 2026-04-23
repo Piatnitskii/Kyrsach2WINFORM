@@ -31,6 +31,9 @@ namespace Kyrsach2WINFORM
         // Получаем инфу по выбранной строке ДатаГрида
         private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+                return;
+
             CurrentRowIndex = e.RowIndex;
 
             //Если мы ткнули на ту учетку, в которой сидим
@@ -99,52 +102,27 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        //Скрываем некоторые данные
+        //СКРИТИЕ ПЕРСОНАЛЬНЫХ ДАННЫХ
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (ShowText)
-            {
+            {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО" && e.RowIndex != ThisRow)
                 {
-                    if (e.Value != null)
-                    {
-                        var Val = e.Value.ToString().Split(' ');
-                        string Result;
-                        if (Val.Length == 3 && Val[2].Trim() != "")
-                            Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
-                        else
-                            Result = Val[0] + " " + (Val[1])[0] + ".";
-
-                        e.Value = Result;
-                    }
+                    Optimize.HideMyFio(e);
                 }
             }
             else
-            {
+            {// прячем все
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
                 {
-                    if (e.Value != null)
-                    {
-                        var Val = e.Value.ToString().Split(' ');
-                        string Result;
-                        if (Val.Length == 3 && Val[2].Trim() != "")
-                            Result = Val[0] + " " + (Val[1])[0] + "." + " " + (Val[2])[0] + ".";
-                        else
-                            Result = Val[0] + " " + (Val[1])[0] + ".";
-
-                        e.Value = Result;
-                    }
+                    Optimize.HideMyFio(e);
                 }
             }
         }
 
-        //Чистим
-        private void dataGridView2_Sorted(object sender, EventArgs e)
-        {
-            dataGridView2.ClearSelection();
-        }
 
-       
+       //РАБОТА С ДАННЫМИ
 
         // Открыть форму редактирования
         private void button1_Click(object sender, EventArgs e)
@@ -206,21 +184,18 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        //Закрыть
-        private void button8_Click(object sender, EventArgs e)
-        {
-            MenuAdmin.DisableButton();
-            this.Close();
-        }
+
+
+        //ВЫДЕЛЕНИЕ СТРОКИ
 
         bool ShowText = false;
         int ThisRow;
+
         //Подсветка строки на которую направлен указатель мыши
         private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex > -1)
             {
-                
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
 
                 ShowText = true;
@@ -235,9 +210,25 @@ namespace Kyrsach2WINFORM
             {
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
                 ShowText = false;
+
                 dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО"].Value;
             }
                 
+        }
+
+
+
+        //Чистим выделение строки
+        private void dataGridView2_Sorted(object sender, EventArgs e)
+        {
+            dataGridView2.ClearSelection();
+        }
+
+        //Закрыть
+        private void button8_Click(object sender, EventArgs e)
+        {
+            MenuAdmin.DisableButton();
+            this.Close();
         }
 
     }

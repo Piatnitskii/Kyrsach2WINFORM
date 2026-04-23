@@ -44,13 +44,34 @@ namespace Kyrsach2WINFORM
             
             if(ConnectAndData.Role == "2")
             {
-                OpenEmploey.Visible = false;
-                OpenUser.Visible = false;
+                //У менеджера скрываем
+                OpenUser.Visible = false;   // пользователи
+                OpenBooks.Visible = false;   // справочники
                 label1.Text = "Меню менеджера";
                 this.Text = "BARBERSHOP | Терминал менеджера";
             }
-            else   
-                OpenBooks.Visible = false;  //У админа скрываем справочники
+            else if(ConnectAndData.Role == "3")
+            {
+                label1.Text = "Меню мастера";
+                this.Text = "BARBERSHOP | Терминал мастера";
+                //У мастера скрываем
+                OpenUser.Visible = false;   // пользователи
+                OpenBooks.Visible = false;   // справочники
+                OpenEmploey.Visible = false;  //сотрудники
+                OpenClient.Visible = false;  //клиенты
+                OpenYslygi.Visible = false;  //услуги
+                OpenOrder.Visible = false;  //записи
+                OpenOplata.Visible = false;  //оплата
+
+            }
+            else
+            {
+                //У админа скрываем
+                OpenEmploey.Visible = false;  //сотрудники
+                OpenClient.Visible = false;  //клиенты
+                OpenYslygi.Visible = false;  //услуги
+                OpenOrder.Visible = false;  //записи
+            }
 
         }
 
