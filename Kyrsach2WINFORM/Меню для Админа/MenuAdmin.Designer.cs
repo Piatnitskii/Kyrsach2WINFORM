@@ -43,6 +43,7 @@ namespace Kyrsach2WINFORM
             this.PanelChild = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.openAdmin = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.PanelChild.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -51,6 +52,7 @@ namespace Kyrsach2WINFORM
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.MainPanel.Controls.Add(this.openAdmin);
             this.MainPanel.Controls.Add(this.button8);
             this.MainPanel.Controls.Add(this.OpenUser);
             this.MainPanel.Controls.Add(this.OpenBooks);
@@ -63,7 +65,7 @@ namespace Kyrsach2WINFORM
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.MainPanel.Location = new System.Drawing.Point(0, 0);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(201, 600);
+            this.MainPanel.Size = new System.Drawing.Size(225, 600);
             this.MainPanel.TabIndex = 0;
             // 
             // button8
@@ -82,7 +84,7 @@ namespace Kyrsach2WINFORM
             this.button8.Location = new System.Drawing.Point(0, 540);
             this.button8.Name = "button8";
             this.button8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(201, 60);
+            this.button8.Size = new System.Drawing.Size(225, 60);
             this.button8.TabIndex = 9;
             this.button8.Text = "Выход";
             this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -102,7 +104,7 @@ namespace Kyrsach2WINFORM
             this.OpenUser.Location = new System.Drawing.Point(0, 414);
             this.OpenUser.Name = "OpenUser";
             this.OpenUser.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenUser.Size = new System.Drawing.Size(201, 60);
+            this.OpenUser.Size = new System.Drawing.Size(225, 60);
             this.OpenUser.TabIndex = 7;
             this.OpenUser.Text = "Пользователи";
             this.OpenUser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -122,7 +124,7 @@ namespace Kyrsach2WINFORM
             this.OpenBooks.Location = new System.Drawing.Point(0, 354);
             this.OpenBooks.Name = "OpenBooks";
             this.OpenBooks.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenBooks.Size = new System.Drawing.Size(201, 60);
+            this.OpenBooks.Size = new System.Drawing.Size(225, 60);
             this.OpenBooks.TabIndex = 6;
             this.OpenBooks.Text = "Справочники";
             this.OpenBooks.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -142,7 +144,7 @@ namespace Kyrsach2WINFORM
             this.OpenYslygi.Location = new System.Drawing.Point(0, 294);
             this.OpenYslygi.Name = "OpenYslygi";
             this.OpenYslygi.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenYslygi.Size = new System.Drawing.Size(201, 60);
+            this.OpenYslygi.Size = new System.Drawing.Size(225, 60);
             this.OpenYslygi.TabIndex = 5;
             this.OpenYslygi.Text = "Услуги";
             this.OpenYslygi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,7 +164,7 @@ namespace Kyrsach2WINFORM
             this.OpenOplata.Location = new System.Drawing.Point(0, 234);
             this.OpenOplata.Name = "OpenOplata";
             this.OpenOplata.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenOplata.Size = new System.Drawing.Size(201, 60);
+            this.OpenOplata.Size = new System.Drawing.Size(225, 60);
             this.OpenOplata.TabIndex = 4;
             this.OpenOplata.Text = "Оплата";
             this.OpenOplata.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -182,7 +184,7 @@ namespace Kyrsach2WINFORM
             this.OpenOrder.Location = new System.Drawing.Point(0, 174);
             this.OpenOrder.Name = "OpenOrder";
             this.OpenOrder.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenOrder.Size = new System.Drawing.Size(201, 60);
+            this.OpenOrder.Size = new System.Drawing.Size(225, 60);
             this.OpenOrder.TabIndex = 3;
             this.OpenOrder.Text = "Записи";
             this.OpenOrder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -202,7 +204,7 @@ namespace Kyrsach2WINFORM
             this.OpenClient.Location = new System.Drawing.Point(0, 114);
             this.OpenClient.Name = "OpenClient";
             this.OpenClient.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenClient.Size = new System.Drawing.Size(201, 60);
+            this.OpenClient.Size = new System.Drawing.Size(225, 60);
             this.OpenClient.TabIndex = 2;
             this.OpenClient.Text = "Клиенты";
             this.OpenClient.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,7 +224,7 @@ namespace Kyrsach2WINFORM
             this.OpenEmploey.Location = new System.Drawing.Point(0, 54);
             this.OpenEmploey.Name = "OpenEmploey";
             this.OpenEmploey.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.OpenEmploey.Size = new System.Drawing.Size(201, 60);
+            this.OpenEmploey.Size = new System.Drawing.Size(225, 60);
             this.OpenEmploey.TabIndex = 1;
             this.OpenEmploey.Text = "Сотрудники";
             this.OpenEmploey.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -235,7 +237,7 @@ namespace Kyrsach2WINFORM
             this.PanelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelLogo.Location = new System.Drawing.Point(0, 0);
             this.PanelLogo.Name = "PanelLogo";
-            this.PanelLogo.Size = new System.Drawing.Size(201, 54);
+            this.PanelLogo.Size = new System.Drawing.Size(225, 54);
             this.PanelLogo.TabIndex = 0;
             // 
             // PanelChild
@@ -243,9 +245,9 @@ namespace Kyrsach2WINFORM
             this.PanelChild.BackColor = System.Drawing.Color.Bisque;
             this.PanelChild.Controls.Add(this.label1);
             this.PanelChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelChild.Location = new System.Drawing.Point(201, 0);
+            this.PanelChild.Location = new System.Drawing.Point(225, 0);
             this.PanelChild.Name = "PanelChild";
-            this.PanelChild.Size = new System.Drawing.Size(1169, 600);
+            this.PanelChild.Size = new System.Drawing.Size(1145, 600);
             this.PanelChild.TabIndex = 1;
             // 
             // label1
@@ -253,11 +255,31 @@ namespace Kyrsach2WINFORM
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(287, 226);
+            this.label1.Location = new System.Drawing.Point(275, 226);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(559, 67);
             this.label1.TabIndex = 10;
             this.label1.Text = "Меню администратора";
+            // 
+            // openAdmin
+            // 
+            this.openAdmin.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openAdmin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.openAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openAdmin.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.openAdmin.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.openAdmin.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_идея_настроек_45;
+            this.openAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAdmin.Location = new System.Drawing.Point(0, 474);
+            this.openAdmin.Name = "openAdmin";
+            this.openAdmin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.openAdmin.Size = new System.Drawing.Size(225, 60);
+            this.openAdmin.TabIndex = 10;
+            this.openAdmin.Text = "Администрирование";
+            this.openAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openAdmin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.openAdmin.UseVisualStyleBackColor = true;
+            this.openAdmin.Click += new System.EventHandler(this.openAdmin_Click);
             // 
             // MenuAdmin
             // 
@@ -297,5 +319,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Button openAdmin;
     }
 }
