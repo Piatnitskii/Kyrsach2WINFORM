@@ -419,6 +419,11 @@ namespace Kyrsach2WINFORM
             RoundShape();
         }
 
+        private void Auth_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ConnectAndData.BackUpCopy("Auto");
+        }
+
 
         //Закрыть
         private void button3_Click(object sender, EventArgs e)
