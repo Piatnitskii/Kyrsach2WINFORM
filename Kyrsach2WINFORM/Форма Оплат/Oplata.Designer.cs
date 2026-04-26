@@ -105,7 +105,7 @@ namespace Kyrsach2WINFORM
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(732, 536);
+            this.button3.Location = new System.Drawing.Point(746, 536);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(216, 52);
             this.button3.TabIndex = 59;

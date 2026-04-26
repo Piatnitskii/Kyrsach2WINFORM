@@ -983,6 +983,36 @@ namespace Kyrsach2WINFORM.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_стопка_книг_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8_стопка_книг_45", resourceCulture);

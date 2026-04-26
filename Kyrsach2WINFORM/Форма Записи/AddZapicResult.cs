@@ -34,17 +34,16 @@ namespace Kyrsach2WINFORM
             //Настраиваем Дата грид
             dataGridView1.Columns.Add("ID", "ID");
             dataGridView1.Columns["ID"].Visible = false;
-            dataGridView1.Columns.Add("Название", "Название");
-            dataGridView1.Columns.Add("Цена", "Цена");
-            dataGridView1.Columns.Add("Продолжительность", "Продолжительность");
 
-            dataGridView1.Columns["Название"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["Цена"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["Продолжительность"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-            dataGridView1.Columns["Название"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-            dataGridView1.Columns["Цена"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-            dataGridView1.Columns["Продолжительность"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
+
+            dataGridView1.Columns.Add("Информация о услуге", "Информация о услуге");
+
+
+
+            dataGridView1.Columns["Информация о услуге"].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dataGridView1.Columns["Информация о услуге"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
+
 
             foreach (DataGridViewColumn column in dataGridView1.Columns)
                 column.MinimumWidth = 50;
@@ -105,7 +104,7 @@ namespace Kyrsach2WINFORM
                     //Все складываем для итога
                     Price += Convert.ToDouble(service.Cost);
                     Time += Convert.ToInt32(service.Duration);
-                    dataGridView1.Rows.Add($"{service.IdService}", $"{service.Name}", $"{service.Cost}", $"{service.Duration}");
+                    dataGridView1.Rows.Add($"{service.IdService}", $"{service.Name}\n     {service.Cost} руб. | {service.Duration} мин.");
                 }
             }
             catch (Exception ex)

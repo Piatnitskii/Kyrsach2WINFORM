@@ -277,5 +277,17 @@ namespace Kyrsach2WINFORM
             AddZapicWiz.CurrentFiveForm.Add(((Button)sender).Text);
             AddZapicWiz.CurrentFiveForm.Add(((Button)sender));
         }
+
+
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            Info.Visible = false;
+        }
+
+        private void button5_MouseMove(object sender, MouseEventArgs e)
+        {
+            Info.Visible = true;
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace Kyrsach2WINFORM
             {
                 foreach (Service service in AddZapicWiz.CurrentFourForm)
                 {
-                   dataGridView2.Rows.Add($"{service.IdService}", $"{service.Name}", $"{service.Cost}", $"{service.Duration}");    
+                   dataGridView2.Rows.Add($"{service.IdService}", $"{service.Name}\n     {service.Cost} руб. | {service.Duration} мин.");    
                 }
             }
             catch (Exception ex)
@@ -54,7 +54,8 @@ namespace Kyrsach2WINFORM
         }
 
 
-        string CMD = "SELECT IdService as ID, Service.Name as 'Название', Cost as 'Цена', Duration as 'Время' FROM Service";
+        string CMD = @"SELECT IdService as ID, Service.Name as 'Название', Cost 'Стоимость', Duration as 'Продолжительность',
+                                CONCAT( Service.Name,'\n     ',Cost,' руб. | ', Duration, ' мин.' ) as `Информация о услуге` FROM Service";
 
         //Заполняет ДатаГрид 1 данными и настраивает 2 ДатаГрид
         void FillDataGrid()
@@ -75,31 +76,23 @@ namespace Kyrsach2WINFORM
 
                     dataGridView1.DataSource = Dt;
 
-                    //Настройка полей
-                    dataGridView1.Columns["Название"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView1.Columns["Цена"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView1.Columns["Время"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                    dataGridView1.Columns["Название"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-                    dataGridView1.Columns["Цена"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-                    dataGridView1.Columns["Время"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
+                    ////Настройка полей
+                    dataGridView1.Columns["Информация о услуге"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    dataGridView1.Columns["Информация о услуге"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
 
                     dataGridView2.Columns.Add("ID", "ID");
                     dataGridView2.Columns["ID"].Visible = false;
-                    dataGridView2.Columns.Add("Название", "Название");
-                    dataGridView2.Columns.Add("Цена", "Цена");
-                    dataGridView2.Columns.Add("Время", "Время");
 
-                    dataGridView2.Columns["Название"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-                    dataGridView2.Columns["Цена"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-                    dataGridView2.Columns["Время"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
+                    dataGridView2.Columns.Add("Информация о услуге", "Информация о услуге");
 
-                    dataGridView2.Columns["Название"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView2.Columns["Цена"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView2.Columns["Время"].SortMode = DataGridViewColumnSortMode.NotSortable;
+                    dataGridView2.Columns["Информация о услуге"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
+                   dataGridView2.Columns["Информация о услуге"].SortMode = DataGridViewColumnSortMode.NotSortable;
+
 
                     dataGridView1.Columns["ID"].Visible = false;
-
+                    dataGridView1.Columns["Название"].Visible = false;
+                    dataGridView1.Columns["Стоимость"].Visible = false;
+                    dataGridView1.Columns["Продолжительность"].Visible = false;
 
                     foreach (DataGridViewColumn column in dataGridView1.Columns)
                         column.MinimumWidth = 40;
@@ -188,7 +181,7 @@ namespace Kyrsach2WINFORM
 
                     Service service = new Service(ID, Name, Cost, Duration);
 
-                    dataGridView2.Rows.Add($"{service.IdService}", $"{service.Name}", $"{service.Cost}", $"{service.Duration}");
+                    dataGridView2.Rows.Add($"{service.IdService}", $"{service.Name}\n     {service.Cost} руб. | {service.Duration} мин.");
 
                     //Сохраняем
                     AddZapicWiz.CurrentFourForm.Add(service);

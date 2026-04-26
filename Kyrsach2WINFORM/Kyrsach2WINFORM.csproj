@@ -864,6 +864,9 @@
     <Content Include="photo\picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\icons8-помощь-30.png" />
+    <None Include="Resources\icons8-помощь-40.png" />
+    <None Include="Resources\icons8-помощь-16.png" />
     <Content Include="Resources\Structure.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

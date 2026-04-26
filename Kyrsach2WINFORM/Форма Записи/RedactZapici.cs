@@ -83,8 +83,11 @@ namespace Kyrsach2WINFORM
             try
             {
                 var Str = zapici.ID;
-                //CONCAT_WS(' ', Employe.Name, Surname, Patronymic)
-                string CMD = $"Select  Service.IdService, Service.Name, Service.Cost, Service.Duration FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService  WHERE Id_Record = {zapici.ID};";
+                //IdService as ID, Service.Name as 'Название', Cost 'Стоимость', Duration as 'Продолжительность',
+                //CONCAT(Service.Name, '\n     ', Cost, ' руб. | ', Duration, ' мин.') as `Информация о услуге`
+                string CMD = $@"Select  
+                                    Service.IdService, Service.Name, Service.Cost, Service.Duration 
+                                     FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService  WHERE Id_Record = {zapici.ID};";
 
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {

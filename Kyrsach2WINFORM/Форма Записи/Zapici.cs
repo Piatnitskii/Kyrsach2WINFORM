@@ -10,6 +10,7 @@ using System.Windows.Forms;
 //
 using MySql.Data.MySqlClient;
 using VPaged.WF;
+using VPaged.WF.VProperties;
 
 namespace Kyrsach2WINFORM
 {
@@ -21,9 +22,20 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
-            _pag = new VPagination(this.groupBox1, pageSize: 10);
+            // Создаём объект стиля с нужными цветами
+            var myStyle = new ButtonStyle(
+                FlatStyle.Flat,
+                6,
+                Color.White,
+                Color.FromArgb(150, 116, 102),   // ваш основной цвет
+                Color.Bisque,   // цвет при активном/нажатом состоянии
+               Color.Black
+            );
+
+            _pag = new VPagination(this.groupBox1, 1,pageSize: 10, null, null,myStyle);
             _pag.SelectDataMaster = FillDataGrid;
             _pag.SelectCountMaster = GetCount;
+            
 
 
             // Включаем двойную буферизацию для DataGridView
