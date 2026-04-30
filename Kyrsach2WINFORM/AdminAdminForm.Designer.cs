@@ -29,6 +29,7 @@ namespace Kyrsach2WINFORM
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminAdminForm));
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -220,6 +221,7 @@ namespace Kyrsach2WINFORM
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AdminAdminForm";

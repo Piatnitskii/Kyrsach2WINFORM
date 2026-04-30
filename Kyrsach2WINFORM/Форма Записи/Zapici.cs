@@ -143,6 +143,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["IDMaser"].Visible = false;
                     dataGridView2.Columns["ФИО мастера"].Visible = false;
                     dataGridView2.Columns["PhoneMaster"].Visible = false;
+                    dataGridView2.Columns["Продолжительность, мин."].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -297,16 +298,12 @@ namespace Kyrsach2WINFORM
             if (ShowText)
             {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента" && e.RowIndex != ThisRow)
-                {
                     Optimize.HideMyFio(e);
-                }
             }
             else
             {// прячем все
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента")
-                {
                     Optimize.HideMyFio(e);
-                }
             }
         }
 
@@ -314,9 +311,8 @@ namespace Kyrsach2WINFORM
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
                 e.Handled = true;
-            }
+
             else { e.Handled = false; }
         }
 

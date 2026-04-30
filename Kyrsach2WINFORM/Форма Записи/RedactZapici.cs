@@ -29,26 +29,16 @@ namespace Kyrsach2WINFORM
 
             //Настраиваем Дата грид
             dataGridView1.Columns.Add("ID", "ID");
-            dataGridView1.Columns.Add("Название", "Название");
-            dataGridView1.Columns.Add("Цена", "Цена");
-            dataGridView1.Columns.Add("Продолжительность", "Время");
+            dataGridView1.Columns.Add("Информация о услуге", "Информация о услуге");
+            dataGridView1.DefaultCellStyle.Font = new Font("Comic Sans MS", 14f);
 
-            dataGridView1.Columns["Название"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-            dataGridView1.Columns["Цена"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-            dataGridView1.Columns["Продолжительность"].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
-
+            dataGridView1.Columns["Информация о услуге"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
+            dataGridView1.Columns["Информация о услуге"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView1.Columns["ID"].Visible = false;    //скрываем
-
-            dataGridView1.Columns["Название"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["Цена"].SortMode = DataGridViewColumnSortMode.NotSortable;
-            dataGridView1.Columns["Продолжительность"].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-            
 
             foreach (DataGridViewColumn column in dataGridView1.Columns)
                 column.MinimumWidth = 50;
 
-            dataGridView1.Columns["Название"].MinimumWidth = 250;
 
             //Заполняем данными ДатаГрид
             FillDataGrid1();
@@ -86,8 +76,9 @@ namespace Kyrsach2WINFORM
                 //IdService as ID, Service.Name as 'Название', Cost 'Стоимость', Duration as 'Продолжительность',
                 //CONCAT(Service.Name, '\n     ', Cost, ' руб. | ', Duration, ' мин.') as `Информация о услуге`
                 string CMD = $@"Select  
-                                    Service.IdService, Service.Name, Service.Cost, Service.Duration 
+                                    Service.IdService as ID,  CONCAT( Service.Name,'\n     ',Cost,' руб. | ', Duration, ' мин.' ) as `Информация о услуге`
                                      FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService  WHERE Id_Record = {zapici.ID};";
+
 
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
@@ -98,7 +89,7 @@ namespace Kyrsach2WINFORM
 
                     //Заполняем данными
                     while (RDR.Read())
-                        dataGridView1.Rows.Add(RDR[0].ToString(), RDR[1].ToString(), RDR[2].ToString(), RDR[3].ToString());
+                        dataGridView1.Rows.Add(RDR[0].ToString(), RDR[1].ToString());
                     
                 }
             }

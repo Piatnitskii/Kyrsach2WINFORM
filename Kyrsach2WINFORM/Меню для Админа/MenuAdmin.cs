@@ -74,7 +74,7 @@ namespace Kyrsach2WINFORM
                 OpenYslygi.Visible = false;  //услуги
                 OpenOrder.Visible = false;  //записи
             }
-
+            label3.Text = ConnectAndData.SurnameUser;
         }
 
 

@@ -423,6 +423,36 @@ namespace Kyrsach2WINFORM.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_знак_цирюльника_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon icons8_знак_цирюльника_481 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_481", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_знак_цирюльника_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_идея_настроек_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8_идея_настроек_45", resourceCulture);

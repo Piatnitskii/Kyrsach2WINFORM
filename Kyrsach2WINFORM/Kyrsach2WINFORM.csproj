@@ -867,6 +867,9 @@
     <None Include="Resources\icons8-помощь-30.png" />
     <None Include="Resources\icons8-помощь-40.png" />
     <None Include="Resources\icons8-помощь-16.png" />
+    <None Include="Resources\icons8-знак-цирюльника-48.png" />
+    <None Include="Resources\icons8-знак-цирюльника-96.png" />
+    <None Include="Resources\icons8-знак-цирюльника-48.ico" />
     <Content Include="Resources\Structure.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
