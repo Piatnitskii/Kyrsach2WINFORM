@@ -86,6 +86,7 @@ namespace Kyrsach2WINFORM
                     // Настройка полей
                     dataGridView2.Columns["ID"].Visible = false;
                     dataGridView2.Columns["idrole"].Visible = false;
+                    dataGridView2.Columns["Пароль"].Visible = false;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;

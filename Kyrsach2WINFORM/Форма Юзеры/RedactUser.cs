@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +35,7 @@ namespace Kyrsach2WINFORM
             textBox1.Text = userSystem.Surname;
             textBox2.Text = userSystem.Name;
             textBox3.Text = userSystem.Patronymic;
+            textBox5.Text = userSystem.Login;
 
             //Контрольная проверка
             CheckData();
@@ -85,19 +87,58 @@ namespace Kyrsach2WINFORM
 
 
             //Если что то поменялось и при этом не равно пустоте
-            if ( (textBox1.Text.Trim() != userSystem.Surname || textBox2.Text.Trim() != userSystem.Name || textBox3.Text.Trim() != userSystem.Patronymic || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "" ))
+            if ( (textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || textBox1.Text.Trim() != userSystem.Surname || textBox2.Text.Trim() != userSystem.Name || textBox3.Text.Trim() != userSystem.Patronymic || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != ""  && textBox5.Text.Trim() != ""))
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
         }
 
+        // Проверка на дубликат True - если нет дубликата
+        bool CheckUser(string Login)
+        {
+            string CMD = $"Select * FROM User WHERE Login = '{Login}'";
+
+            using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
+            {
+                Con.Open();
+                MySqlCommand cmd = new MySqlCommand(CMD, Con);
+                bool Result = cmd.ExecuteScalar() == null;
+
+                return Result;
+            }
+        }
+
+        //Возвращает ХЕШ переданной строки
+        string GetHash(string password)
+        {
+            var sha256 = SHA256.Create();
+            var sha256byte = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+            string hash = BitConverter.ToString(sha256byte).Replace("-", "");
+            return hash;
+        }
+
         //Изменить
         private void redactUser_Click(object sender, EventArgs e)
         {
+            string Name = textBox2.Text.ToString();
+            string Surname = textBox1.Text.ToString();
+            string Patronymic = textBox3.Text.ToString();
+
+            string Password = "";
+            //Хешируем пароль
+            if (textBox4.Text.ToString().Trim().Length != 0)
+                Password = GetHash(textBox4.Text.ToString());
 
             string Role = comboBox1.SelectedValue.ToString();
+            string Login = textBox5.Text.ToString();
 
-            string CMD = $"UPDATE User SET Name='{textBox2.Text.ToString().Trim()}', Surname='{textBox1.Text.ToString().Trim()}', Patronymic='{textBox3.Text.ToString().Trim()}', Id_Role='{Role}' WHERE IdUser = '{userSystem.IdUser}';";
+            string CMD;
+            if (Password != "") //Если что то внесли в строку с паролем, меняем пароль
+                CMD = $"UPDATE User SET Name='{Name}', Surname='{Surname}', Patronymic='{Patronymic}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}', Password = '{Password}' WHERE IdUser = '{userSystem.IdUser}';";
+            else
+                CMD = $"UPDATE User SET Name='{Name}', Surname='{Surname}', Patronymic='{Patronymic}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}' WHERE IdUser = '{userSystem.IdUser}';";
+
             try
             {
                 DialogResult dialogResult = MessageBox.Show("Изменить данные пользователя?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -109,6 +150,13 @@ namespace Kyrsach2WINFORM
 
                         if ( !(dialogResultTwo == DialogResult.Yes))
                             return;
+                    }
+
+                    //Проверяем на дубликат
+                    if (!CheckUser(Login) && Login != userSystem.Login)
+                    {
+                        MessageBox.Show("Пользователь с данным логином уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
                     //Изменяем строку
@@ -199,6 +247,52 @@ namespace Kyrsach2WINFORM
         {
             CheckData();
         }
+
+        //Логин
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            CheckData();
+        }
+        //Пароль
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            CheckData();
+        }
+
+        //Логин  //Пароль
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Разрешаем control символы (например, Backspace)
+            if (char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+                return;
+            }
+
+            // Разрешаем английские буквы (верхний и нижний регистр)
+            if (char.IsLetter(e.KeyChar))
+            {
+                e.Handled = false;
+                return;
+            }
+
+            // Разрешаем цифры
+            if (char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+                return;
+            }
+            // Разрешаем определённые спецсимволы
+            char[] allowedSpecialChars = { '_', '-', '@', '.', '!', '#', '$', '%', '&', '*', '(', ')' };
+            if (allowedSpecialChars.Contains(e.KeyChar))
+            {
+                e.Handled = false;
+                return;
+            }
+
+            e.Handled = true;
+        }
+
         #endregion
 
         //Закрыть
@@ -206,6 +300,7 @@ namespace Kyrsach2WINFORM
         {
             this.Close();
         }
+        
     }
 
 }

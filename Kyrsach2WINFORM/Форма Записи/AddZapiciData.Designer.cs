@@ -29,6 +29,7 @@ namespace Kyrsach2WINFORM
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,6 +56,16 @@ namespace Kyrsach2WINFORM
             this.button23 = new System.Windows.Forms.Button();
             this.button24 = new System.Windows.Forms.Button();
             this.button25 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.Info = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button26 = new System.Windows.Forms.Button();
+            this.Info.SuspendLayout();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -389,12 +400,115 @@ namespace Kyrsach2WINFORM
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button5
+            // 
+            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Bisque;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_помощь_30;
+            this.button5.Location = new System.Drawing.Point(575, 5);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(40, 33);
+            this.button5.TabIndex = 26;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.MouseLeave += new System.EventHandler(this.button5_MouseLeave);
+            this.button5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.button5_MouseMove);
+            // 
+            // Info
+            // 
+            this.Info.BackColor = System.Drawing.Color.DimGray;
+            this.Info.Controls.Add(this.label4);
+            this.Info.Controls.Add(this.label3);
+            this.Info.Controls.Add(this.label2);
+            this.Info.Controls.Add(this.button28);
+            this.Info.Controls.Add(this.button27);
+            this.Info.Controls.Add(this.button26);
+            this.Info.Location = new System.Drawing.Point(363, 41);
+            this.Info.Name = "Info";
+            this.Info.Size = new System.Drawing.Size(405, 184);
+            this.Info.TabIndex = 27;
+            this.Info.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(97, 147);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(92, 18);
+            this.label4.TabIndex = 33;
+            this.label4.Text = "Время занято";
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(99, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(303, 52);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "Потенциально свободное время при меньшем количестве услуг";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(97, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 18);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Свободное время";
+            // 
+            // button28
+            // 
+            this.button28.BackColor = System.Drawing.Color.LightGray;
+            this.button28.Enabled = false;
+            this.button28.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button28.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button28.Location = new System.Drawing.Point(16, 140);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(77, 32);
+            this.button28.TabIndex = 30;
+            this.button28.Text = "9:30";
+            this.button28.UseVisualStyleBackColor = false;
+            // 
+            // button27
+            // 
+            this.button27.BackColor = System.Drawing.Color.YellowGreen;
+            this.button27.Enabled = false;
+            this.button27.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button27.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button27.Location = new System.Drawing.Point(16, 77);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(77, 32);
+            this.button27.TabIndex = 29;
+            this.button27.Text = "9:30";
+            this.button27.UseVisualStyleBackColor = false;
+            // 
+            // button26
+            // 
+            this.button26.BackColor = System.Drawing.Color.Bisque;
+            this.button26.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button26.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button26.Location = new System.Drawing.Point(16, 12);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(77, 32);
+            this.button26.TabIndex = 28;
+            this.button26.Text = "9:30";
+            this.button26.UseVisualStyleBackColor = false;
+            // 
             // AddZapiciData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(770, 348);
+            this.Controls.Add(this.Info);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button25);
             this.Controls.Add(this.button24);
             this.Controls.Add(this.button23);
@@ -427,6 +541,8 @@ namespace Kyrsach2WINFORM
             this.Name = "AddZapiciData";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddZapiciData";
+            this.Info.ResumeLayout(false);
+            this.Info.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -460,5 +576,14 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Button button23;
         private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel Info;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button26;
     }
 }

@@ -226,6 +226,15 @@
   <data name="icons8_записи_65__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-записи-65 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_знак_цирюльника_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-знак-цирюльника-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_знак_цирюльника_481" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-знак-цирюльника-48.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_знак_цирюльника_96" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-знак-цирюльника-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_идея_настроек_45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-идея-настроек-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -393,6 +402,15 @@
   </data>
   <data name="icons8_персонал_65" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-персонал-65.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_помощь_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-помощь-16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_помощь_30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-помощь-30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_помощь_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8-помощь-40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_стопка_книг_45" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-стопка-книг-45.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

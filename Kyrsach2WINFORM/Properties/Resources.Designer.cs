@@ -423,6 +423,36 @@ namespace Kyrsach2WINFORM.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_знак_цирюльника_48 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon icons8_знак_цирюльника_481 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_481", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_знак_цирюльника_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_знак_цирюльника_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_идея_настроек_45 {
             get {
                 object obj = ResourceManager.GetObject("icons8_идея_настроек_45", resourceCulture);
@@ -976,6 +1006,36 @@ namespace Kyrsach2WINFORM.Properties {
         internal static System.Drawing.Bitmap icons8_персонал_65 {
             get {
                 object obj = ResourceManager.GetObject("icons8_персонал_65", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_30 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_помощь_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_помощь_40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

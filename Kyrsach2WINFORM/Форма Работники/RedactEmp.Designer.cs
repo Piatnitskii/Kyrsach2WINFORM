@@ -29,6 +29,7 @@ namespace Kyrsach2WINFORM
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RedactEmp));
             this.button1 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -267,6 +268,7 @@ namespace Kyrsach2WINFORM
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button8);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RedactEmp";

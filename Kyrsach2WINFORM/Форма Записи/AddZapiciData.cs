@@ -60,7 +60,7 @@ namespace Kyrsach2WINFORM
                 dateTimePicker1_ValueChanged(dateTimePicker1, EventArgs.Empty);
         }
 
-        // Приводи страницу к виду ранее (тоесть если уже была выбрана дата и время)
+        // Приводим страницу к виду ранее (тоесть если уже была выбрана дата и время)
         void True_Start()
         {
             CheckTime($"Select IdRecord, Date_Record, Time_Record, Total_Time FROM Record Where Id_Employe = '{emploey.IdEmploey}' AND Date_Record = '{AddZapicWiz.CurrentFiveForm[0]}';");
@@ -276,6 +276,19 @@ namespace Kyrsach2WINFORM
             AddZapicWiz.CurrentFiveForm.Add(dateTimePicker1.Value.ToString("yyyy-MM-dd"));
             AddZapicWiz.CurrentFiveForm.Add(((Button)sender).Text);
             AddZapicWiz.CurrentFiveForm.Add(((Button)sender));
+        }
+
+
+
+        private void button5_MouseLeave(object sender, EventArgs e)
+        {
+            Info.Visible = false;
+        }
+
+        private void button5_MouseMove(object sender, MouseEventArgs e)
+        {
+            Info.Visible = true;
+            Info.BringToFront();
         }
     }
 }

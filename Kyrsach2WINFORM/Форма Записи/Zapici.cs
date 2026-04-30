@@ -10,6 +10,7 @@ using System.Windows.Forms;
 //
 using MySql.Data.MySqlClient;
 using VPaged.WF;
+using VPaged.WF.VProperties;
 
 namespace Kyrsach2WINFORM
 {
@@ -21,9 +22,20 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
-            _pag = new VPagination(this.groupBox1, pageSize: 10);
+            // Создаём объект стиля с нужными цветами
+            var myStyle = new ButtonStyle(
+                FlatStyle.Flat,
+                6,
+                Color.White,
+                Color.FromArgb(150, 116, 102),   // ваш основной цвет
+                Color.Bisque,   // цвет при активном/нажатом состоянии
+               Color.Black
+            );
+
+            _pag = new VPagination(this.groupBox1, 1,pageSize: 10, null, null,myStyle);
             _pag.SelectDataMaster = FillDataGrid;
             _pag.SelectCountMaster = GetCount;
+            
 
 
             // Включаем двойную буферизацию для DataGridView
@@ -131,6 +143,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["IDMaser"].Visible = false;
                     dataGridView2.Columns["ФИО мастера"].Visible = false;
                     dataGridView2.Columns["PhoneMaster"].Visible = false;
+                    dataGridView2.Columns["Продолжительность, мин."].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -285,16 +298,12 @@ namespace Kyrsach2WINFORM
             if (ShowText)
             {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента" && e.RowIndex != ThisRow)
-                {
                     Optimize.HideMyFio(e);
-                }
             }
             else
             {// прячем все
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента")
-                {
                     Optimize.HideMyFio(e);
-                }
             }
         }
 
@@ -302,9 +311,8 @@ namespace Kyrsach2WINFORM
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
                 e.Handled = true;
-            }
+
             else { e.Handled = false; }
         }
 

@@ -32,7 +32,6 @@ namespace Kyrsach2WINFORM
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,27 +43,20 @@ namespace Kyrsach2WINFORM
             this.button3 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(1002, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(210, 34);
-            this.comboBox1.TabIndex = 50;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(73, 15);
+            this.label3.Location = new System.Drawing.Point(73, 7);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(250, 38);
             this.label3.TabIndex = 48;
@@ -80,9 +72,9 @@ namespace Kyrsach2WINFORM
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(1025, 536);
+            this.button2.Location = new System.Drawing.Point(1011, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(187, 52);
+            this.button2.Size = new System.Drawing.Size(186, 52);
             this.button2.TabIndex = 44;
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = false;
@@ -99,7 +91,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(811, 536);
+            this.button1.Location = new System.Drawing.Point(818, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(187, 52);
             this.button1.TabIndex = 43;
@@ -109,11 +101,13 @@ namespace Kyrsach2WINFORM
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox2.Location = new System.Drawing.Point(84, 71);
+            this.textBox2.Location = new System.Drawing.Point(85, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(794, 34);
+            this.textBox2.Size = new System.Drawing.Size(828, 34);
             this.textBox2.TabIndex = 42;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
@@ -162,7 +156,7 @@ namespace Kyrsach2WINFORM
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(1201, 419);
+            this.dataGridView2.Size = new System.Drawing.Size(1201, 395);
             this.dataGridView2.TabIndex = 41;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
@@ -182,9 +176,9 @@ namespace Kyrsach2WINFORM
             this.button6.Font = new System.Drawing.Font("Verdana", 12F);
             this.button6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button6.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_удалить_48;
-            this.button6.Location = new System.Drawing.Point(12, 536);
+            this.button6.Location = new System.Drawing.Point(3, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(57, 52);
+            this.button6.Size = new System.Drawing.Size(56, 52);
             this.button6.TabIndex = 45;
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button6.UseVisualStyleBackColor = false;
@@ -196,7 +190,7 @@ namespace Kyrsach2WINFORM
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(1097, 42);
+            this.label1.Location = new System.Drawing.Point(1097, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(115, 26);
             this.label1.TabIndex = 54;
@@ -204,14 +198,15 @@ namespace Kyrsach2WINFORM
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Left;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 26);
+            this.label2.Size = new System.Drawing.Size(73, 43);
             this.label2.TabIndex = 55;
             this.label2.Text = "Поиск";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button3
             // 
@@ -222,7 +217,7 @@ namespace Kyrsach2WINFORM
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button3.Location = new System.Drawing.Point(12, 15);
+            this.button3.Location = new System.Drawing.Point(12, 7);
             this.button3.Name = "button3";
             this.button3.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.button3.Size = new System.Drawing.Size(42, 41);
@@ -233,10 +228,11 @@ namespace Kyrsach2WINFORM
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label4.Location = new System.Drawing.Point(79, 533);
+            this.label4.Location = new System.Drawing.Point(75, 509);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(162, 26);
             this.label4.TabIndex = 57;
@@ -244,11 +240,66 @@ namespace Kyrsach2WINFORM
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(307, 536);
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.ForeColor = System.Drawing.Color.Black;
+            this.groupBox1.Location = new System.Drawing.Point(220, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(401, 52);
+            this.groupBox1.Size = new System.Drawing.Size(438, 52);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
+            this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 65);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1201, 43);
+            this.tableLayoutPanel1.TabIndex = 59;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(920, 3);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(278, 34);
+            this.comboBox1.TabIndex = 50;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.AutoSize = true;
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 193F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 192F));
+            this.tableLayoutPanel2.Controls.Add(this.button2, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBox1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button6, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(13, 530);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1200, 58);
+            this.tableLayoutPanel2.TabIndex = 60;
             // 
             // Zapici
             // 
@@ -256,17 +307,12 @@ namespace Kyrsach2WINFORM
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(1225, 600);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.dataGridView2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -275,13 +321,15 @@ namespace Kyrsach2WINFORM
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Zapici_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button2;
@@ -293,5 +341,8 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
