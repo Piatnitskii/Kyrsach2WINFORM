@@ -83,7 +83,7 @@ namespace Kyrsach2WINFORM
             this.openAdmin.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.openAdmin.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_идея_настроек_45;
             this.openAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openAdmin.Location = new System.Drawing.Point(0, 518);
+            this.openAdmin.Location = new System.Drawing.Point(0, 526);
             this.openAdmin.Name = "openAdmin";
             this.openAdmin.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.openAdmin.Size = new System.Drawing.Size(228, 60);
@@ -127,7 +127,7 @@ namespace Kyrsach2WINFORM
             this.OpenUser.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenUser.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_аватар_пользователя_50__1_;
             this.OpenUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenUser.Location = new System.Drawing.Point(0, 458);
+            this.OpenUser.Location = new System.Drawing.Point(0, 466);
             this.OpenUser.Name = "OpenUser";
             this.OpenUser.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenUser.Size = new System.Drawing.Size(228, 60);
@@ -147,7 +147,7 @@ namespace Kyrsach2WINFORM
             this.OpenBooks.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenBooks.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_стопка_книг_50__1_;
             this.OpenBooks.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenBooks.Location = new System.Drawing.Point(0, 398);
+            this.OpenBooks.Location = new System.Drawing.Point(0, 406);
             this.OpenBooks.Name = "OpenBooks";
             this.OpenBooks.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenBooks.Size = new System.Drawing.Size(228, 60);
@@ -167,7 +167,7 @@ namespace Kyrsach2WINFORM
             this.OpenYslygi.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenYslygi.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_ножницы_50;
             this.OpenYslygi.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenYslygi.Location = new System.Drawing.Point(0, 338);
+            this.OpenYslygi.Location = new System.Drawing.Point(0, 346);
             this.OpenYslygi.Name = "OpenYslygi";
             this.OpenYslygi.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenYslygi.Size = new System.Drawing.Size(228, 60);
@@ -187,7 +187,7 @@ namespace Kyrsach2WINFORM
             this.OpenOplata.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenOplata.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_оплата_наличными_50__1_;
             this.OpenOplata.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenOplata.Location = new System.Drawing.Point(0, 278);
+            this.OpenOplata.Location = new System.Drawing.Point(0, 286);
             this.OpenOplata.Name = "OpenOplata";
             this.OpenOplata.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenOplata.Size = new System.Drawing.Size(228, 60);
@@ -207,7 +207,7 @@ namespace Kyrsach2WINFORM
             this.OpenOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenOrder.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_записи_50__1_;
             this.OpenOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenOrder.Location = new System.Drawing.Point(0, 218);
+            this.OpenOrder.Location = new System.Drawing.Point(0, 226);
             this.OpenOrder.Name = "OpenOrder";
             this.OpenOrder.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenOrder.Size = new System.Drawing.Size(228, 60);
@@ -227,7 +227,7 @@ namespace Kyrsach2WINFORM
             this.OpenClient.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenClient.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_клиенты_50__1_;
             this.OpenClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenClient.Location = new System.Drawing.Point(0, 158);
+            this.OpenClient.Location = new System.Drawing.Point(0, 166);
             this.OpenClient.Name = "OpenClient";
             this.OpenClient.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenClient.Size = new System.Drawing.Size(228, 60);
@@ -247,7 +247,7 @@ namespace Kyrsach2WINFORM
             this.OpenEmploey.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.OpenEmploey.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_персонал_50__1_;
             this.OpenEmploey.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.OpenEmploey.Location = new System.Drawing.Point(0, 98);
+            this.OpenEmploey.Location = new System.Drawing.Point(0, 106);
             this.OpenEmploey.Name = "OpenEmploey";
             this.OpenEmploey.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.OpenEmploey.Size = new System.Drawing.Size(228, 60);
@@ -266,7 +266,7 @@ namespace Kyrsach2WINFORM
             this.PanelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.PanelLogo.Location = new System.Drawing.Point(0, 0);
             this.PanelLogo.Name = "PanelLogo";
-            this.PanelLogo.Size = new System.Drawing.Size(228, 98);
+            this.PanelLogo.Size = new System.Drawing.Size(228, 106);
             this.PanelLogo.TabIndex = 0;
             // 
             // pictureBox1
@@ -317,7 +317,7 @@ namespace Kyrsach2WINFORM
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(86, 29);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 66);
+            this.label3.Size = new System.Drawing.Size(142, 77);
             this.label3.TabIndex = 12;
             this.label3.Text = "Пользователь";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;

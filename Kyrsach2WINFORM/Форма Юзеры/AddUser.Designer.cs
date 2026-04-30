@@ -48,12 +48,12 @@ namespace Kyrsach2WINFORM
             // 
             // textBox4
             // 
-            this.textBox4.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox4.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox4.Location = new System.Drawing.Point(409, 126);
             this.textBox4.MaxLength = 8;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(350, 40);
+            this.textBox4.Size = new System.Drawing.Size(350, 37);
             this.textBox4.TabIndex = 105;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
@@ -71,12 +71,12 @@ namespace Kyrsach2WINFORM
             // 
             // textBox5
             // 
-            this.textBox5.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox5.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox5.Location = new System.Drawing.Point(409, 39);
             this.textBox5.MaxLength = 20;
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(350, 40);
+            this.textBox5.Size = new System.Drawing.Size(350, 37);
             this.textBox5.TabIndex = 103;
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
@@ -113,33 +113,33 @@ namespace Kyrsach2WINFORM
             // comboBox1
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.comboBox1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(490, 215);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(269, 40);
+            this.comboBox1.Size = new System.Drawing.Size(269, 37);
             this.comboBox1.TabIndex = 99;
             // 
             // textBox3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox3.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox3.Location = new System.Drawing.Point(11, 215);
             this.textBox3.MaxLength = 50;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(375, 40);
+            this.textBox3.Size = new System.Drawing.Size(375, 37);
             this.textBox3.TabIndex = 98;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox2
             // 
-            this.textBox2.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox2.Location = new System.Drawing.Point(13, 126);
             this.textBox2.MaxLength = 50;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(373, 40);
+            this.textBox2.Size = new System.Drawing.Size(373, 37);
             this.textBox2.TabIndex = 97;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -179,12 +179,12 @@ namespace Kyrsach2WINFORM
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.textBox1.Location = new System.Drawing.Point(13, 39);
             this.textBox1.MaxLength = 50;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(373, 40);
+            this.textBox1.Size = new System.Drawing.Size(373, 37);
             this.textBox1.TabIndex = 93;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);

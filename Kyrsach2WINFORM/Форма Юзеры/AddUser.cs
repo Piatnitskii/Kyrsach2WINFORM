@@ -123,7 +123,6 @@ namespace Kyrsach2WINFORM
                     if (!CheckUser(Login))
                     {
                         MessageBox.Show("Пользователь с данным логином уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Clear();    // Очистка
                         return;
                     }
 
