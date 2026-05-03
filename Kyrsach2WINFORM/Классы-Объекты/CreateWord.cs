@@ -28,18 +28,7 @@ namespace Kyrsach2WINFORM.Классы_Объекты
 
             try
             {
-                // 1. Получаем дату,стоимость и скидку
-                string[] DataAmount = GetDataPayment(OrderID).Split(';') ;
-
-                string PaymentTime = DataAmount[0];
-                
-                string Discount = Convert.ToDouble(DataAmount[2]).ToString("F2");
-                string ItogSumma = (Convert.ToDouble(DataAmount[1].Replace(',','.')) - Convert.ToDouble(DataAmount[2].Replace(',', '.'))).ToString("F2");
-
-                // 2. Получаем все услуги по записи
-                List<ServiceList> ListServiceName = GetServices(OrderID);
-
-
+ 
                 string fileName = Directory.GetCurrentDirectory() + @"\Талон.docx"; // шаблон
 
                 
@@ -49,7 +38,15 @@ namespace Kyrsach2WINFORM.Классы_Объекты
 
                 Doc = Ap.Documents.Open(fileName, ReadOnly: true);
 
-                SetCheckPageSize(Doc);
+                // 1. Получаем дату,стоимость и скидку
+                string[] DataAmount = GetDataPayment(OrderID).Split(';');
+
+                string PaymentTime = DataAmount[0];
+
+                string Discount = Convert.ToDouble(DataAmount[2]).ToString("F2");
+                string ItogSumma = (Convert.ToDouble(DataAmount[1].Replace(',', '.')) - Convert.ToDouble(DataAmount[2].Replace(',', '.'))).ToString("F2");
+                // 2. Получаем все услуги по записи
+                List<ServiceList> ListServiceName = GetServices(OrderID);
 
                 ReplaceWord("{НомерЗаписи}", OrderID, Doc);
                 ReplaceWord("{Стоимость}", ItogSumma, Doc);
@@ -63,10 +60,10 @@ namespace Kyrsach2WINFORM.Классы_Объекты
                     Row newRow = table.Rows.Add();
 
                     // Заполняем ячейки
-                    newRow.Cells[1].Range.Text = service.ServiceName;
+                    newRow.Cells[1].Range.Text = service.ServiceName +  $"\n                            ≡{service.ServiceCost}";
                 }
 
-                AdjustPageHeightToContent(Doc);
+                AdjustPageHeightToContent(Doc, ListServiceName.Count);
                 Ap.Visible = true;
             }
             catch (Exception ex)
@@ -77,28 +74,15 @@ namespace Kyrsach2WINFORM.Классы_Объекты
             }
         }
 
-        // Устанавливаем ВЫСОТУ страницы для чека
-        static private void SetCheckPageSize(Document doc)
-        {
-                PageSetup pageSetup = doc.PageSetup;
-                pageSetup.PageHeight = doc.Application.CentimetersToPoints(30f);
-        }
-
-
         // Реализует "динамический" чек
-        static private void AdjustPageHeightToContent(Document doc)
+        static private void AdjustPageHeightToContent(Document doc, int count)
         {
-            // Вычисляем высоту содержимого
-            float contentHeightPoints = doc.Content.ComputeStatistics(WdStatistic.wdStatisticLines) * doc.Content.Font.Size * 1.2f;
-
-            // Конвертируем в сантиметры (1 см = 28.35 точек)
-            float contentHeightCm = contentHeightPoints / 28.35f;
-
-            // Добавляем еще
-            float totalHeightCm = contentHeightCm + 4f;
-
+            float totalPageSize = doc.PageSetup.PageHeight;
             // Устанавливаем высоту страницы
-            doc.PageSetup.PageHeight = doc.Application.CentimetersToPoints(totalHeightCm);
+            for (int i = 1; i < count; i++)
+                totalPageSize += 15.5f;
+
+            doc.PageSetup.PageHeight = totalPageSize;
         }
 
         // Получаем дату и стоимость (скидку)
@@ -127,8 +111,21 @@ namespace Kyrsach2WINFORM.Классы_Объекты
         // Получаем все услуги по записи
         static private List<ServiceList> GetServices(string OrderID)
         {
-           
-            string CMD = $"Select  Service.Name as 'Название_Услуги' FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService WHERE Id_Record = {OrderID};";
+
+
+            //Select  Service.Name as 'Название_Услуги' FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService WHERE Id_Record
+            string CMD = $@"            SELECT
+                                        Service.Name AS 'Название_Услуги',
+										ROUND(
+                                        CASE
+                                            WHEN(SELECT SUM(Record.Totla_Price) FROM Record WHERE Record.IdRecord = Service_In_Record.Id_Record) > 2000
+                                            THEN Service.Cost * 0.85-- 15 % скидка
+                                            ELSE Service.Cost-- Без скидки
+                                        END, 2) AS 'Цена_с_учетом_скидки'
+
+                                        FROM Service_In_Record
+                                        INNER JOIN Service ON Service_In_Record.Id_Service = Service.IdService
+                                        WHERE Service_In_Record.Id_Record = { OrderID};";
             List<ServiceList> Services = new List<ServiceList>();
             using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
             {
@@ -142,6 +139,7 @@ namespace Kyrsach2WINFORM.Классы_Объекты
                     Services.Add(new ServiceList
                     {
                         ServiceName = RDR["Название_Услуги"].ToString(),
+                        ServiceCost = RDR["Цена_с_учетом_скидки"].ToString(),
                     });
 
                 return Services;
@@ -171,6 +169,7 @@ namespace Kyrsach2WINFORM.Классы_Объекты
         public class ServiceList
         {
             public string ServiceName { get; set; }
+            public string ServiceCost { get; set; }
         }
     }
 }

@@ -1,0 +1,42 @@
+        // Получаем выручку по категориям
+        public List<CategoryRevenue> GetCategoriesRevenueData(string Data_Start, string Data_End)
+        {
+            var categories = new List<CategoryRevenue>();
+
+            string query = $@"
+                    SELECT 
+                    Category.Name as Название_Категории,
+                    COUNT(*) as Количество_Оплат,
+                    SUM(Cost) as Выручка
+
+                    FROM Payment
+
+                    JOIN Record ON Payment.Id_Record = Record.IdRecord
+                    JOIN Service_In_Record  ON Record.IdRecord = Service_In_Record.Id_Record
+                    JOIN Service ON Service_In_Record.Id_Service = Service.IdService
+                    JOIN Category ON Service.Id_Category = Category.IdCategory
+
+                    WHERE Payment.Payment_Time BETWEEN '{Data_Start}' AND '{Data_End}' AND Record.Id_Status = 2
+                    GROUP BY Category.IdCategory, Category.Name;
+            ";
+
+            using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
+            {
+                MySqlCommand cmd = new MySqlCommand(query, Con);
+                Con.Open();
+                MySqlDataReader RDR = cmd.ExecuteReader();
+
+                // Заполняем список строками
+                while (RDR.Read())
+                {
+                    categories.Add(new CategoryRevenue
+                    {
+                        CategoryName = RDR["Название_Категории"].ToString(),
+                        PaymentsCount = Convert.ToInt32(RDR["Количество_Оплат"]),
+                        Revenue = Convert.ToDouble(RDR["Выручка"]),
+                    });
+                }
+            }
+
+            return categories;
+        }

@@ -37,6 +37,8 @@ namespace Kyrsach2WINFORM
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // label3
@@ -71,7 +73,7 @@ namespace Kyrsach2WINFORM
             this.button8.Font = new System.Drawing.Font("Verdana", 12F);
             this.button8.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button8.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_double_left_30;
-            this.button8.Location = new System.Drawing.Point(28, 262);
+            this.button8.Location = new System.Drawing.Point(28, 367);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(57, 52);
             this.button8.TabIndex = 25;
@@ -89,7 +91,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(91, 262);
+            this.button1.Location = new System.Drawing.Point(91, 367);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(309, 52);
             this.button1.TabIndex = 28;
@@ -129,12 +131,36 @@ namespace Kyrsach2WINFORM
             this.dateTimePicker2.TabIndex = 73;
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
+            // radioButton1
+            // 
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton1.Location = new System.Drawing.Point(43, 240);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(349, 50);
+            this.radioButton1.TabIndex = 74;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Отчет по платежам с подсчетом дохода (PDF)";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton2.Location = new System.Drawing.Point(43, 287);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(349, 54);
+            this.radioButton2.TabIndex = 75;
+            this.radioButton2.Text = "Отчет с диаграммами рейтинга оказываемых услуг (Excel)";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
             // Otchet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(431, 326);
+            this.ClientSize = new System.Drawing.Size(431, 431);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label2);
@@ -163,5 +189,7 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
     }
 }
