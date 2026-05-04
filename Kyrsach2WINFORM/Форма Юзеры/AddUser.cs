@@ -19,23 +19,32 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
-            //Заполнение комбобокса
+            //Заполнение комбобокса и дата грида
             PullData();
+
+            // Включаем двойную буферизацию для DataGridView
+            Optimize.SetDoubleBuffered(dataGridView2);
+            dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
         }
 
-        //Заполнение комбобокса
+        DataTable DtEmploey = new DataTable();
+
+        //Заполнение комбобокса и грида
         void PullData()
         {
             try
             {
                 string CMD = "SELECT * FROM Role;";
+                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone FROM Employe";
+
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
 
+                    //Заполняем комбобокс ролями
                     MySqlCommand cmd = new MySqlCommand(CMD, Con);
-                    cmd.ExecuteNonQuery();
 
+                    cmd.ExecuteNonQuery();
                     DataTable Dt = new DataTable();
                     MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
 
@@ -44,14 +53,45 @@ namespace Kyrsach2WINFORM
                     comboBox1.ValueMember = "IdRole";
                     comboBox1.DisplayMember = "Name";
                     comboBox1.DataSource = Dt;
+
+                    //Добавляем данные в дата грид (Сотрудники)
+                    cmd = new MySqlCommand(CMD2, Con);
+                    cmd.ExecuteNonQuery();
+                    
+                    Ad = new MySqlDataAdapter(cmd);
+                    Ad.Fill(DtEmploey);
+
+                    dataGridView2.DataSource = DtEmploey.DefaultView;
+                    dataGridView2.Columns["IdEmploye"].Visible = false;
+                    dataGridView2.Columns["Phone"].Visible = false;
+                    dataGridView2.Columns["ФИО сотрудника"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
+
+                    dataGridView2.ClearSelection(); //Очистка выделения
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Не удалось заполнить таблицу ролей или сотрудников: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        int CurrentRowIndex = -1; // Индекс выбранной строки
+        string Id_Employe = "-1";
+        // Получаем инфу по выбранной строке ДатаГрида
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CurrentRowIndex = e.RowIndex;
+
+            if (CurrentRowIndex == -1)
+            {
+                Id_Employe = "-1";
+                dataGridView2.ClearSelection();
+                return;
+            }
+            Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
+            label2.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}";
+            CheckData();
+        }
 
 
         //Возвращает ХЕШ переданной строки
@@ -83,7 +123,7 @@ namespace Kyrsach2WINFORM
         void CheckData()
         {
 
-            if (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != "" && textBox5.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox4.Text.Trim().Length == 8)
+            if (CurrentRowIndex != -1 && Id_Employe != "-1" && textBox5.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox4.Text.Trim().Length == 8)
                 button2.Enabled = true;
             else
                 button2.Enabled = false;
@@ -93,32 +133,18 @@ namespace Kyrsach2WINFORM
         private void addUser_Click(object sender, EventArgs e)
         {
 
-            string Name = textBox2.Text.ToString();
-            string Surname = textBox1.Text.ToString();
-            string Patronymic = textBox3.Text.ToString();
-
             //Хешируем пароль
             string Password = GetHash(textBox4.Text.ToString());
 
             string Login = textBox5.Text.ToString();
             string Id_Role = comboBox1.SelectedValue.ToString();
 
-            string CMD = $"INSERT INTO User (Name, Surname, Patronymic, Password, Login, Id_Role) VALUES ('{Name}', '{Surname}', '{Patronymic}', '{Password}', '{Login}', '{Id_Role}');";
+            string CMD = $"INSERT INTO User (Id_Employe, Password, Login, Id_Role) VALUES ({Id_Employe}, '{Password}', '{Login}', '{Id_Role}');";
             try
             {
                 DialogResult dialogResult = MessageBox.Show("Добавить пользователя?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (textBox3.Text.Trim() == "")
-                    {
-                        DialogResult dialogResultTwo = MessageBox.Show("Оставить поле 'Отчество' пустым?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        //В случае надобности удаляем отчество
-                        if (dialogResultTwo == DialogResult.Yes)
-                            CMD = $"INSERT INTO User (Name, Surname, Password, Login, Id_Role) VALUES ('{Name}', '{Surname}', '{Password}', '{Login}', '{Id_Role}');";
-                        else
-                            return;
-                    }
-
                     //Проверяем на дубликат
                     if (!CheckUser(Login))
                     {
@@ -151,13 +177,14 @@ namespace Kyrsach2WINFORM
         void Clear()
         {
             textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
             textBox4.Text = "";
             textBox5.Text = "";
         }
-
-
+        //Чистим выбор
+        private void AddUser_Load(object sender, EventArgs e)
+        {
+            dataGridView2.ClearSelection();
+        }
 
         // Первая буква ЗАГЛАВНАЯ
         void Chars(string Text, TextBox Element)
@@ -193,7 +220,7 @@ namespace Kyrsach2WINFORM
         #region Настройка полей
 
 
-        //Фамилия //Имя //Отчество
+        //Поиск
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
@@ -203,25 +230,24 @@ namespace Kyrsach2WINFORM
                 e.Handled = false;
         }
 
-        //Фамилия
+        //Поиск
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            Chars(textBox1.Text, textBox1);
-            CheckData();
-        }
 
-        //Имя
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            Chars(textBox2.Text, textBox2);
-            CheckData();
-        }
-        
-        //Отчество
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            Chars(textBox3.Text, textBox3);
-            CheckData();
+            DataView dv = DtEmploey.DefaultView;
+            string search = textBox1.Text.Trim();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                dv.RowFilter = "";  // Показать все
+            }
+            else
+            {
+                // Поиск по колонкам
+                dv.RowFilter = "[ФИО сотрудника] LIKE '%" + search + "%'";
+            }
+
+            dataGridView2.Refresh();  // Обновить вид
         }
 
         //Логин
@@ -277,9 +303,6 @@ namespace Kyrsach2WINFORM
             this.Close();
         }
 
-       
+
     }
-    
-
-
 }

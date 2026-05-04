@@ -62,8 +62,12 @@ namespace Kyrsach2WINFORM
             dataGridView2.ClearSelection();
         }
 
-        // IdUser, Name, Surname, Patronymic, Password, Login, Id_Role
-        string CMD = "Select IdUser as ID, CONCAT_WS(' ', User.Name, Surname, Patronymic) AS 'ФИО', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole' FROM User INNER JOIN Role ON Id_Role = IdRole";
+        // IdUser, Name, Surname, Patronymic, Password, Login, Id_Role, Id_Employe
+        string CMD = $@"Select IdUser as ID, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО', Employe.Phone as 'Телефон', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole', Id_Employe
+                        FROM User 
+                        INNER JOIN Role ON Id_Role = IdRole 
+                        INNER JOIN Employe ON Id_Employe = IdEmploye";
+
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {
@@ -87,6 +91,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["ID"].Visible = false;
                     dataGridView2.Columns["idrole"].Visible = false;
                     dataGridView2.Columns["Пароль"].Visible = false;
+                    dataGridView2.Columns["Id_Employe"].Visible = false;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -129,14 +134,15 @@ namespace Kyrsach2WINFORM
         private void button1_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
-            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
-            string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+
+            string Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["Id_Employe"].Value.ToString();
+
+
             string Login = dataGridView2.Rows[CurrentRowIndex].Cells["Логин"].Value.ToString();
             string RoleName = dataGridView2.Rows[CurrentRowIndex].Cells["Роль"].Value.ToString();
             string Id_Role = dataGridView2.Rows[CurrentRowIndex].Cells["idrole"].Value.ToString();
 
-            UserSystem user = new UserSystem(ID, Name, Surname, Patronymic, Login, Id_Role, RoleName);
+            UserSystem user = new UserSystem(ID, Id_Employe, Login, Id_Role, RoleName);
 
             RedactUser FormA = new RedactUser(user);
             FormA.ShowDialog();
@@ -155,6 +161,7 @@ namespace Kyrsach2WINFORM
         private void deleteUser_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
+            string Role = dataGridView2.Rows[CurrentRowIndex].Cells["Роль"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
             string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
@@ -162,7 +169,7 @@ namespace Kyrsach2WINFORM
             string CMD = $"DELETE FROM User WHERE IdUser = {ID};";
             try
             {
-                DialogResult dialogResult = MessageBox.Show($"Удалить пользователя {Name + " " + Surname + " " + Patronymic}?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult dialogResult = MessageBox.Show($"Удалить пользователя {Name + " " + Surname + " " + Patronymic} под ролью {Role}?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
                     //Удаляем строку

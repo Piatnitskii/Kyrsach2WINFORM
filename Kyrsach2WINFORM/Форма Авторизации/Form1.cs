@@ -135,7 +135,7 @@ namespace Kyrsach2WINFORM
                 {
                     Con.Open();
 
-                    MySqlCommand cmd = new MySqlCommand( $"Select IdUser, Name, Surname, Patronymic, Password, Login, Id_Role from User WHERE Login='{Login}'", Con);
+                    MySqlCommand cmd = new MySqlCommand( $"Select IdUser, Employe.Name, Employe.Surname, Employe.Patronymic, Password, Login, Id_Role from User INNER JOIN Employe ON Id_Employe = IdEmploye WHERE Login='{Login}'", Con);
                     cmd.ExecuteNonQuery();
 
                     MySqlDataAdapter ad = new MySqlDataAdapter(cmd);

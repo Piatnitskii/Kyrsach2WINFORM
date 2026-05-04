@@ -28,38 +28,40 @@ namespace Kyrsach2WINFORM
             if (userSystem.IdUser == ConnectAndData.ID)
                 comboBox1.Enabled = false;
 
-            //Заполняем комбобокс
+            //Заполнение комбобокса и дата грида
             PullData();
 
             // Заполняем поля выбранным объектом
-            textBox1.Text = userSystem.Surname;
-            textBox2.Text = userSystem.Name;
-            textBox3.Text = userSystem.Patronymic;
             textBox5.Text = userSystem.Login;
 
             //Контрольная проверка
             CheckData();
+
+            // Включаем двойную буферизацию для DataGridView
+            Optimize.SetDoubleBuffered(dataGridView2);
+            dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
         }
 
-
+        DataTable DtEmploey = new DataTable();
         //Заполнение комбобокса
         void PullData()
         {
             try
             {
-                string CMD = "SELECT * FROM Role;";
+                string CMD = "SELECT * FROM Role;"; 
+                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone FROM Employe";
+
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
 
+                    //Заполняем комбобокс ролями
                     MySqlCommand cmd = new MySqlCommand(CMD, Con);
                     cmd.ExecuteNonQuery();
 
                     DataTable Dt = new DataTable();
                     MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
 
-                    //Dt.Columns.Add("IdRole");
-                    //Dt.Columns.Add("Name");
                     Ad.Fill(Dt);
 
                     comboBox1.ValueMember = "IdRole";
@@ -68,6 +70,30 @@ namespace Kyrsach2WINFORM
 
                     //устанавливаем выбранный элемент
                     comboBox1.SelectedValue = userSystem.Id_Role;
+
+                    //Добавляем данные в дата грид (Сотрудники)
+                    cmd = new MySqlCommand(CMD2, Con);
+                    cmd.ExecuteNonQuery();
+
+                    Ad = new MySqlDataAdapter(cmd);
+                    Ad.Fill(DtEmploey);
+
+                    dataGridView2.DataSource = DtEmploey.DefaultView;
+                    dataGridView2.Columns["IdEmploye"].Visible = false;
+                    dataGridView2.Columns["Phone"].Visible = false;
+                    dataGridView2.Columns["ФИО сотрудника"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
+
+                    //Выбираем нужного сотрудника
+                    foreach(DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (row.Cells["IdEmploye"].Value.ToString() == userSystem.Id_Employe)
+                        {
+                            row.Selected = true;
+                            label1.Text = $"Выбранный сотрудник {row.Cells["ФИО сотрудника"].Value.ToString()}, +{row.Cells["Phone"].Value.ToString()}";
+                            Id_Employe = userSystem.Id_Employe;
+                        }
+                            
+                    }
                 }
             }
             catch (Exception ex)
@@ -76,19 +102,36 @@ namespace Kyrsach2WINFORM
             }
         }
 
+        int CurrentRowIndex = -1; // Индекс выбранной строки
+        string Id_Employe;
+        // Получаем инфу по выбранной строке ДатаГрида
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CurrentRowIndex = e.RowIndex;
+
+            if (CurrentRowIndex == -1)
+            {
+                Id_Employe = "-1";
+                dataGridView2.ClearSelection();
+                return;
+            }
+            Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
+            label1.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}";
+            CheckData();
+        }
 
         //Проверка заполнености обязательных полей
         void CheckData()
         {
-            //var A = textBox1.Text.Trim() != userSystem.Surname;
-            //var v = textBox2.Text.Trim() != userSystem.Name;
-            //var c = textBox3.Text.Trim() != userSystem.Patronymic;
-            //var b = comboBox1.SelectedValue.ToString() != userSystem.Id_Role;
-
-
             //Если что то поменялось и при этом не равно пустоте
-            if ( (textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || textBox1.Text.Trim() != userSystem.Surname || textBox2.Text.Trim() != userSystem.Name || textBox3.Text.Trim() != userSystem.Patronymic || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox1.Text.Trim() != "" && textBox2.Text.Trim() != ""  && textBox5.Text.Trim() != ""))
-                button1.Enabled = true;
+            if ( (Id_Employe != userSystem.Id_Employe || textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox5.Text.Trim() != ""))
+            {
+                //если поменяли все таки пароль, то он должен быть 8 цифр
+                if( textBox4.Text.Trim().Length > 0 && textBox4.Text.Trim().Length != 8)
+                    button1.Enabled = false;
+                else
+                    button1.Enabled = true;
+            }
             else
                 button1.Enabled = false;
         }
@@ -121,10 +164,6 @@ namespace Kyrsach2WINFORM
         //Изменить
         private void redactUser_Click(object sender, EventArgs e)
         {
-            string Name = textBox2.Text.ToString();
-            string Surname = textBox1.Text.ToString();
-            string Patronymic = textBox3.Text.ToString();
-
             string Password = "";
             //Хешируем пароль
             if (textBox4.Text.ToString().Trim().Length != 0)
@@ -135,23 +174,15 @@ namespace Kyrsach2WINFORM
 
             string CMD;
             if (Password != "") //Если что то внесли в строку с паролем, меняем пароль
-                CMD = $"UPDATE User SET Name='{Name}', Surname='{Surname}', Patronymic='{Patronymic}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}', Password = '{Password}' WHERE IdUser = '{userSystem.IdUser}';";
+                CMD = $"UPDATE User SET Id_Employe='{Id_Employe}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}', Password = '{Password}' WHERE IdUser = '{userSystem.IdUser}';";
             else
-                CMD = $"UPDATE User SET Name='{Name}', Surname='{Surname}', Patronymic='{Patronymic}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}' WHERE IdUser = '{userSystem.IdUser}';";
+                CMD = $"UPDATE User SET Id_Employe='{Id_Employe}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}' WHERE IdUser = '{userSystem.IdUser}';";
 
             try
             {
                 DialogResult dialogResult = MessageBox.Show("Изменить данные пользователя?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    if (textBox3.Text.Trim() == "")
-                    {
-                        DialogResult dialogResultTwo = MessageBox.Show("Оставить поле 'Отчество' пустым?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                        if ( !(dialogResultTwo == DialogResult.Yes))
-                            return;
-                    }
-
                     //Проверяем на дубликат
                     if (!CheckUser(Login) && Login != userSystem.Login)
                     {
@@ -180,36 +211,7 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        // Переводит 1 букву в верхний регистр
-        void Chars(string Text, TextBox Element)
-        {
-            int selectionStart = Element.SelectionStart;
-            int selectionLength = Element.SelectionLength;
 
-            ArrayList chars = new ArrayList();
-            string result = "";
-
-            if (!string.IsNullOrEmpty(Text))
-            {
-
-                for (int i = 0; i < Text.Length; i++)
-                {
-                    if (i == 0)
-                        chars.Add(Char.ToUpper(Text[0]));               // Добавляем первую букву в верхнем регистре
-                    else
-                        chars.Add(Char.ToLower(Text[i]));                 // Добавляем остальные символы без изменений
-                }
-
-                foreach (var item in chars)
-                {
-                    result += item.ToString();
-                }
-            }
-
-            Element.Text = result;
-            Element.SelectionStart = selectionStart;
-            Element.SelectionLength = selectionLength;
-        }
 
         #region Настройка полей
 
@@ -222,24 +224,23 @@ namespace Kyrsach2WINFORM
             }
             else { e.Handled = false; }
         }
-        // Фамилия
+        // Поиск
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            Chars(textBox1.Text, textBox1);
-            CheckData();
-        }
-        //Имя
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            Chars(textBox2.Text, textBox2);
-            CheckData();
-        }
+            DataView dv = DtEmploey.DefaultView;
+            string search = textBox1.Text.Trim();
 
-        //Отчество
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            Chars(textBox3.Text, textBox3);
-            CheckData();
+            if (string.IsNullOrEmpty(search))
+            {
+                dv.RowFilter = "";  // Показать все
+            }
+            else
+            {
+                // Поиск по колонкам
+                dv.RowFilter = "[ФИО сотрудника] LIKE '%" + search + "%'";
+            }
+
+            dataGridView2.Refresh();  // Обновить вид
         }
 
         //Роль
@@ -300,7 +301,8 @@ namespace Kyrsach2WINFORM
         {
             this.Close();
         }
-        
+
+
     }
 
 }
