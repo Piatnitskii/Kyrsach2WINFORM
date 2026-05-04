@@ -42,12 +42,13 @@ namespace Kyrsach2WINFORM
             this.OpenClient = new System.Windows.Forms.Button();
             this.OpenEmploey = new System.Windows.Forms.Button();
             this.PanelLogo = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PanelChild = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.PanelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -58,6 +59,7 @@ namespace Kyrsach2WINFORM
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.MainPanel.Controls.Add(this.button1);
             this.MainPanel.Controls.Add(this.openAdmin);
             this.MainPanel.Controls.Add(this.button8);
             this.MainPanel.Controls.Add(this.OpenUser);
@@ -269,6 +271,28 @@ namespace Kyrsach2WINFORM
             this.PanelLogo.Size = new System.Drawing.Size(228, 106);
             this.PanelLogo.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(86, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(142, 77);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Пользователь";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(86, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(136, 23);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Пользователь:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_знак_цирюльника_96;
@@ -300,27 +324,24 @@ namespace Kyrsach2WINFORM
             this.label1.TabIndex = 10;
             this.label1.Text = "Меню администратора";
             // 
-            // label2
+            // button1
             // 
-            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(86, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(136, 23);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Пользователь:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(86, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 77);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Пользователь";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_записи_50__1_;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(0, 586);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(228, 60);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Рассписание";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MenuAdmin
             // 
@@ -365,5 +386,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

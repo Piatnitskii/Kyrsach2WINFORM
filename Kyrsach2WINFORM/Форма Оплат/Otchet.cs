@@ -81,7 +81,7 @@ namespace Kyrsach2WINFORM
                                         SUM(Amount - Discount) as Общая_Выручка,
                                         ROUND(AVG(Amount - Discount), 2) as Средний_Чек
                                     FROM Payment 
-                                    WHERE Payment_Time BETWEEN '{Data_Start}' AND '{Data_End}'";   
+                                    WHERE Payment_Time BETWEEN '{Data_Start}' AND '{Data_End} 23:59:59'";   
 
             string Result = "";
 
@@ -316,7 +316,7 @@ namespace Kyrsach2WINFORM
             FROM Payment p
             INNER JOIN Service_In_Record sir ON sir.Id_Record = p.Id_Record
             INNER JOIN Service s ON s.IdService = sir.Id_Service  
-            WHERE p.Payment_Time BETWEEN '{startDate}' AND '{endDate}'
+            WHERE p.Payment_Time BETWEEN '{startDate}' AND '{endDate} 23:59:59'
             GROUP BY s.IdService, s.Name, s.Cost, s.Duration
             ORDER BY s.Name;";
 
@@ -353,7 +353,7 @@ namespace Kyrsach2WINFORM
         public void GenerateReportExcell(List<ServiceData> servicesData, string startDate, string endDate)
         {
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + $@"\Documents");
-            var templatePath = Directory.GetCurrentDirectory() + @"\Template.xlsx";  // Путь к шаблону
+            var templatePath = Directory.GetCurrentDirectory() + @"\TemplateDontDelete.xlsx";  // Путь к шаблону
             var filePath = Directory.GetCurrentDirectory() + $@"\Documents\Отчет по услугам {startDate}-{endDate}.xlsx";
 
             using (var workbook = new XLWorkbook(templatePath))

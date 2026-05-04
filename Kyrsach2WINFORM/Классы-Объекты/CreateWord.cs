@@ -29,7 +29,7 @@ namespace Kyrsach2WINFORM.Классы_Объекты
             try
             {
  
-                string fileName = Directory.GetCurrentDirectory() + @"\Талон.docx"; // шаблон
+                string fileName = Directory.GetCurrentDirectory() + @"\TemplateDontDelete.docx"; // шаблон
 
                 
 

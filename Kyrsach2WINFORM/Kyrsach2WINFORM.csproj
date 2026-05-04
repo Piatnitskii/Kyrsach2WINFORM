@@ -140,6 +140,12 @@
     <Compile Include="AdminAdminForm.Designer.cs">
       <DependentUpon>AdminAdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Форма Расписания\Schedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Форма Расписания\Schedule.Designer.cs">
+      <DependentUpon>Schedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -373,6 +379,9 @@
     <EmbeddedResource Include="Форма Записи\AddZapicWiz.resx">
       <DependentUpon>AddZapicWiz.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Форма Расписания\Schedule.resx">
+      <DependentUpon>Schedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Форма Справочники\AddCategory.resx">
       <DependentUpon>AddCategory.cs</DependentUpon>
     </EmbeddedResource>
@@ -461,12 +470,6 @@
     <EmbeddedResource Include="Форма Записи\Zapici.resx">
       <DependentUpon>Zapici.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Dump and CSV\Role.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Dump and CSV\User.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -477,13 +480,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Template.xlsx">
+    <None Include="TemplateDontDelete.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Отчет.docx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Талон.docx">
+    <None Include="TemplateDontDelete.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -903,7 +903,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dump and CSV\BarBerDump.sql" />
     <Content Include="MysqlDump\libcrypto-1_1-x64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
