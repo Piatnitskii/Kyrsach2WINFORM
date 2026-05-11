@@ -15,14 +15,15 @@ namespace Kyrsach2WINFORM
     {
 
         //Fields
-        string ID, Name;
+        string ID, Name, BarberPost;
 
-        public RedactRoly(string ID, string Name)
+        public RedactRoly(string ID, string Name, string BarberPost)
         {
             InitializeComponent();
 
             this.ID = ID;
             this.Name = Name;
+            this.BarberPost = BarberPost;
             textBox1.Text = Name;
         }
         
@@ -48,7 +49,11 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                string CMD = $"UPDATE Post SET Name = '{textBox1.Text.ToString().Trim()}' WHERE IdPost = '{ID}';";
+                int Value = 0;
+                if (checkBox1.Checked)
+                    Value = 1;
+
+                string CMD = $"UPDATE Post SET Name = '{textBox1.Text.ToString().Trim()}', BarberPost = {Value} WHERE IdPost = '{ID}';";
 
                 DialogResult dialogResult = MessageBox.Show("Изменить должность?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
@@ -90,16 +95,31 @@ namespace Kyrsach2WINFORM
                 e.Handled = false;
         }
 
+        private void RedactRoly_Load(object sender, EventArgs e)
+        {
+            if (BarberPost == "1")
+                checkBox1.Checked = true;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckValue();
+        }
+
         //Должность
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text.Trim() != Name && textBox1.Text.Trim().Length > 2)
+            CheckValue();
+        }
+
+        //Проверяем условия
+        private void CheckValue()
+        {
+            if (textBox1.Text.Trim() != Name && textBox1.Text.Trim().Length > 2 || Convert.ToInt32(BarberPost) != Convert.ToInt32(checkBox1.Checked))
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
         }
-
-
 
         //Закрыть
         private void button8_Click(object sender, EventArgs e)

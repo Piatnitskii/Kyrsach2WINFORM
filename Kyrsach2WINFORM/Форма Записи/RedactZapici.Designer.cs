@@ -82,7 +82,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 53);
+            this.label2.Location = new System.Drawing.Point(3, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 26);
             this.label2.TabIndex = 52;
@@ -92,9 +92,9 @@ namespace Kyrsach2WINFORM
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(3, 29);
+            this.label3.Location = new System.Drawing.Point(3, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 24);
+            this.label3.Size = new System.Drawing.Size(72, 26);
             this.label3.TabIndex = 53;
             this.label3.Text = "Номер";
             // 
@@ -102,7 +102,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(3, 51);
+            this.label5.Location = new System.Drawing.Point(3, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 26);
             this.label5.TabIndex = 55;
@@ -114,7 +114,7 @@ namespace Kyrsach2WINFORM
             this.label6.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(3, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 28);
+            this.label6.Size = new System.Drawing.Size(92, 29);
             this.label6.TabIndex = 54;
             this.label6.Text = "Мастер:";
             // 
@@ -181,13 +181,15 @@ namespace Kyrsach2WINFORM
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 36);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 32);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(413, 280);
+            this.dataGridView1.Size = new System.Drawing.Size(418, 313);
             this.dataGridView1.TabIndex = 62;
+            this.dataGridView1.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseLeave);
+            this.dataGridView1.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseMove);
             // 
             // pictureBox3
             // 
@@ -228,7 +230,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(568, 339);
+            this.button1.Location = new System.Drawing.Point(639, 368);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(220, 52);
             this.button1.TabIndex = 48;
@@ -246,7 +248,7 @@ namespace Kyrsach2WINFORM
             this.button8.Font = new System.Drawing.Font("Verdana", 12F);
             this.button8.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button8.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_double_left_30;
-            this.button8.Location = new System.Drawing.Point(12, 339);
+            this.button8.Location = new System.Drawing.Point(11, 371);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(57, 52);
             this.button8.TabIndex = 47;
@@ -261,7 +263,7 @@ namespace Kyrsach2WINFORM
             this.panel2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.panel2.Location = new System.Drawing.Point(12, 15);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(360, 96);
+            this.panel2.Size = new System.Drawing.Size(417, 114);
             this.panel2.TabIndex = 67;
             // 
             // tableLayoutPanel1
@@ -278,7 +280,7 @@ namespace Kyrsach2WINFORM
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.9485F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.89432F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.15719F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(358, 94);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(415, 112);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -286,9 +288,9 @@ namespace Kyrsach2WINFORM
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
-            this.panel1.Location = new System.Drawing.Point(12, 117);
+            this.panel1.Location = new System.Drawing.Point(12, 135);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(360, 95);
+            this.panel1.Size = new System.Drawing.Size(417, 105);
             this.panel1.TabIndex = 68;
             // 
             // tableLayoutPanel2
@@ -305,15 +307,15 @@ namespace Kyrsach2WINFORM
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.61225F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.5102F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.87755F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(358, 93);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 103);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 28);
+            this.label7.Location = new System.Drawing.Point(3, 31);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 23);
+            this.label7.Size = new System.Drawing.Size(72, 26);
             this.label7.TabIndex = 56;
             this.label7.Text = "Номер";
             // 
@@ -327,9 +329,9 @@ namespace Kyrsach2WINFORM
             this.panel3.Controls.Add(this.pictureBox3);
             this.panel3.Controls.Add(this.pictureBox2);
             this.panel3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
-            this.panel3.Location = new System.Drawing.Point(11, 218);
+            this.panel3.Location = new System.Drawing.Point(12, 246);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(360, 115);
+            this.panel3.Size = new System.Drawing.Size(421, 116);
             this.panel3.TabIndex = 69;
             // 
             // tableLayoutPanel3
@@ -343,7 +345,7 @@ namespace Kyrsach2WINFORM
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(311, 26);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(371, 26);
             this.tableLayoutPanel3.TabIndex = 71;
             // 
             // label11
@@ -351,7 +353,7 @@ namespace Kyrsach2WINFORM
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label11.ForeColor = System.Drawing.Color.Crimson;
-            this.label11.Location = new System.Drawing.Point(146, 0);
+            this.label11.Location = new System.Drawing.Point(174, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(74, 26);
             this.label11.TabIndex = 66;
@@ -364,9 +366,9 @@ namespace Kyrsach2WINFORM
             this.panel4.Controls.Add(this.dataGridView1);
             this.panel4.Controls.Add(this.label4);
             this.panel4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.panel4.Location = new System.Drawing.Point(373, 15);
+            this.panel4.Location = new System.Drawing.Point(439, 15);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(415, 318);
+            this.panel4.Size = new System.Drawing.Size(420, 347);
             this.panel4.TabIndex = 70;
             // 
             // RedactZapici
@@ -374,7 +376,7 @@ namespace Kyrsach2WINFORM
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(800, 400);
+            this.ClientSize = new System.Drawing.Size(871, 432);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
@@ -388,6 +390,7 @@ namespace Kyrsach2WINFORM
             this.Name = "RedactZapici";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Завершение записи";
+            this.Load += new System.EventHandler(this.RedactZapici_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

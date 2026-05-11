@@ -55,7 +55,7 @@ namespace Kyrsach2WINFORM
 
                     //Настройка полей
                     dataGridView1.Columns["ФИО"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView1.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(0, 3, 0, 3);
+                    dataGridView1.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
                     dataGridView1.Columns["ID"].Visible = false;
                     dataGridView1.Columns["Телефон"].Visible = false;
                 }

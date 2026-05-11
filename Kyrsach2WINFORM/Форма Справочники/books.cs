@@ -39,7 +39,7 @@ namespace Kyrsach2WINFORM
         void FillDataGrid()
         {
             string CMDCategory = "Select IdCategory as 'ID', Name as 'Название' FROM Category;";
-            string  CMDPost = "Select IdPost as 'ID', Name as 'Название' FROM Post;";
+            string  CMDPost = "Select IdPost as 'ID', Name as 'Название', BarberPost as 'BarberPost' FROM Post;";
 
             try
             {
@@ -69,6 +69,7 @@ namespace Kyrsach2WINFORM
                     //Должность
                     dataGridView2.DataSource = DtPost;
                     dataGridView2.Columns["ID"].Visible = false;
+                    dataGridView2.Columns["BarberPost"].Visible = false;
                     dataGridView2.Columns["Название"].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                     //Все блокируем
@@ -163,8 +164,9 @@ namespace Kyrsach2WINFORM
         private void button3_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
+            string BarberPost = dataGridView2.Rows[CurrentRowIndex].Cells["BarberPost"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["Название"].Value.ToString();
-            RedactRoly FormA = new RedactRoly(ID, Name);
+            RedactRoly FormA = new RedactRoly(ID, Name, BarberPost);
             FormA.ShowDialog();
             FillDataGrid();
         }

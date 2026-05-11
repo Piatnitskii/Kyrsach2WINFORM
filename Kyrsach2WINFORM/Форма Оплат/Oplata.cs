@@ -22,23 +22,46 @@ namespace Kyrsach2WINFORM
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
-            //Если администратор, то убираем некоторый функционал
-            if (ConnectAndData.Role == "1")
-            {
-                button3.Visible = false;
-                button4.Location = new Point(960, 536);
-            }
+            //Настройка полей
+            dataGridView2.Columns.Add("ID", "ID");
+            dataGridView2.Columns.Add("Номер записи", "Номер записи");
+            dataGridView2.Columns.Add("Клиент-Мастер", "Клиент-Мастер");
+            dataGridView2.Columns.Add("Время записи", "Время записи");
+            dataGridView2.Columns.Add("Время оплаты", "Время оплаты");
+            dataGridView2.Columns.Add("Сумма", "Сумма");
+            dataGridView2.Columns.Add("Скидка", "Скидка");
+
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
+                column.MinimumWidth = 100;
+
+            dataGridView2.Columns["Номер записи"].MinimumWidth = 20;
+
+            dataGridView2.Columns["ID"].Visible = false;
+            dataGridView2.Columns["Номер записи"].Width = 20;
+            dataGridView2.Columns["Клиент-Мастер"].Width = 500;
+            dataGridView2.Columns["Время записи"].Width = 250;
+            dataGridView2.Columns["Время оплаты"].Width = 230;
+
+
+  
 
             // Заполняем Дата грид
             FillDataGrid();
         }
 
-        // CONCAT_WS(' ', User.Name, Surname, Patronymic) AS 'ФИО'
-        string CMD = @"SELECT IdPayment as ID, IdRecord as 'Номер записи', CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic ) AS 'ФИО клиента', Date_Record as 'Дата записи', Time_Record as 'Время записи',  Payment_Time 'Время оплаты', Amount as 'Сумма руб.', Discount as 'Скидка руб.' FROM Record 
+        string CMD = @"SELECT IdPayment as ID, IdRecord as 'Номер записи', 
+                        CONCAT('К: ',CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic), '\nМ: ', CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic)) as 'Клиент-Мастер', 
+                        CONCAT(DATE_FORMAT(Date_Record, '%d.%m.%Y'), '\n', DATE_FORMAT(Time_Record, '%H:%i')) as 'Время',
+                        Payment_Time 'Время оплаты', Amount as 'Сумма', Discount as 'Скидка' 
+                        
+                        FROM Record 
+                        
                         INNER JOIN `Client` ON IdClient = Id_Client
                         INNER JOIN `Employe` ON IdEmploye = Id_Employe  
                         INNER JOIN `Status` ON IdStatus = Id_Status 
                         INNER JOIN Payment ON IdRecord = Id_Record;";
+
+
 
         private void Oplata_Load(object sender, EventArgs e)
         {
@@ -60,20 +83,15 @@ namespace Kyrsach2WINFORM
                     Con.Open();
 
                     MySqlCommand cmd = new MySqlCommand(CMD, Con);
-                    cmd.ExecuteNonQuery();
 
-                    DataTable Dt = new DataTable();
-                    MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
+                    MySqlDataReader RDR = cmd.ExecuteReader();
 
-                    Ad.Fill(Dt);
+                    //Заполняем данными
+                    while (RDR.Read())
+                    {
+                        dataGridView2.Rows.Add(RDR[0].ToString(), RDR[1].ToString(), RDR[2].ToString(), RDR[3].ToString(), RDR[4].ToString(), RDR[5].ToString(), RDR[6].ToString());
+                    }
 
-                    dataGridView2.DataSource = Dt;
-
-                    //Настройка полей
-                    dataGridView2.Columns["ID"].Visible = false;
-
-                    foreach (DataGridViewColumn column in dataGridView2.Columns)
-                        column.MinimumWidth = 100;
 
                     dataGridView2.ClearSelection(); //Очистка выделения
                 }
@@ -81,31 +99,6 @@ namespace Kyrsach2WINFORM
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        //Скрываем некоторые данные
-        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (ShowText)
-            {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
-                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента" && e.RowIndex != ThisRow)
-                {
-                    Optimize.HideMyFio(e);
-                }
-            }
-            else
-            {// прячем все
-                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента")
-                {
-                    Optimize.HideMyFio(e);
-                }
-            }
-
-            if (dataGridView2.Columns[e.ColumnIndex].Name == "Время записи")
-            {
-                string Time = (DateTime.Parse(e.Value.ToString())).ToString("HH:mm");
-                e.Value = Time;
             }
         }
 
@@ -124,13 +117,6 @@ namespace Kyrsach2WINFORM
             
             button3.Enabled = true;
         }
-
-        //// Редактировать отчет
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    RedactPlat FormA = new RedactPlat();
-        //    FormA.ShowDialog();
-        //}
 
         // Сформировать отчет
         private void button4_Click(object sender, EventArgs e)
@@ -158,18 +144,12 @@ namespace Kyrsach2WINFORM
         }
 
         //ВЫДЕЛЕНИЕ СТРОКИ
-
-        bool ShowText = false;
-        int ThisRow;
         //Подсветка строки на которую направлен указатель мыши
         private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex > -1)
             {
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
-                ShowText = true;
-                ThisRow = e.RowIndex;
-                dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value;
             }
         }
         //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
@@ -179,9 +159,6 @@ namespace Kyrsach2WINFORM
             if (e.RowIndex > -1)
             {
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                ShowText = false;
-
-                dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value;
             }
         }
 

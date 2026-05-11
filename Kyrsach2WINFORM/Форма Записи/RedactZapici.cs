@@ -184,5 +184,11 @@ namespace Kyrsach2WINFORM
             if (e.RowIndex > -1)
                 dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
         }
+
+        private void RedactZapici_Load(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
+        }
+
     }
 }

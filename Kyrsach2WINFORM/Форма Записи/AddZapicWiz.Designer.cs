@@ -50,7 +50,7 @@ namespace Kyrsach2WINFORM
             this.panel1.Controls.Add(this.button3);
             this.panel1.Location = new System.Drawing.Point(12, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(776, 49);
+            this.panel1.Size = new System.Drawing.Size(874, 49);
             this.panel1.TabIndex = 0;
             // 
             // button5
@@ -61,7 +61,7 @@ namespace Kyrsach2WINFORM
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button5.Location = new System.Drawing.Point(602, 2);
+            this.button5.Location = new System.Drawing.Point(651, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(171, 45);
             this.button5.TabIndex = 1;
@@ -76,7 +76,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Location = new System.Drawing.Point(3, 2);
+            this.button1.Location = new System.Drawing.Point(52, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 45);
             this.button1.TabIndex = 0;
@@ -92,7 +92,7 @@ namespace Kyrsach2WINFORM
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(462, 2);
+            this.button4.Location = new System.Drawing.Point(511, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(110, 45);
             this.button4.TabIndex = 3;
@@ -108,7 +108,7 @@ namespace Kyrsach2WINFORM
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(151, 2);
+            this.button2.Location = new System.Drawing.Point(200, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(129, 45);
             this.button2.TabIndex = 1;
@@ -124,7 +124,7 @@ namespace Kyrsach2WINFORM
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button3.Location = new System.Drawing.Point(315, 2);
+            this.button3.Location = new System.Drawing.Point(364, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 45);
             this.button3.TabIndex = 2;
@@ -136,7 +136,7 @@ namespace Kyrsach2WINFORM
             // 
             this.panel2.Location = new System.Drawing.Point(15, 90);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(770, 348);
+            this.panel2.Size = new System.Drawing.Size(871, 432);
             this.panel2.TabIndex = 1;
             // 
             // AddZapicWiz
@@ -144,7 +144,7 @@ namespace Kyrsach2WINFORM
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(898, 534);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;

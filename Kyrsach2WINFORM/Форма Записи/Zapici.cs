@@ -27,20 +27,63 @@ namespace Kyrsach2WINFORM
                 FlatStyle.Flat,
                 6,
                 Color.White,
-                Color.FromArgb(150, 116, 102),   // ваш основной цвет
+                Color.FromArgb(150, 116, 102),
                 Color.Bisque,   // цвет при активном/нажатом состоянии
                Color.Black
             );
 
-            _pag = new VPagination(this.groupBox1, 1,pageSize: 10, null, null,myStyle);
-            _pag.SelectDataMaster = FillDataGrid;
-            _pag.SelectCountMaster = GetCount;
-            
+
 
 
             // Включаем двойную буферизацию для DataGridView
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
+
+
+            //Настройка полей
+            dataGridView2.Columns.Add("№", "№");
+            dataGridView2.Columns.Add("IDClient", "IDClient");
+            dataGridView2.Columns.Add("IDMaser", "IDMaser");
+            dataGridView2.Columns.Add("ФИО клиента", "ФИО клиента");
+            dataGridView2.Columns.Add("ФИО мастера", "ФИО мастера");
+            dataGridView2.Columns.Add("Клиент-Мастер", "Клиент-Мастер");
+            dataGridView2.Columns.Add("Телефон", "Телефон");
+            dataGridView2.Columns.Add("Статус", "Статус");
+            dataGridView2.Columns.Add("Дата записи", "Дата записи");
+            dataGridView2.Columns.Add("Время записи", "Время записи");
+            dataGridView2.Columns.Add("Время", "Время");
+            dataGridView2.Columns.Add("Сумма", "Сумма");
+            dataGridView2.Columns.Add("Продолжительность, мин.", "Продолжительность, мин.");
+            dataGridView2.Columns.Add("PhoneMaster", "PhoneMaster");
+
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
+            {
+                column.MinimumWidth = 100;
+                if (column.Name == "№")
+                    column.MinimumWidth = 40;
+                if (column.Name == "Время записи")
+                    column.MinimumWidth = 70;
+            }
+
+            dataGridView2.Columns["Телефон"].Visible = false;
+            dataGridView2.Columns["IDClient"].Visible = false;
+            dataGridView2.Columns["IDMaser"].Visible = false;
+            dataGridView2.Columns["ФИО мастера"].Visible = false;
+            dataGridView2.Columns["ФИО клиента"].Visible = false;
+            dataGridView2.Columns["Дата записи"].Visible = false;
+            dataGridView2.Columns["Время записи"].Visible = false;
+            dataGridView2.Columns["PhoneMaster"].Visible = false;
+            dataGridView2.Columns["Продолжительность, мин."].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
+            dataGridView2.Columns["Продолжительность, мин."].SortMode = DataGridViewColumnSortMode.NotSortable;
+
+            dataGridView2.Columns[0].Width = 80;
+            dataGridView2.Columns["Клиент-Мастер"].Width = 450;
+            dataGridView2.Columns["Статус"].Width = 150;
+            dataGridView2.Columns["Время"].Width = 200;
+            
+            _pag = new VPagination(this.groupBox1, 1, pageSize: 10, null, null, myStyle);
+            _pag.SelectDataMaster = FillDataGrid;
+            _pag.SelectCountMaster = GetCount;
 
             //Сортировка по дате
             comboBox1.Items.Add("По умолчанию");
@@ -58,7 +101,7 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        
+
 
         int CurrentRowIndex; // Индекс выбранной строки
         // Получаем инфу по выбранной строке ДатаГрида
@@ -114,9 +157,7 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                dataGridView2.DataSource = null;
-                dataGridView2.Columns.Clear();
-
+                dataGridView2.Rows.Clear();
                 // Формируем пагинированный SQL
                 int skip = (_pag.PageIndex - 1) * _pag.PageSize;
                 string fullSql = CMD + having + orderBy +
@@ -127,26 +168,15 @@ namespace Kyrsach2WINFORM
                     Con.Open();
 
                     MySqlCommand cmd = new MySqlCommand(fullSql, Con);
-                    MySqlDataAdapter ad = new MySqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
+                    MySqlDataReader RDR = cmd.ExecuteReader();
 
-                    
-                    ad.Fill(dt);
-                   
-                    dataGridView2.DataSource = dt;
                     label4.Text = $"Кол-во записей: {countRow}";
 
-                    dataGridView2.Columns["Продолжительность, мин."].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
-
-                    dataGridView2.Columns["Телефон"].Visible = false;
-                    dataGridView2.Columns["IDClient"].Visible = false;
-                    dataGridView2.Columns["IDMaser"].Visible = false;
-                    dataGridView2.Columns["ФИО мастера"].Visible = false;
-                    dataGridView2.Columns["PhoneMaster"].Visible = false;
-                    dataGridView2.Columns["Продолжительность, мин."].SortMode = DataGridViewColumnSortMode.NotSortable;
-
-                    foreach (DataGridViewColumn column in dataGridView2.Columns)
-                        column.MinimumWidth = 100;
+                    //Заполняем данными
+                    while (RDR.Read())
+                    {
+                        dataGridView2.Rows.Add(RDR[0].ToString(), RDR[1].ToString(), RDR[2].ToString(), RDR[3].ToString(), RDR[4].ToString(), RDR[5].ToString(), RDR[6].ToString(), RDR[7].ToString(), RDR[8].ToString(), RDR[9].ToString(), RDR[10].ToString(), RDR[11].ToString(), RDR[12].ToString(), RDR[13].ToString());
+                    }
 
 
                     dataGridView2.ClearSelection(); //Очистка выделения
@@ -160,11 +190,13 @@ namespace Kyrsach2WINFORM
             }
         }
 
+
+
         //Редактировать
         private void button1_Click(object sender, EventArgs e)
         {
             //Формируем нашу запись в объект
-            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["Номер"].Value.ToString();
+            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
             string IDClient = dataGridView2.Rows[CurrentRowIndex].Cells["IDClient"].Value.ToString();
             string IdMaster = dataGridView2.Rows[CurrentRowIndex].Cells["IDMaser"].Value.ToString();
 
@@ -173,8 +205,8 @@ namespace Kyrsach2WINFORM
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
             string Status = dataGridView2.Rows[CurrentRowIndex].Cells["Статус"].Value.ToString();
             string Time = dataGridView2.Rows[CurrentRowIndex].Cells["Время записи"].Value.ToString();
-            string Dration = dataGridView2.Rows[CurrentRowIndex].Cells["Продолжительность, мин."].Value.ToString(); 
-            string Price = dataGridView2.Rows[CurrentRowIndex].Cells["Сумма записи"].Value.ToString();
+            string Dration = dataGridView2.Rows[CurrentRowIndex].Cells["Продолжительность, мин."].Value.ToString();
+            string Price = dataGridView2.Rows[CurrentRowIndex].Cells["Сумма"].Value.ToString();
             string Date = dataGridView2.Rows[CurrentRowIndex].Cells["Дата записи"].Value.ToString();
 
             string PhoneMaster = dataGridView2.Rows[CurrentRowIndex].Cells["PhoneMaster"].Value.ToString();
@@ -189,7 +221,7 @@ namespace Kyrsach2WINFORM
         //Удаление
         private void deleteOrder_Click(object sender, EventArgs e)
         {
-            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["Номер"].Value.ToString();
+            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
 
             //2 запроса - Одна транзакция
             MySqlTransaction transaction = null;
@@ -244,19 +276,18 @@ namespace Kyrsach2WINFORM
             textBox2_TextChanged(textBox2, EventArgs.Empty);
         }
 
-
-
         // Строка запроса default
-        string CMD = @"SELECT IdRecord as 'Номер', Client.IdClient as 'IDClient', Employe.IdEmploye 'IDMaser',
-                CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic) AS 'ФИО клиента', 
-                Client.Phone as 'Телефон',
-                CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО мастера',  
+        string CMD = @"SELECT IdRecord as '№', Client.IdClient as 'IDClient', Employe.IdEmploye 'IDMaser',
+        CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic) as 'ФИО клиента',
+        CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) as 'ФИО мастера',
+		CONCAT('К: ',CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic), '\nМ: ', CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic)) as 'Клиент-Мастер' ,
+		Client.Phone as 'Телефон',  
                 Status.Name as 'Статус', 
-
-                DATE_FORMAT(Date_Record, '%d.%m.%Y') AS 'Дата записи',  -- Формат dd.MM.yyyy
-                DATE_FORMAT(Time_Record, '%H:%i') AS 'Время записи',    -- Формат HH:MM
+                DATE_FORMAT(Date_Record, '%d.%m.%Y') as 'Дата записи',
+                DATE_FORMAT(Time_Record, '%H:%i') as 'Время записи',
+                CONCAT(DATE_FORMAT(Date_Record, '%d.%m.%Y'), '\n', DATE_FORMAT(Time_Record, '%H:%i')) as 'Время',
                 
-                Totla_Price as 'Сумма записи', Total_Time as 'Продолжительность, мин.', Employe.Phone as 'PhoneMaster' FROM Record 
+                Totla_Price as 'Сумма', Total_Time as 'Продолжительность, мин.', Employe.Phone as 'PhoneMaster' FROM Record 
 
                     INNER JOIN `Client` ON IdClient = Id_Client 
                     INNER JOIN `Employe` ON IdEmploye = Id_Employe  
@@ -276,7 +307,7 @@ namespace Kyrsach2WINFORM
                 orderBy = $" ORDER BY Date_Record";
             else
                 orderBy = $" ORDER BY Date_Record DESC";
-            FillDataGrid();
+
             _pag.VPagRunOrRefresh();
         }
 
@@ -287,25 +318,11 @@ namespace Kyrsach2WINFORM
                 having = "";
             else
                 having = $" HAVING IdRecord LIKE '%{textBox2.Text}%'";
-            FillDataGrid();
+
             _pag.VPagRunOrRefresh();
         }
 
 
-        //Прячем некоторые данные
-        private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (ShowText)
-            {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
-                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента" && e.RowIndex != ThisRow)
-                    Optimize.HideMyFio(e);
-            }
-            else
-            {// прячем все
-                if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО клиента")
-                    Optimize.HideMyFio(e);
-            }
-        }
 
         //Поиск - Только цифры
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
@@ -328,12 +345,8 @@ namespace Kyrsach2WINFORM
         {
             if (e.RowIndex > -1)
             {
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
-                ShowText = true;
-                ThisRow = e.RowIndex;
-                dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value;
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray; 
             }
-               
         }
         //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
         private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
@@ -341,10 +354,7 @@ namespace Kyrsach2WINFORM
             if (e.RowIndex > -1)
             {
                 dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
-                ShowText = false;
-                dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value = dataGridView2.Rows[e.RowIndex].Cells["ФИО клиента"].Value;
             }
-                
         }
 
         //Установил Nuget пакет для пагинации, VPaged.WF + System.Windows.Forms

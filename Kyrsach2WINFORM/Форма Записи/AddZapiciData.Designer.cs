@@ -71,7 +71,7 @@ namespace Kyrsach2WINFORM
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(289, 5);
+            this.dateTimePicker1.Location = new System.Drawing.Point(334, 12);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(280, 33);
             this.dateTimePicker1.TabIndex = 0;
@@ -82,7 +82,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(126, 41);
+            this.button1.Location = new System.Drawing.Point(178, 63);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 32);
             this.button1.TabIndex = 1;
@@ -94,7 +94,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(144, 9);
+            this.label1.Location = new System.Drawing.Point(189, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(139, 29);
             this.label1.TabIndex = 2;
@@ -105,7 +105,7 @@ namespace Kyrsach2WINFORM
             this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(262, 44);
+            this.button2.Location = new System.Drawing.Point(314, 66);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(77, 32);
             this.button2.TabIndex = 3;
@@ -118,7 +118,7 @@ namespace Kyrsach2WINFORM
             this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(397, 44);
+            this.button3.Location = new System.Drawing.Point(449, 66);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(77, 32);
             this.button3.TabIndex = 4;
@@ -132,7 +132,7 @@ namespace Kyrsach2WINFORM
             this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(538, 44);
+            this.button4.Location = new System.Drawing.Point(590, 66);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(77, 32);
             this.button4.TabIndex = 5;
@@ -145,7 +145,7 @@ namespace Kyrsach2WINFORM
             this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(126, 93);
+            this.button6.Location = new System.Drawing.Point(178, 115);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(77, 32);
             this.button6.TabIndex = 6;
@@ -158,7 +158,7 @@ namespace Kyrsach2WINFORM
             this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(262, 93);
+            this.button7.Location = new System.Drawing.Point(314, 115);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(77, 32);
             this.button7.TabIndex = 7;
@@ -171,7 +171,7 @@ namespace Kyrsach2WINFORM
             this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button8.Location = new System.Drawing.Point(397, 93);
+            this.button8.Location = new System.Drawing.Point(449, 115);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(77, 32);
             this.button8.TabIndex = 8;
@@ -184,7 +184,7 @@ namespace Kyrsach2WINFORM
             this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button9.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button9.Location = new System.Drawing.Point(538, 93);
+            this.button9.Location = new System.Drawing.Point(590, 115);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(77, 32);
             this.button9.TabIndex = 9;
@@ -197,7 +197,7 @@ namespace Kyrsach2WINFORM
             this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button10.Location = new System.Drawing.Point(126, 146);
+            this.button10.Location = new System.Drawing.Point(178, 168);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(77, 32);
             this.button10.TabIndex = 10;
@@ -210,7 +210,7 @@ namespace Kyrsach2WINFORM
             this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button11.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button11.Location = new System.Drawing.Point(262, 146);
+            this.button11.Location = new System.Drawing.Point(314, 168);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(77, 32);
             this.button11.TabIndex = 11;
@@ -223,7 +223,7 @@ namespace Kyrsach2WINFORM
             this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button12.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button12.Location = new System.Drawing.Point(397, 146);
+            this.button12.Location = new System.Drawing.Point(449, 168);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(77, 32);
             this.button12.TabIndex = 12;
@@ -236,7 +236,7 @@ namespace Kyrsach2WINFORM
             this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button13.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button13.Location = new System.Drawing.Point(538, 146);
+            this.button13.Location = new System.Drawing.Point(590, 168);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(77, 32);
             this.button13.TabIndex = 13;
@@ -249,7 +249,7 @@ namespace Kyrsach2WINFORM
             this.button14.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button14.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button14.Location = new System.Drawing.Point(126, 194);
+            this.button14.Location = new System.Drawing.Point(178, 216);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(77, 32);
             this.button14.TabIndex = 14;
@@ -262,7 +262,7 @@ namespace Kyrsach2WINFORM
             this.button15.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button15.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button15.Location = new System.Drawing.Point(262, 194);
+            this.button15.Location = new System.Drawing.Point(314, 216);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(77, 32);
             this.button15.TabIndex = 15;
@@ -275,7 +275,7 @@ namespace Kyrsach2WINFORM
             this.button16.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button16.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button16.Location = new System.Drawing.Point(397, 194);
+            this.button16.Location = new System.Drawing.Point(449, 216);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(77, 32);
             this.button16.TabIndex = 16;
@@ -288,7 +288,7 @@ namespace Kyrsach2WINFORM
             this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button17.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button17.Location = new System.Drawing.Point(538, 194);
+            this.button17.Location = new System.Drawing.Point(590, 216);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(77, 32);
             this.button17.TabIndex = 17;
@@ -301,7 +301,7 @@ namespace Kyrsach2WINFORM
             this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button18.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button18.Location = new System.Drawing.Point(126, 244);
+            this.button18.Location = new System.Drawing.Point(178, 266);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(77, 32);
             this.button18.TabIndex = 18;
@@ -314,7 +314,7 @@ namespace Kyrsach2WINFORM
             this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button19.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button19.Location = new System.Drawing.Point(262, 244);
+            this.button19.Location = new System.Drawing.Point(314, 266);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(77, 32);
             this.button19.TabIndex = 19;
@@ -327,7 +327,7 @@ namespace Kyrsach2WINFORM
             this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button20.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button20.Location = new System.Drawing.Point(397, 244);
+            this.button20.Location = new System.Drawing.Point(449, 266);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(77, 32);
             this.button20.TabIndex = 20;
@@ -340,7 +340,7 @@ namespace Kyrsach2WINFORM
             this.button21.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button21.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button21.Location = new System.Drawing.Point(538, 244);
+            this.button21.Location = new System.Drawing.Point(590, 266);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(77, 32);
             this.button21.TabIndex = 21;
@@ -353,7 +353,7 @@ namespace Kyrsach2WINFORM
             this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button22.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button22.Location = new System.Drawing.Point(126, 294);
+            this.button22.Location = new System.Drawing.Point(178, 316);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(77, 32);
             this.button22.TabIndex = 22;
@@ -366,7 +366,7 @@ namespace Kyrsach2WINFORM
             this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button23.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button23.Location = new System.Drawing.Point(262, 294);
+            this.button23.Location = new System.Drawing.Point(314, 316);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(77, 32);
             this.button23.TabIndex = 23;
@@ -379,7 +379,7 @@ namespace Kyrsach2WINFORM
             this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button24.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button24.Location = new System.Drawing.Point(397, 294);
+            this.button24.Location = new System.Drawing.Point(449, 316);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(77, 32);
             this.button24.TabIndex = 24;
@@ -392,7 +392,7 @@ namespace Kyrsach2WINFORM
             this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button25.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button25.Location = new System.Drawing.Point(538, 294);
+            this.button25.Location = new System.Drawing.Point(590, 316);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(77, 32);
             this.button25.TabIndex = 25;
@@ -405,7 +405,7 @@ namespace Kyrsach2WINFORM
             this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Bisque;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_помощь_30;
-            this.button5.Location = new System.Drawing.Point(575, 5);
+            this.button5.Location = new System.Drawing.Point(620, 12);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(40, 33);
             this.button5.TabIndex = 26;
@@ -422,7 +422,7 @@ namespace Kyrsach2WINFORM
             this.Info.Controls.Add(this.button28);
             this.Info.Controls.Add(this.button27);
             this.Info.Controls.Add(this.button26);
-            this.Info.Location = new System.Drawing.Point(363, 41);
+            this.Info.Location = new System.Drawing.Point(438, 51);
             this.Info.Name = "Info";
             this.Info.Size = new System.Drawing.Size(405, 184);
             this.Info.TabIndex = 27;
@@ -506,7 +506,7 @@ namespace Kyrsach2WINFORM
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(770, 348);
+            this.ClientSize = new System.Drawing.Size(855, 393);
             this.Controls.Add(this.Info);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button25);

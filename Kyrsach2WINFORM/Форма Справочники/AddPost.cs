@@ -40,7 +40,12 @@ namespace Kyrsach2WINFORM
         private void addPost_Click(object sender, EventArgs e)
         {
             string NamePost = textBox1.Text.Trim();
-            string CMD = $"INSERT INTO Post (Name) VALUES ('{NamePost}');";
+
+            int Value = 0;
+            if (checkBox1.Checked)
+                Value = 1;
+
+            string CMD = $"INSERT INTO Post (Name, BarberPost) VALUES ('{NamePost}', {Value});";
 
             try
             {

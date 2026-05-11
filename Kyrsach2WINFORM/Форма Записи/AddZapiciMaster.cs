@@ -141,7 +141,7 @@ namespace Kyrsach2WINFORM
 
         //только БАРБЕРЫ
         DataTable DtForMaster = new DataTable();
-        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe INNER JOIN Post ON Id_Post = IdPost WHERE Post.Name = 'Барбер' OR IdPost = 2";
+        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe INNER JOIN Post ON Id_Post = IdPost WHERE BarberPost = 1";
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {
@@ -158,11 +158,19 @@ namespace Kyrsach2WINFORM
 
                     Ad.Fill(DtForMaster);
 
+                    // **ПРОВЕРКА НА ПУСТУЮ ТАБЛИЦУ**
+                    if (DtForMaster.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Ни одна должность не выбрана в качестве 'Мастера', обратитесь к администрутору для решения проблемы", "Отсутствует настройка должностей",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+
                     dataGridView1.DataSource = DtForMaster.DefaultView;
 
                     //Настройка полей
                     dataGridView1.Columns["ФИО"].SortMode = DataGridViewColumnSortMode.NotSortable;
-                    dataGridView1.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(0, 3, 0, 3);
+                    dataGridView1.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
                     dataGridView1.Columns["ID"].Visible = false;
                     dataGridView1.Columns["Телефон"].Visible = false;
                     dataGridView1.Columns["Photo"].Visible = false;
@@ -212,6 +220,18 @@ namespace Kyrsach2WINFORM
 
             else
                 e.Handled = false;
+        }
+
+        private void dataGridView1_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
+        private void dataGridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
         }
     }
 }

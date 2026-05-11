@@ -33,6 +33,7 @@ namespace Kyrsach2WINFORM
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button8
@@ -45,7 +46,7 @@ namespace Kyrsach2WINFORM
             this.button8.Font = new System.Drawing.Font("Verdana", 12F);
             this.button8.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button8.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_double_left_30;
-            this.button8.Location = new System.Drawing.Point(12, 169);
+            this.button8.Location = new System.Drawing.Point(12, 189);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(51, 43);
             this.button8.TabIndex = 70;
@@ -86,7 +87,7 @@ namespace Kyrsach2WINFORM
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(238, 168);
+            this.button2.Location = new System.Drawing.Point(238, 185);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(211, 44);
             this.button2.TabIndex = 71;
@@ -94,12 +95,24 @@ namespace Kyrsach2WINFORM
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.addPost_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox1.Location = new System.Drawing.Point(23, 126);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(397, 27);
+            this.checkBox1.TabIndex = 72;
+            this.checkBox1.Text = "отображать должность при оформлении записи";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // AddRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
-            this.ClientSize = new System.Drawing.Size(461, 224);
+            this.ClientSize = new System.Drawing.Size(461, 244);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox1);
@@ -121,5 +134,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
