@@ -40,7 +40,6 @@ namespace Kyrsach2WINFORM
             dataGridView1.Columns.Add("Информация о услуге", "Информация о услуге");
 
 
-
             dataGridView1.Columns["Информация о услуге"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridView1.Columns["Информация о услуге"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
 

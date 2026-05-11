@@ -135,7 +135,7 @@ namespace Kyrsach2WINFORM
                 {
                     Con.Open();
 
-                    MySqlCommand cmd = new MySqlCommand( $"Select IdUser, Employe.Name, Employe.Surname, Employe.Patronymic, Password, Login, Id_Role from User INNER JOIN Employe ON Id_Employe = IdEmploye WHERE Login='{Login}'", Con);
+                    MySqlCommand cmd = new MySqlCommand( $"Select IdUser, Employe.Name, Employe.Surname, Employe.Patronymic, Password, Login, Id_Role, Id_Employe from User INNER JOIN Employe ON Id_Employe = IdEmploye WHERE Login='{Login}'", Con);
                     cmd.ExecuteNonQuery();
 
                     MySqlDataAdapter ad = new MySqlDataAdapter(cmd);
@@ -178,6 +178,7 @@ namespace Kyrsach2WINFORM
                     ConnectAndData.SurnameUser = dt.Rows[0].ItemArray.GetValue(2).ToString();
                     ConnectAndData.PatronymicUser = dt.Rows[0].ItemArray.GetValue(3).ToString();
                     ConnectAndData.Role = dt.Rows[0].ItemArray.GetValue(6).ToString();
+                    ConnectAndData.Id_Employe = dt.Rows[0].ItemArray.GetValue(7).ToString();
 
                     string FIO = ConnectAndData.NameUser + " " + ConnectAndData.SurnameUser + " " + ConnectAndData.PatronymicUser;
 

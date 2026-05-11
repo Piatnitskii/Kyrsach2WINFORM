@@ -22,6 +22,7 @@ namespace Kyrsach2WINFORM
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
+            FillDataGrid();
         }
 
         // Строка запроса default
@@ -40,7 +41,7 @@ namespace Kyrsach2WINFORM
                     INNER JOIN `Employe` ON IdEmploye = Id_Employe  
                     INNER JOIN `Status` ON IdStatus = Id_Status
 
-                WHERE Id_Emploey = {ConnectAndData.ID}";
+                WHERE Employe.IdEmploye = {ConnectAndData.Id_Employe} AND Status.Name = 'Ожидается'";
 
         // Заполняет данными таблицу
         void FillDataGrid()
@@ -68,6 +69,8 @@ namespace Kyrsach2WINFORM
 
                     dataGridView2.Columns["Телефон"].Visible = false;
                     dataGridView2.Columns["IDClient"].Visible = false;
+                    dataGridView2.Columns["Номер"].Visible = false;
+                    dataGridView2.Columns["Статус"].Visible = false;
                     dataGridView2.Columns["IDMaser"].Visible = false;
                     dataGridView2.Columns["ФИО мастера"].Visible = false;
                     dataGridView2.Columns["PhoneMaster"].Visible = false;

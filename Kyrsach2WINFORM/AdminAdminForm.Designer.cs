@@ -182,6 +182,7 @@ namespace Kyrsach2WINFORM
             this.button5.TabIndex = 91;
             this.button5.Text = "X";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label3
             // 

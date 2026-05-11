@@ -48,8 +48,8 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                string CMD = "SELECT * FROM Role;"; 
-                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone FROM Employe";
+                string CMD = "SELECT * FROM Role;";
+                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone, Post.Name as 'Post_name'  FROM Employe INNER JOIN Post ON Id_Post = IdPost";
 
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
@@ -81,6 +81,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.DataSource = DtEmploey.DefaultView;
                     dataGridView2.Columns["IdEmploye"].Visible = false;
                     dataGridView2.Columns["Phone"].Visible = false;
+                    dataGridView2.Columns["Post_name"].Visible = false;
                     dataGridView2.Columns["ФИО сотрудника"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
 
                     //Выбираем нужного сотрудника
@@ -89,7 +90,7 @@ namespace Kyrsach2WINFORM
                         if (row.Cells["IdEmploye"].Value.ToString() == userSystem.Id_Employe)
                         {
                             row.Selected = true;
-                            label1.Text = $"Выбранный сотрудник {row.Cells["ФИО сотрудника"].Value.ToString()}, +{row.Cells["Phone"].Value.ToString()}";
+                            label1.Text = $"Выбранный сотрудник {row.Cells["ФИО сотрудника"].Value.ToString()}, +{row.Cells["Phone"].Value.ToString()}, {row.Cells["Post_name"].Value.ToString()}";
                             Id_Employe = userSystem.Id_Employe;
                         }
                             
@@ -116,7 +117,7 @@ namespace Kyrsach2WINFORM
                 return;
             }
             Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
-            label1.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}";
+            label1.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}, {dataGridView2.Rows[CurrentRowIndex].Cells["Post_name"].Value.ToString()}";
             CheckData();
         }
 

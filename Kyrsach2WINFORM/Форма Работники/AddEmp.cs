@@ -123,10 +123,10 @@ namespace Kyrsach2WINFORM
                 if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
 
-                // ограничение 2 мб
-                if (new System.IO.FileInfo(openFileDialog1.FileName).Length > 2097152)
+                // ограничение 3 мб
+                if (new System.IO.FileInfo(openFileDialog1.FileName).Length > 3145728) // 3 MB = 3 * 1024 * 1024
                 {
-                    MessageBox.Show("Размер выбранного изображения не должен превышать 2 мб", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Размер выбранного изображения не должен превышать 3 мб", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

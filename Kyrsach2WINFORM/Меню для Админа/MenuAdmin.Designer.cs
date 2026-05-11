@@ -32,6 +32,7 @@ namespace Kyrsach2WINFORM
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuAdmin));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.openSchedule = new System.Windows.Forms.Button();
             this.openAdmin = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.OpenUser = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@ namespace Kyrsach2WINFORM
             this.PanelChild = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.MainPanel.SuspendLayout();
             this.PanelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -59,7 +59,7 @@ namespace Kyrsach2WINFORM
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
-            this.MainPanel.Controls.Add(this.button1);
+            this.MainPanel.Controls.Add(this.openSchedule);
             this.MainPanel.Controls.Add(this.openAdmin);
             this.MainPanel.Controls.Add(this.button8);
             this.MainPanel.Controls.Add(this.OpenUser);
@@ -75,6 +75,26 @@ namespace Kyrsach2WINFORM
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(228, 729);
             this.MainPanel.TabIndex = 0;
+            // 
+            // openSchedule
+            // 
+            this.openSchedule.Dock = System.Windows.Forms.DockStyle.Top;
+            this.openSchedule.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.openSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openSchedule.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.openSchedule.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.openSchedule.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_записи_50__1_;
+            this.openSchedule.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openSchedule.Location = new System.Drawing.Point(0, 586);
+            this.openSchedule.Name = "openSchedule";
+            this.openSchedule.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.openSchedule.Size = new System.Drawing.Size(228, 60);
+            this.openSchedule.TabIndex = 11;
+            this.openSchedule.Text = "Расписание";
+            this.openSchedule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.openSchedule.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.openSchedule.UseVisualStyleBackColor = true;
+            this.openSchedule.Click += new System.EventHandler(this.openSchedule_Click);
             // 
             // openAdmin
             // 
@@ -324,25 +344,6 @@ namespace Kyrsach2WINFORM
             this.label1.TabIndex = 10;
             this.label1.Text = "Меню администратора";
             // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button1.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_записи_50__1_;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(0, 586);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(228, 60);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Рассписание";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // MenuAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -386,6 +387,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button openSchedule;
     }
 }

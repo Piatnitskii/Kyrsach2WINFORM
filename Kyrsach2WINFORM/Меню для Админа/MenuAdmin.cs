@@ -48,6 +48,7 @@ namespace Kyrsach2WINFORM
                 OpenUser.Visible = false;   // пользователи
                 OpenBooks.Visible = false;   // справочники
                 openAdmin.Visible = false; //администрирование
+                openSchedule.Visible = false; //расписание
                 label1.Text = "Меню менеджера";
                 this.Text = "BARBERSHOP | Терминал менеджера";
             }
@@ -64,7 +65,6 @@ namespace Kyrsach2WINFORM
                 OpenOrder.Visible = false;  //записи
                 OpenOplata.Visible = false;  //оплата
                 openAdmin.Visible = false; //администрирование
-
             }
             else
             {
@@ -73,6 +73,8 @@ namespace Kyrsach2WINFORM
                 OpenClient.Visible = false;  //клиенты
                 OpenYslygi.Visible = false;  //услуги
                 OpenOrder.Visible = false;  //записи
+                openSchedule.Visible = false; //расписание
+                OpenOplata.Visible = false;  //оплата
             }
             label3.Text = ConnectAndData.SurnameUser;
         }
@@ -231,6 +233,15 @@ namespace Kyrsach2WINFORM
             {
                 ActiveButton(sender, RGBColors.color1);
                 OpenChildForm(new AdminAdminForm());
+            }
+        }
+
+        private void openSchedule_Click(object sender, EventArgs e)
+        {
+            if (!(CurrentBTN == sender))
+            {
+                ActiveButton(sender, RGBColors.color1);
+                OpenChildForm(new Schedule());
             }
         }
     }

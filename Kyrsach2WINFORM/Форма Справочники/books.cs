@@ -22,8 +22,8 @@ namespace Kyrsach2WINFORM
             // Включаем двойную буферизацию для DataGridView2
             Optimize.SetDoubleBuffered(dataGridView2);
 
-            dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
+           //dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            //dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
             //Заролняем дата грид
             FillDataGrid();
         }

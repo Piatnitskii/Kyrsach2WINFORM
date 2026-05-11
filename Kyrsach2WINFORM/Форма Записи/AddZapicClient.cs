@@ -32,7 +32,8 @@ namespace Kyrsach2WINFORM
             FillDataGrid();
         }
 
-        
+
+        DataTable DtForClient = new DataTable();
         string CMD = "Select IdClient as ID, CONCAT_WS(' ', Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон'  FROM Client";
 
         //Заполняет ДатаГрид данными
@@ -40,8 +41,6 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                DataTable DtForClient = new DataTable();
-
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
@@ -52,7 +51,7 @@ namespace Kyrsach2WINFORM
                     MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
 
                     Ad.Fill(DtForClient);
-                    dataGridView1.DataSource = DtForClient;
+                    dataGridView1.DataSource = DtForClient.DefaultView;
 
                     //Настройка полей
                     dataGridView1.Columns["ФИО"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -102,23 +101,40 @@ namespace Kyrsach2WINFORM
         //Отображаем выбранного ранее клиента, если таковой имеется
         void SelectRow()
         {
-            if (client.CurrentRowIndex != null && client.IdClient != null) // Если выбран ранее, отображаем
+            if (client.IdClient != null) // Если выбран ранее, отображаем
             {
-                dataGridView1.CurrentCell = dataGridView1.Rows[Convert.ToInt32(client.CurrentRowIndex)].Cells[1];
-                CurrentRowIndex = Convert.ToInt32(client.CurrentRowIndex);
+                bool rowFound = false; // Для отслеживания, нашли ли мы строку
 
-                // отображаем выбранного ранее клиента
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Проверяем, совпадает ли ID клиента с ID в строке
+                    if (row.Cells["ID"].Value.ToString() == client.IdClient)
+                    {
+                        dataGridView1.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                        rowFound = true; // Отмечаем, что строка найдена
+                        row.Selected = true; // Подсвечиваем строку
+                        break; 
+                    }
+                }
+
+                // Отображаем выбранного ранее клиента
                 label1.Text = client.FIO;
                 label2.Text = client.Phone;
 
                 label1.Visible = true;
                 label2.Visible = true;
+
+                if (!rowFound)
+                    dataGridView1.ClearSelection(); // Если строка не найдена, очищаем выделение
+
             }
             else
-                dataGridView1.ClearSelection();
+            {
+                dataGridView1.ClearSelection(); // Если не выбран клиент, очищаем выделение
+            }
         }
 
-        
+
         //Проверяем выбранного ранее клиента
         private void AddZapicClient_Load(object sender, EventArgs e)
         {
@@ -136,6 +152,36 @@ namespace Kyrsach2WINFORM
         {
             if (e.RowIndex > -1)
                 dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
+
+        //Поиск
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = DtForClient.DefaultView;
+            string search = textBox1.Text.Trim();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                dv.RowFilter = "";  // Показать все
+            }
+            else
+            {
+                // Поиск по колонкам
+                dv.RowFilter = "[ФИО] LIKE '%" + search + "%'";
+            }
+
+            dataGridView1.Refresh();  // Обновить вид
+            SelectRow();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
+                e.Handled = true;
+
+            else
+                e.Handled = false;
         }
     }
 }

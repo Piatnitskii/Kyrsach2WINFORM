@@ -21,7 +21,7 @@ namespace Kyrsach2WINFORM
         public static string SurnameUser = "";
         public static string PatronymicUser = "";
         public static string Role = "";
-
+        public static string Id_Employe = "";
 
 
         // Блок ПОДКЛЮЧЕНИЯ

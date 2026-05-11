@@ -35,7 +35,7 @@ namespace Kyrsach2WINFORM
             try
             {
                 string CMD = "SELECT * FROM Role;";
-                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone FROM Employe";
+                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone, Post.Name as 'Post_name'  FROM Employe INNER JOIN Post ON Id_Post = IdPost";
 
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
@@ -64,6 +64,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.DataSource = DtEmploey.DefaultView;
                     dataGridView2.Columns["IdEmploye"].Visible = false;
                     dataGridView2.Columns["Phone"].Visible = false;
+                    dataGridView2.Columns["Post_name"].Visible = false;
                     dataGridView2.Columns["ФИО сотрудника"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
 
                     dataGridView2.ClearSelection(); //Очистка выделения
@@ -89,7 +90,7 @@ namespace Kyrsach2WINFORM
                 return;
             }
             Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
-            label2.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}";
+            label2.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}, {dataGridView2.Rows[CurrentRowIndex].Cells["Post_name"].Value.ToString()}";
             CheckData();
         }
 
@@ -223,7 +224,7 @@ namespace Kyrsach2WINFORM
         //Поиск
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
                 e.Handled = true;
 
             else
@@ -303,6 +304,9 @@ namespace Kyrsach2WINFORM
             this.Close();
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

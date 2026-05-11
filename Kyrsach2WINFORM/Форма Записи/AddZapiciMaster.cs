@@ -34,11 +34,11 @@ namespace Kyrsach2WINFORM
             this.button4 = (Button)control4;
             this.button5 = (Button)control5;
 
+            // Включаем двойную буферизацию для DataGridView
+            Optimize.SetDoubleBuffered(dataGridView1);
+
             // Путь до корня проекта
             ProjectFolderPath = Directory.GetCurrentDirectory();
-
-            if (ProjectFolderPath.Contains("bin\\Debug") || ProjectFolderPath.Contains("bin\\Release"))
-                ProjectFolderPath = string.Join("\\", ProjectFolderPath.Split('\\').TakeWhile(el => el != "bin"));
 
             //Заполняем ДатаГрид данными
             FillDataGrid();
@@ -47,11 +47,22 @@ namespace Kyrsach2WINFORM
         //Отображаем выбранного ранее клиента, если таковой имеется
         void SelectRow()
         {
-            if (emploey.CurrentRowIndex != null && emploey.IdEmploey != null)
+            if (emploey.IdEmploey != null)
             {
-                dataGridView1.CurrentCell = dataGridView1.Rows[Convert.ToInt32(emploey.CurrentRowIndex)].Cells[1];
-                CurrentRowIndex = Convert.ToInt32(emploey.CurrentRowIndex);
-               
+                bool rowFound = false; // Для отслеживания, нашли ли мы строку
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    // Проверяем, совпадает ли ID клиента с ID в строке
+                    if (row.Cells["ID"].Value.ToString() == emploey.IdEmploey)
+                    {
+                        dataGridView1.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                        rowFound = true; // Отмечаем, что строка найдена
+                        row.Selected = true; // Подсвечиваем строку
+                        break;
+                    }
+                }
+
                 // Подставляем соответсвующую фотку
                 ConfigurePath();
 
@@ -62,6 +73,9 @@ namespace Kyrsach2WINFORM
                 label1.Visible = true;
                 label2.Visible = true;
                 pictureBox1.Visible = true;
+
+                if (!rowFound)
+                    dataGridView1.ClearSelection(); // Если строка не найдена, очищаем выделение
             }
             else
                 dataGridView1.ClearSelection();
@@ -126,7 +140,8 @@ namespace Kyrsach2WINFORM
         }
 
         //только БАРБЕРЫ
-        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe WHERE Id_Post = 2";
+        DataTable DtForMaster = new DataTable();
+        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe INNER JOIN Post ON Id_Post = IdPost WHERE Post.Name = 'Барбер' OR IdPost = 2";
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {
@@ -139,12 +154,11 @@ namespace Kyrsach2WINFORM
                     MySqlCommand cmd = new MySqlCommand(CMD, Con);
                     cmd.ExecuteNonQuery();
 
-                    DataTable Dt = new DataTable();
                     MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
 
-                    Ad.Fill(Dt);
+                    Ad.Fill(DtForMaster);
 
-                    dataGridView1.DataSource = Dt;
+                    dataGridView1.DataSource = DtForMaster.DefaultView;
 
                     //Настройка полей
                     dataGridView1.Columns["ФИО"].SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -168,6 +182,36 @@ namespace Kyrsach2WINFORM
         private void AddZapiciMaster_Load(object sender, EventArgs e)
         {
             SelectRow();
+        }
+
+
+        //Поиск
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = DtForMaster.DefaultView;
+            string search = textBox1.Text.Trim();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                dv.RowFilter = "";  // Показать все
+            }
+            else
+            {
+                // Поиск по колонкам
+                dv.RowFilter = "[ФИО] LIKE '%" + search + "%'";
+            }
+
+            dataGridView1.Refresh();  // Обновить вид
+            SelectRow();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
+                e.Handled = true;
+
+            else
+                e.Handled = false;
         }
     }
 }

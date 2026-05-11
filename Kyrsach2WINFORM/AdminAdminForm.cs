@@ -284,5 +284,12 @@ namespace Kyrsach2WINFORM
         {
             button2.Enabled = true;
         }
+
+        //Закрыть
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MenuAdmin.DisableButton();
+            this.Close();
+        }
     }
 }

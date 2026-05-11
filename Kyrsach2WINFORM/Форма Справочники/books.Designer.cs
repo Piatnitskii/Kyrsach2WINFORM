@@ -46,13 +46,13 @@ namespace Kyrsach2WINFORM
             this.button1 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -61,7 +61,7 @@ namespace Kyrsach2WINFORM
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(198, 5);
+            this.label2.Location = new System.Drawing.Point(199, 5);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 29);
             this.label2.TabIndex = 10;
@@ -78,8 +78,7 @@ namespace Kyrsach2WINFORM
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Comic Sans MS", 24F);
@@ -95,7 +94,7 @@ namespace Kyrsach2WINFORM
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ControlLightLight;
             this.dataGridView1.Location = new System.Drawing.Point(3, 42);
@@ -103,7 +102,7 @@ namespace Kyrsach2WINFORM
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(571, 385);
+            this.dataGridView1.Size = new System.Drawing.Size(572, 385);
             this.dataGridView1.TabIndex = 11;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseLeave);
@@ -133,8 +132,7 @@ namespace Kyrsach2WINFORM
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGridView2.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridView2.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Comic Sans MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -153,12 +151,12 @@ namespace Kyrsach2WINFORM
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.GridColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView2.Location = new System.Drawing.Point(580, 42);
+            this.dataGridView2.Location = new System.Drawing.Point(581, 42);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(463, 385);
+            this.dataGridView2.Size = new System.Drawing.Size(462, 385);
             this.dataGridView2.TabIndex = 13;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellMouseLeave);
@@ -226,7 +224,7 @@ namespace Kyrsach2WINFORM
             this.button4.Font = new System.Drawing.Font("Verdana", 12F);
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_plus_24;
-            this.button4.Location = new System.Drawing.Point(400, 11);
+            this.button4.Location = new System.Drawing.Point(399, 11);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(57, 52);
             this.button4.TabIndex = 17;
@@ -246,7 +244,7 @@ namespace Kyrsach2WINFORM
             this.button3.Font = new System.Drawing.Font("Verdana", 12F);
             this.button3.ForeColor = System.Drawing.Color.Black;
             this.button3.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_карандаш_50;
-            this.button3.Location = new System.Drawing.Point(331, 11);
+            this.button3.Location = new System.Drawing.Point(330, 11);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(57, 52);
             this.button3.TabIndex = 16;
@@ -265,7 +263,7 @@ namespace Kyrsach2WINFORM
             this.button2.Font = new System.Drawing.Font("Verdana", 12F);
             this.button2.ForeColor = System.Drawing.Color.Black;
             this.button2.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_plus_24;
-            this.button2.Location = new System.Drawing.Point(508, 11);
+            this.button2.Location = new System.Drawing.Point(509, 11);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(57, 52);
             this.button2.TabIndex = 15;
@@ -285,7 +283,7 @@ namespace Kyrsach2WINFORM
             this.button1.Font = new System.Drawing.Font("Verdana", 12F);
             this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_карандаш_50;
-            this.button1.Location = new System.Drawing.Point(445, 11);
+            this.button1.Location = new System.Drawing.Point(446, 11);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(57, 52);
             this.button1.TabIndex = 14;
@@ -335,19 +333,6 @@ namespace Kyrsach2WINFORM
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1046, 505);
             this.tableLayoutPanel1.TabIndex = 54;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.button6);
-            this.groupBox1.Location = new System.Drawing.Point(3, 433);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(571, 69);
-            this.groupBox1.TabIndex = 55;
-            this.groupBox1.TabStop = false;
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -355,11 +340,25 @@ namespace Kyrsach2WINFORM
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(580, 433);
+            this.groupBox2.Location = new System.Drawing.Point(581, 433);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(463, 69);
+            this.groupBox2.Size = new System.Drawing.Size(462, 69);
             this.groupBox2.TabIndex = 55;
             this.groupBox2.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.button6);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.groupBox1.Location = new System.Drawing.Point(3, 433);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(572, 69);
+            this.groupBox1.TabIndex = 55;
+            this.groupBox1.TabStop = false;
             // 
             // books
             // 
@@ -380,8 +379,8 @@ namespace Kyrsach2WINFORM
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
