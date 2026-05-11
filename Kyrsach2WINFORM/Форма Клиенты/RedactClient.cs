@@ -31,9 +31,9 @@ namespace Kyrsach2WINFORM
         }
 
         // Проверка на дубликат True - если нет дубликата
-        bool CheckClient(string NumberPhone, string Name, string Surname, string Patronymic) // ТУТ самое главное чтобы не было точного совпадения по всем столбцам
+        bool CheckClient(string NumberPhone, string Name, string Surname, string Patronymic) // ТУТ самое главное чтобы не было точного совпадения по номеру
         {
-            string CMD = $"Select * FROM Client WHERE Phone = '{NumberPhone}' AND Name = '{Name}' AND Surname = '{Surname}' AND Patronymic = '{Patronymic}' AND IdClient != '{client.IdClient}';";
+            string CMD = $"Select * FROM Client WHERE Phone = '{NumberPhone}' AND IdClient != '{client.IdClient}';";
 
             using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
             {
