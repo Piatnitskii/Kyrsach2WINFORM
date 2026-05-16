@@ -17,6 +17,10 @@ namespace Kyrsach2WINFORM
         public Employee()
         {
             InitializeComponent();
+
+            button3.Click += MenuAdmin.UserActivityDetected;
+            dataGridView2.CellClick += MenuAdmin.UserActivityDetected;
+
             this.DoubleBuffered = true; //двойная буферизация
 
             // Включаем двойную буферизацию для DataGridView
@@ -107,6 +111,7 @@ namespace Kyrsach2WINFORM
         // Обновить сотрудника
         private void button1_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
@@ -122,20 +127,23 @@ namespace Kyrsach2WINFORM
             RedactEmp FormA = new RedactEmp(emploey);
             FormA.ShowDialog();
             FillDataGrid();
+            Optimize.Ontimer();
         }
 
         //  Добавить сотрудника
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            Optimize.StopTimerSafely();
             AddEmp FormA = new AddEmp();
             FormA.ShowDialog();
             FillDataGrid();
+            Optimize.Ontimer();
         }
 
         //Удаление сотрудника
         private void deleteEmploye_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
@@ -159,12 +167,14 @@ namespace Kyrsach2WINFORM
                     FillDataGrid();
                 }
                 else
-                    return;
+                    ;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка удаления сотрудника", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            Optimize.Ontimer();
         }
 
         // Скрываем персональные данные ФИО и номер телефона

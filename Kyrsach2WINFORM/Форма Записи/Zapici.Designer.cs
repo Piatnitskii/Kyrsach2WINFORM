@@ -160,8 +160,8 @@ namespace Kyrsach2WINFORM
             this.dataGridView2.Size = new System.Drawing.Size(1201, 395);
             this.dataGridView2.TabIndex = 41;
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellMouseEnter);
             this.dataGridView2.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellMouseLeave);
-            this.dataGridView2.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView2_CellMouseMove);
             this.dataGridView2.Sorted += new System.EventHandler(this.dataGridView2_Sorted);
             // 
             // button6

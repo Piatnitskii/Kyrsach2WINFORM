@@ -22,6 +22,7 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
+
             // Создаём объект стиля с нужными цветами
             var myStyle = new ButtonStyle(
                 FlatStyle.Flat,
@@ -31,9 +32,6 @@ namespace Kyrsach2WINFORM
                 Color.Bisque,   // цвет при активном/нажатом состоянии
                Color.Black
             );
-
-
-
 
             // Включаем двойную буферизацию для DataGridView
             Optimize.SetDoubleBuffered(dataGridView2);
@@ -102,6 +100,13 @@ namespace Kyrsach2WINFORM
         }
 
 
+        //Установил Nuget пакет для пагинации, VPaged.WF + System.Windows.Forms
+        // Загрузка формы - очищяем выделение
+        private void Zapici_Load(object sender, EventArgs e)
+        {
+            dataGridView2.ClearSelection();
+            _pag.VPagRunOrRefresh();
+        }
 
         int CurrentRowIndex; // Индекс выбранной строки
         // Получаем инфу по выбранной строке ДатаГрида
@@ -274,6 +279,8 @@ namespace Kyrsach2WINFORM
             AddZapicWiz FormA = new AddZapicWiz();
             FormA.ShowDialog();
             textBox2_TextChanged(textBox2, EventArgs.Empty);
+
+
         }
 
         // Строка запроса default
@@ -336,18 +343,6 @@ namespace Kyrsach2WINFORM
 
 
         //ВЫДЕЛЕНИЕ СТРОКИ
-
-        bool ShowText = false;
-        int ThisRow;
-
-        //Подсветка строки на которую направлен указатель мыши
-        private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex > -1)
-            {
-                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray; 
-            }
-        }
         //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
         private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
@@ -357,14 +352,13 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        //Установил Nuget пакет для пагинации, VPaged.WF + System.Windows.Forms
-
-
-        // Загрузка формы - очищяем выделение
-        private void Zapici_Load(object sender, EventArgs e)
+        //Подсветка строки на которую направлен указатель мыши
+        private void dataGridView2_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-            dataGridView2.ClearSelection();
-            _pag.VPagRunOrRefresh();
+            if (e.RowIndex > -1)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+            }
         }
 
         //Сортировка - очищяем выделение

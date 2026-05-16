@@ -28,8 +28,118 @@ namespace Kyrsach2WINFORM
         //Fields
         static private Panel LeftBorderPBTN;
         static public  Button CurrentBTN;
+
+
         // Открытая форма
         private Form ActiveForm = null;
+
+        //Таймер
+        static Point lastMousePos;      // Последняя позиция
+       
+
+        private const double MOVEMENT_THRESHOLD = 0.1;  // Пикселей для "движения"
+
+        // ЛОК
+        static readonly object timerLock = new object(); 
+        private readonly object mouseLock = new object();
+
+        public void MenuAdmin_Load(object sender, EventArgs e)
+        {
+            Optimize.remainingTime = 180; // Устанавливаем оставшееся время в секундах (3 минуты)
+            Optimize.inactivityTimer.Start(); // Стартуем таймеры
+            Optimize.movementDetectTimer.Start();
+
+            lastMousePos = PointToClient(Cursor.Position);
+        }
+        
+
+        //При закрытии формы останавливаем таймеры
+        private void MenuAdmin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Optimize.StopTimerSafely();  
+        }
+
+        //Тикет таймера на движение мыши
+        private void MovementDetectTimer_Tick(object sender, EventArgs e)
+        {
+
+                if (Optimize.isFormClosing) return;
+
+                lock (mouseLock)  // ← ЗАЩИТА
+                {
+                    Point currentScreenPos = Cursor.Position;
+                    Point currentFormPos = PointToClient(currentScreenPos);  // ← КЛЮЧ!
+
+                    // Проверяем только внутри формы
+                    if (ClientRectangle.Contains(currentFormPos))
+                    {
+                        int deltaX = Math.Abs(currentFormPos.X - lastMousePos.X);
+                        int deltaY = Math.Abs(currentFormPos.Y - lastMousePos.Y);
+
+                        if (deltaX > MOVEMENT_THRESHOLD || deltaY > MOVEMENT_THRESHOLD)
+                        {
+                            label5.Text = $"🖱️ ДВИЖЕТСЯ: ΔX={deltaX}, ΔY={deltaY}";
+
+                            if (Optimize.isFormClosing) return;
+                            UserActivityDetected(null, null);
+                        }
+                    }
+
+                    lastMousePos = currentFormPos;
+                }
+        }
+
+
+        //Сбрасываем таймер
+        static public void UserActivityDetected(object sender, EventArgs e)
+        {
+
+            if (Optimize.isFormClosing) return;
+
+            lock (timerLock)  // ← БЛОКИРУЕМ МНОЖЕСТВЕННЫЕ ВЫЗОВЫ
+            {
+                if (Optimize.isUpdatingTimer) return;  // Пропускаем дубли
+
+                Optimize.isUpdatingTimer = true;
+
+                Optimize.inactivityTimer.Stop();
+                Optimize.remainingTime = 10;
+                Optimize.UpdateRemainingTimeLabel(MenuAdmin.Instance?.label4);
+                Optimize.inactivityTimer.Start();
+
+                Optimize.isUpdatingTimer = false;
+            }
+        }
+
+
+
+        //Тикет таймера для отсчета времени для закрытия формы
+        public void InactivityTimer_Tick(object sender, EventArgs e)
+        {
+
+                if (Optimize.isFormClosing) return;
+
+                lock (timerLock)  // ← БЛОКИРУЕМ Tick
+                {
+                    if (Optimize.isFormClosing) return;
+
+                    if (Optimize.remainingTime > 0)
+                    {
+                        Optimize.remainingTime--;
+                    Optimize.UpdateRemainingTimeLabel(this.label4);
+                    }
+                    else
+                    {
+                        Optimize.inactivityTimer.Stop();
+                        if (Optimize.isFormClosing) return;
+                        Application.OpenForms["MenuAdmin"]?.Close();
+                    }
+                }
+
+        }
+
+        // СТАТИЧЕСКАЯ ссылка на единственный инстанс
+        public static MenuAdmin Instance { get; private set; }
 
         public MenuAdmin()
         {
@@ -37,12 +147,35 @@ namespace Kyrsach2WINFORM
             this.DoubleBuffered = true;
             this.BackColor = SystemColors.InactiveCaption;
 
+            // устанавливаем Instance при создании формы
+            Instance = this;
+
+            this.OpenEmploey.Click += UserActivityDetected;
+            this.OpenClient.Click += UserActivityDetected;
+            this.OpenBooks.Click += UserActivityDetected;
+            this.OpenOplata.Click += UserActivityDetected;
+            this.OpenOrder.Click += UserActivityDetected;
+            this.OpenYslygi.Click += UserActivityDetected;
+            this.openSchedule.Click += UserActivityDetected;
+            this.OpenUser.Click += UserActivityDetected;
+            this.openAdmin.Click += UserActivityDetected;
+
             LeftBorderPBTN = new Panel();
             LeftBorderPBTN.Size = new Size(7, 60);
             MainPanel.Controls.Add(LeftBorderPBTN);
 
+            // Настройка таймера 
+            Optimize.inactivityTimer = new Timer();
+            Optimize.inactivityTimer.Interval = 1000;
+            Optimize.inactivityTimer.Tick += InactivityTimer_Tick;
+
+            // Таймер: если 1 сек без движения → "застыл"
+            Optimize.movementDetectTimer = new Timer { Interval = 1000 };
+            Optimize.movementDetectTimer.Tick += MovementDetectTimer_Tick;
             
-            if(ConnectAndData.Role == "2")
+
+
+            if (ConnectAndData.Role == "2")
             {
                 //У менеджера скрываем
                 OpenUser.Visible = false;   // пользователи
@@ -165,12 +298,12 @@ namespace Kyrsach2WINFORM
 
         private void OpenEmploey_Click(object sender, EventArgs e)
         {
+
             if (!(CurrentBTN == sender))
             {
                 ActiveButton(sender, RGBColors.color1);
                 OpenChildForm(new Employee());
             }
-
         }
 
         private void OpenClient_Click(object sender, EventArgs e)
@@ -244,5 +377,7 @@ namespace Kyrsach2WINFORM
                 OpenChildForm(new Schedule());
             }
         }
+
+
     }
 }

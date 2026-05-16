@@ -23,7 +23,7 @@ namespace Kyrsach2WINFORM
 
         static public Button CurrentBTN;
 
-        public AddZapicWiz()
+        public AddZapicWiz( )
         {
             InitializeComponent();
 
@@ -36,6 +36,7 @@ namespace Kyrsach2WINFORM
             // Закрытие формы по завершению создания записи
             FormManager.RegisterForm("AddZapicWiz", this);
         }
+
 
         //Metods для кнопок
         // Накидываем на кнопку цвета, "Активируем" ее

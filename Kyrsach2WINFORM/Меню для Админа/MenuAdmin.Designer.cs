@@ -32,6 +32,8 @@ namespace Kyrsach2WINFORM
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuAdmin));
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.openSchedule = new System.Windows.Forms.Button();
             this.openAdmin = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -59,6 +61,8 @@ namespace Kyrsach2WINFORM
             // MainPanel
             // 
             this.MainPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.MainPanel.Controls.Add(this.label5);
+            this.MainPanel.Controls.Add(this.label4);
             this.MainPanel.Controls.Add(this.openSchedule);
             this.MainPanel.Controls.Add(this.openAdmin);
             this.MainPanel.Controls.Add(this.button8);
@@ -75,6 +79,24 @@ namespace Kyrsach2WINFORM
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(228, 729);
             this.MainPanel.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 653);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(35, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "label5";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 633);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "label4";
             // 
             // openSchedule
             // 
@@ -358,7 +380,10 @@ namespace Kyrsach2WINFORM
             this.Name = "MenuAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BARBERSHOP | Терминал администратора";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuAdmin_FormClosing);
+            this.Load += new System.EventHandler(this.MenuAdmin_Load);
             this.MainPanel.ResumeLayout(false);
+            this.MainPanel.PerformLayout();
             this.PanelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.PanelChild.ResumeLayout(false);
@@ -388,5 +413,7 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button openSchedule;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
