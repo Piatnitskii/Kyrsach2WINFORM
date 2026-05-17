@@ -22,6 +22,12 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
+            button3.Click += MenuAdmin.UserActivityDetected;
+            dataGridView2.CellClick += MenuAdmin.UserActivityDetected;
+            textBox2.KeyPress += MenuAdmin.UserActivityDetected;
+            comboBox1.Click += MenuAdmin.UserActivityDetected;
+            groupBox1.Click += MenuAdmin.UserActivityDetected;
+
 
             // Создаём объект стиля с нужными цветами
             var myStyle = new ButtonStyle(
@@ -200,6 +206,7 @@ namespace Kyrsach2WINFORM
         //Редактировать
         private void button1_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             //Формируем нашу запись в объект
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
             string IDClient = dataGridView2.Rows[CurrentRowIndex].Cells["IDClient"].Value.ToString();
@@ -221,11 +228,13 @@ namespace Kyrsach2WINFORM
             RedactZapici FormA = new RedactZapici(Zapici);
             FormA.ShowDialog();
             textBox2_TextChanged(textBox2, EventArgs.Empty);
+            Optimize.Ontimer();
         }
 
         //Удаление
         private void deleteOrder_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
 
             //2 запроса - Одна транзакция
@@ -270,17 +279,18 @@ namespace Kyrsach2WINFORM
                 }
             }
             else
-                return;
+                ;
+            Optimize.Ontimer();
         }
 
         //Добавить
         private void button2_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             AddZapicWiz FormA = new AddZapicWiz();
             FormA.ShowDialog();
             textBox2_TextChanged(textBox2, EventArgs.Empty);
-
-
+            Optimize.Ontimer();
         }
 
         // Строка запроса default
