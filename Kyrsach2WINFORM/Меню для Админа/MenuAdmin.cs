@@ -45,11 +45,6 @@ namespace Kyrsach2WINFORM
 
         public void MenuAdmin_Load(object sender, EventArgs e)
         {
-            Optimize.remainingTime = 180; // Устанавливаем оставшееся время в секундах (3 минуты)
-            Optimize.inactivityTimer.Start(); // Стартуем таймеры
-            Optimize.movementDetectTimer.Start();
-
-            lastMousePos = PointToClient(Cursor.Position);
         }
         
 
@@ -147,18 +142,12 @@ namespace Kyrsach2WINFORM
             this.DoubleBuffered = true;
             this.BackColor = SystemColors.InactiveCaption;
 
+            Optimize.isFormClosing = false;
+
             // устанавливаем Instance при создании формы
             Instance = this;
 
-            this.OpenEmploey.Click += UserActivityDetected;
-            this.OpenClient.Click += UserActivityDetected;
-            this.OpenBooks.Click += UserActivityDetected;
-            this.OpenOplata.Click += UserActivityDetected;
-            this.OpenOrder.Click += UserActivityDetected;
-            this.OpenYslygi.Click += UserActivityDetected;
-            this.openSchedule.Click += UserActivityDetected;
-            this.OpenUser.Click += UserActivityDetected;
-            this.openAdmin.Click += UserActivityDetected;
+            
 
             LeftBorderPBTN = new Panel();
             LeftBorderPBTN.Size = new Size(7, 60);
@@ -172,8 +161,6 @@ namespace Kyrsach2WINFORM
             // Таймер: если 1 сек без движения → "застыл"
             Optimize.movementDetectTimer = new Timer { Interval = 1000 };
             Optimize.movementDetectTimer.Tick += MovementDetectTimer_Tick;
-            
-
 
             if (ConnectAndData.Role == "2")
             {
@@ -184,6 +171,19 @@ namespace Kyrsach2WINFORM
                 openSchedule.Visible = false; //расписание
                 label1.Text = "Меню менеджера";
                 this.Text = "BARBERSHOP | Терминал менеджера";
+
+                this.OpenEmploey.Click += UserActivityDetected;
+                this.OpenClient.Click += UserActivityDetected;
+                this.OpenOplata.Click += UserActivityDetected;
+                this.OpenOrder.Click += UserActivityDetected;
+                this.OpenYslygi.Click += UserActivityDetected;
+
+
+                Optimize.remainingTime = 180; // Устанавливаем оставшееся время в секундах (3 минуты)
+                Optimize.inactivityTimer.Start(); // Стартуем таймеры
+                Optimize.movementDetectTimer.Start();
+
+                lastMousePos = PointToClient(Cursor.Position);
             }
             else if(ConnectAndData.Role == "3")
             {

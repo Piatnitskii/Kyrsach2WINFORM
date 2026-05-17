@@ -19,6 +19,14 @@ namespace Kyrsach2WINFORM
         {
             InitializeComponent();
 
+            button3.Click += MenuAdmin.UserActivityDetected;
+            dataGridView2.CellClick += MenuAdmin.UserActivityDetected;
+            textBox2.KeyPress += MenuAdmin.UserActivityDetected;
+            comboBox1.Click += MenuAdmin.UserActivityDetected;
+            comboBox2.Click += MenuAdmin.UserActivityDetected;
+            comboBox1.SelectedIndexChanged += MenuAdmin.UserActivityDetected;
+            comboBox2.SelectedIndexChanged += MenuAdmin.UserActivityDetected;
+
             // Включаем двойную буферизацию для DataGridView
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
@@ -228,6 +236,7 @@ namespace Kyrsach2WINFORM
         //Редактировать
         private void button1_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["Number"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["Name"].Value.ToString();
             string Cost = dataGridView2.Rows[CurrentRowIndex].Cells["Cost"].Value.ToString();
@@ -241,19 +250,23 @@ namespace Kyrsach2WINFORM
             ReadctYslyg FormA = new ReadctYslyg(service);
             FormA.ShowDialog();
             FillDataGrid(LastCMD);
+            Optimize.Ontimer();
         }
 
         //Добавить
         private void button2_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             AddYslyga FormA = new AddYslyga();
             FormA.ShowDialog();
             FillDataGrid(LastCMD);
+            Optimize.Ontimer();
         }
 
         //Удаление
         private void deleteService_Click(object sender, EventArgs e)
         {
+            Optimize.StopTimerSafely();
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["Number"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["Name"].Value.ToString();
 
@@ -275,12 +288,13 @@ namespace Kyrsach2WINFORM
                     FillDataGrid(LastCMD);
                 }
                 else
-                    return;
+                    ;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            Optimize.Ontimer();
         }
 
         // Чистим 

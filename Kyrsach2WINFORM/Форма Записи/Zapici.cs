@@ -27,7 +27,7 @@ namespace Kyrsach2WINFORM
             textBox2.KeyPress += MenuAdmin.UserActivityDetected;
             comboBox1.Click += MenuAdmin.UserActivityDetected;
             groupBox1.Click += MenuAdmin.UserActivityDetected;
-
+            comboBox1.SelectedIndexChanged += MenuAdmin.UserActivityDetected;
 
             // Создаём объект стиля с нужными цветами
             var myStyle = new ButtonStyle(
