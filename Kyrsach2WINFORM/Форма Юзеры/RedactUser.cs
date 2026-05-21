@@ -89,6 +89,7 @@ namespace Kyrsach2WINFORM
                     {
                         if (row.Cells["IdEmploye"].Value.ToString() == userSystem.Id_Employe)
                         {
+                            dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
                             row.Selected = true;
                             label1.Text = $"Выбранный сотрудник {row.Cells["ФИО сотрудника"].Value.ToString()}, +{row.Cells["Phone"].Value.ToString()}, {row.Cells["Post_name"].Value.ToString()}";
                             Id_Employe = userSystem.Id_Employe;
@@ -114,6 +115,7 @@ namespace Kyrsach2WINFORM
             {
                 Id_Employe = "-1";
                 dataGridView2.ClearSelection();
+                CheckData();
                 return;
             }
             Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
@@ -125,7 +127,7 @@ namespace Kyrsach2WINFORM
         void CheckData()
         {
             //Если что то поменялось и при этом не равно пустоте
-            if ( (Id_Employe != userSystem.Id_Employe || textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox5.Text.Trim() != ""))
+            if ( (Id_Employe != userSystem.Id_Employe || textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (Id_Employe != "-1" && textBox5.Text.Trim() != ""))
             {
                 //если поменяли все таки пароль, то он должен быть 8 цифр
                 if( textBox4.Text.Trim().Length > 0 && textBox4.Text.Trim().Length != 8)
@@ -242,8 +244,35 @@ namespace Kyrsach2WINFORM
             }
 
             dataGridView2.Refresh();  // Обновить вид
+            SelectRow();
         }
+        //Отображаем сотрудника
+        void SelectRow()
+        {
+            if (Id_Employe != "-1") // Если выбран ранее, отображаем
+            {
+                bool rowFound = false; // Для отслеживания, нашли ли мы строку
 
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    // Проверяем, совпадает ли ID сотрудника с ID в строке
+                    if (row.Cells["IdEmploye"].Value.ToString() == Id_Employe)
+                    {
+                        dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                        rowFound = true; // Отмечаем, что строка найдена
+                        row.Selected = true; // Подсвечиваем строку
+                        break;
+                    }
+                }
+
+                if (!rowFound)
+                    dataGridView2.ClearSelection(); // Если строка не найдена, очищаем выделение
+            }
+            else
+            {
+                dataGridView2.ClearSelection(); // Если не выбран клиент, очищаем выделение
+            }
+        }
         //Роль
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {

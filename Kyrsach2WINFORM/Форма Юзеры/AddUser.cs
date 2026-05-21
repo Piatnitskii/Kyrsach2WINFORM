@@ -87,6 +87,7 @@ namespace Kyrsach2WINFORM
             {
                 Id_Employe = "-1";
                 dataGridView2.ClearSelection();
+                CheckData();
                 return;
             }
             Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
@@ -124,7 +125,7 @@ namespace Kyrsach2WINFORM
         void CheckData()
         {
 
-            if (CurrentRowIndex != -1 && Id_Employe != "-1" && textBox5.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox4.Text.Trim().Length == 8)
+            if (Id_Employe != "-1" && textBox5.Text.Trim() != "" && textBox4.Text.Trim() != "" && textBox4.Text.Trim().Length == 8)
                 button2.Enabled = true;
             else
                 button2.Enabled = false;
@@ -231,6 +232,34 @@ namespace Kyrsach2WINFORM
                 e.Handled = false;
         }
 
+        //Отображаем сотрудника
+        void SelectRow()
+        {
+            if (Id_Employe != "-1") // Если выбран ранее, отображаем
+            {
+                bool rowFound = false; // Для отслеживания, нашли ли мы строку
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    // Проверяем, совпадает ли ID сотрудника с ID в строке
+                    if (row.Cells["IdEmploye"].Value.ToString() == Id_Employe)
+                    {
+                        dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                        rowFound = true; // Отмечаем, что строка найдена
+                        row.Selected = true; // Подсвечиваем строку
+                        break;
+                    }
+                }
+
+                if (!rowFound)
+                    dataGridView2.ClearSelection(); // Если строка не найдена, очищаем выделение
+            }
+            else
+            {
+                dataGridView2.ClearSelection(); // Если не выбран клиент, очищаем выделение
+            }
+        }
+
         //Поиск
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -249,6 +278,7 @@ namespace Kyrsach2WINFORM
             }
 
             dataGridView2.Refresh();  // Обновить вид
+            SelectRow();
         }
 
         //Логин
@@ -307,6 +337,18 @@ namespace Kyrsach2WINFORM
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+        //Подсветка строки на которую направлен указатель мыши
+        private void dataGridView2_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+        }
+        //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
+        private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
         }
     }
 }
