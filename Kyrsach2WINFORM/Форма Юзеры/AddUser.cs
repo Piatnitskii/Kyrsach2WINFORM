@@ -221,7 +221,7 @@ namespace Kyrsach2WINFORM
         #region Настройка полей
 
 
-        //Поиск
+        //Поиск - русские, пробелы, управляющие символы
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))

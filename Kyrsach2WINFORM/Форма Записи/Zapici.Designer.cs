@@ -95,7 +95,7 @@ namespace Kyrsach2WINFORM
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(166, 52);
             this.button1.TabIndex = 43;
-            this.button1.Text = "Редактировать";
+            this.button1.Text = "Завершить";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

@@ -42,12 +42,13 @@ namespace Kyrsach2WINFORM
             CheckData();
         }
 
-        //Заполнение комбобокса категориями
+        DataTable DtCategory = new DataTable();
+        //Заполнение датагрида категориями
         void PullData()
         {
             try
             {
-                string CMD = "SELECT * FROM Category;";
+                string CMD = "SELECT IdCategory as 'ID', Name as 'Название' FROM Category;";
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
@@ -55,17 +56,26 @@ namespace Kyrsach2WINFORM
                     MySqlCommand cmd = new MySqlCommand(CMD, Con);
                     cmd.ExecuteNonQuery();
 
-                    DataTable Dt = new DataTable();
                     MySqlDataAdapter Ad = new MySqlDataAdapter(cmd);
 
-                    Ad.Fill(Dt);
+                    Ad.Fill(DtCategory);
 
-                    comboBox1.ValueMember = "IdCategory";
-                    comboBox1.DisplayMember = "Name";
-                    comboBox1.DataSource = Dt;
+                    dataGridView2.DataSource = DtCategory.DefaultView;
+                    dataGridView2.Columns["ID"].Visible = false;
+                    dataGridView2.Columns["Название"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
 
                     //устанавливаем выбранный элемент
-                    comboBox1.SelectedValue = service.Id_Category;
+                    foreach (DataGridViewRow row in dataGridView2.Rows)
+                    {
+                        if (row.Cells["ID"].Value.ToString() == service.Id_Category)
+                        {
+                            Id_CategoryService = service.Id_Category;
+                            dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                            row.Selected = true; // Подсвечиваем строку
+                            break;
+                        }
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -73,14 +83,13 @@ namespace Kyrsach2WINFORM
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         
 
         //Проверка заполнености обязательных полей
         void CheckData()
         {
 
-            if ( (textBox1.Text.Trim() != service.Name || textBox2.Text.Trim() != service.Description || numericUpDown1.Value != Convert.ToDecimal(service.Duration) || numericUpDown2.Value != Convert.ToDecimal(service.Cost) || comboBox1.SelectedValue.ToString() != service.Id_Category) && (numericUpDown2.Text != ""  && numericUpDown1.Text != "" && textBox1.Text.Trim() != "" && numericUpDown1.Value > 0 && numericUpDown2.Value > 0))
+            if ( (textBox1.Text.Trim() != service.Name || textBox2.Text.Trim() != service.Description || numericUpDown1.Value != Convert.ToDecimal(service.Duration) || numericUpDown2.Value != Convert.ToDecimal(service.Cost) || Id_CategoryService != service.Id_Category) && (Id_CategoryService != "-1" && numericUpDown2.Text != ""  && numericUpDown1.Text != "" && textBox1.Text.Trim() != "" && numericUpDown1.Value > 0 && numericUpDown2.Value > 0))
                 button1.Enabled = true;
             else
                 button1.Enabled = false;
@@ -107,14 +116,12 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-
                 string Name = textBox1.Text.ToString().Trim();
                 string Description = textBox2.Text.ToString().Trim();
                 string Cost = numericUpDown2.Value.ToString().Replace(",", ".");
                 string Duration = numericUpDown1.Value.ToString();
-                string Category = comboBox1.SelectedValue.ToString();
 
-                string CMD = $"UPDATE Service SET Name = '{Name}', Description = '{Description}', Id_Category = '{Category}', Cost = {Cost}, Duration = '{Duration}' WHERE IdService = {service.IdService};";
+                string CMD = $"UPDATE Service SET Name = '{Name}', Description = '{Description}', Id_Category = '{Id_CategoryService}', Cost = {Cost}, Duration = '{Duration}' WHERE IdService = {service.IdService};";
 
                 DialogResult dialogResult = MessageBox.Show("Изменить услугу?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
@@ -219,6 +226,92 @@ namespace Kyrsach2WINFORM
             this.Close();
         }
 
-        
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            DataView dv = DtCategory.DefaultView;
+            string search = textBox3.Text.Trim();
+
+            if (string.IsNullOrEmpty(search))
+            {
+                dv.RowFilter = "";  // Показать все
+            }
+            else
+            {
+                // Поиск по колонкам
+                dv.RowFilter = "[Название] LIKE '%" + search + "%'";
+            }
+
+            dataGridView2.Refresh();  // Обновить вид
+            SelectRow();
+        }
+
+        //Отображаем ранее выбранную категорию услуг
+        void SelectRow()
+        {
+            if (Id_CategoryService != "-1") // Если выбран ранее, отображаем
+            {
+                bool rowFound = false; // Для отслеживания, нашли ли мы строку
+
+                foreach (DataGridViewRow row in dataGridView2.Rows)
+                {
+                    // Проверяем, совпадает ли ID категории с ID в строке
+                    if (row.Cells["ID"].Value.ToString() == Id_CategoryService)
+                    {
+                        dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
+                        rowFound = true; // Отмечаем, что строка найдена
+                        row.Selected = true; // Подсвечиваем строку
+                        break;
+                    }
+                }
+
+                if (!rowFound)
+                    dataGridView2.ClearSelection(); // Если строка не найдена, очищаем выделение
+            }
+            else
+            {
+                dataGridView2.ClearSelection(); // Если не выбран клиент, очищаем выделение
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
+                e.Handled = true;
+
+            else
+                e.Handled = false;
+        }
+
+
+        //Подсветка строки на которую направлен указатель мыши
+        private void dataGridView2_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+        }
+        //Возвращаем состояние строки на исходную, когда указатель "Покидает" строку
+        private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
+        int CurrentRowIndex = -1; // Индекс выбранной строки
+        string Id_CategoryService;
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CurrentRowIndex = e.RowIndex;
+
+            if (CurrentRowIndex == -1)
+            {
+                dataGridView2.ClearSelection();
+                Id_CategoryService = "-1";
+                CheckData();
+                return;
+            }
+
+            Id_CategoryService = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
+            CheckData();
+        }
     }
 }

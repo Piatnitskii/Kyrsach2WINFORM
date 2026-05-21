@@ -65,7 +65,7 @@ namespace Kyrsach2WINFORM
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(171, 45);
             this.button5.TabIndex = 1;
-            this.button5.Text = "Подтверждение заказа";
+            this.button5.Text = "Подтверждение записи";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
