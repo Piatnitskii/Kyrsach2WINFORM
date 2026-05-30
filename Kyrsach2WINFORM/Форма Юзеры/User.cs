@@ -63,10 +63,11 @@ namespace Kyrsach2WINFORM
         }
 
         // IdUser, Name, Surname, Patronymic, Password, Login, Id_Role, Id_Employe
-        string CMD = $@"Select IdUser as ID, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО', Employe.Phone as 'Телефон', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole', Id_Employe
+        string CMD = $@"Select IdUser as ID, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО', Employe.Phone as 'Телефон', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole', Id_Employe, Post.Name as 'Должность'
                         FROM User 
                         INNER JOIN Role ON Id_Role = IdRole 
-                        INNER JOIN Employe ON Id_Employe = IdEmploye";
+                        INNER JOIN Employe ON Id_Employe = IdEmploye
+                        INNER JOIN Post ON Id_Post = IdPost";
 
         //Заполняет ДатаГрид данными
         void FillDataGrid()
@@ -87,11 +88,12 @@ namespace Kyrsach2WINFORM
 
                     dataGridView2.DataSource = Dt;
 
-                    // Настройка полей
+                    // Настройка полей 
                     dataGridView2.Columns["ID"].Visible = false;
                     dataGridView2.Columns["idrole"].Visible = false;
                     dataGridView2.Columns["Пароль"].Visible = false;
                     dataGridView2.Columns["Id_Employe"].Visible = false;
+                    dataGridView2.Columns["Должность"].Visible = false;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -128,9 +130,9 @@ namespace Kyrsach2WINFORM
         }
 
 
-       //РАБОТА С ДАННЫМИ
+        //РАБОТА С ДАННЫМИ
 
-        // Открыть форму редактирования
+        // Открыть форму редактирования 
         private void button1_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
@@ -141,8 +143,11 @@ namespace Kyrsach2WINFORM
             string Login = dataGridView2.Rows[CurrentRowIndex].Cells["Логин"].Value.ToString();
             string RoleName = dataGridView2.Rows[CurrentRowIndex].Cells["Роль"].Value.ToString();
             string Id_Role = dataGridView2.Rows[CurrentRowIndex].Cells["idrole"].Value.ToString();
+            string post = dataGridView2.Rows[CurrentRowIndex].Cells["Должность"].Value.ToString();
+            string phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
+            string fio = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString();
 
-            UserSystem user = new UserSystem(ID, Id_Employe, Login, Id_Role, RoleName);
+            UserSystem user = new UserSystem(ID, Id_Employe, Login, Id_Role, RoleName, null, post, phone, fio);
 
             RedactUser FormA = new RedactUser(user);
             FormA.ShowDialog();

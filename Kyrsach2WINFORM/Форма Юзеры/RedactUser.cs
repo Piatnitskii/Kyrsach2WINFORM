@@ -25,6 +25,8 @@ namespace Kyrsach2WINFORM
             this.userSystem = userSystem;
             InitializeComponent();
 
+            label1.Text = $"Выбранный сотрудник: {userSystem.Fio}, +{userSystem.Phone}, {userSystem.Post}";
+
             if (userSystem.IdUser == ConnectAndData.ID)
                 comboBox1.Enabled = false;
 
@@ -37,9 +39,6 @@ namespace Kyrsach2WINFORM
             //Контрольная проверка
             CheckData();
 
-            // Включаем двойную буферизацию для DataGridView
-            Optimize.SetDoubleBuffered(dataGridView2);
-            dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
         }
 
         DataTable DtEmploey = new DataTable();
@@ -49,8 +48,6 @@ namespace Kyrsach2WINFORM
             try
             {
                 string CMD = "SELECT * FROM Role;";
-                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone, Post.Name as 'Post_name'  FROM Employe INNER JOIN Post ON Id_Post = IdPost";
-
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
@@ -70,32 +67,6 @@ namespace Kyrsach2WINFORM
 
                     //устанавливаем выбранный элемент
                     comboBox1.SelectedValue = userSystem.Id_Role;
-
-                    //Добавляем данные в дата грид (Сотрудники)
-                    cmd = new MySqlCommand(CMD2, Con);
-                    cmd.ExecuteNonQuery();
-
-                    Ad = new MySqlDataAdapter(cmd);
-                    Ad.Fill(DtEmploey);
-
-                    dataGridView2.DataSource = DtEmploey.DefaultView;
-                    dataGridView2.Columns["IdEmploye"].Visible = false;
-                    dataGridView2.Columns["Phone"].Visible = false;
-                    dataGridView2.Columns["Post_name"].Visible = false;
-                    dataGridView2.Columns["ФИО сотрудника"].DefaultCellStyle.Padding = new Padding(0, 5, 0, 5);
-
-                    //Выбираем нужного сотрудника
-                    foreach(DataGridViewRow row in dataGridView2.Rows)
-                    {
-                        if (row.Cells["IdEmploye"].Value.ToString() == userSystem.Id_Employe)
-                        {
-                            dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
-                            row.Selected = true;
-                            label1.Text = $"Выбранный сотрудник {row.Cells["ФИО сотрудника"].Value.ToString()}, +{row.Cells["Phone"].Value.ToString()}, {row.Cells["Post_name"].Value.ToString()}";
-                            Id_Employe = userSystem.Id_Employe;
-                        }
-                            
-                    }
                 }
             }
             catch (Exception ex)
@@ -104,30 +75,12 @@ namespace Kyrsach2WINFORM
             }
         }
 
-        int CurrentRowIndex = -1; // Индекс выбранной строки
-        string Id_Employe;
-        // Получаем инфу по выбранной строке ДатаГрида
-        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            CurrentRowIndex = e.RowIndex;
-
-            if (CurrentRowIndex == -1)
-            {
-                Id_Employe = "-1";
-                dataGridView2.ClearSelection();
-                CheckData();
-                return;
-            }
-            Id_Employe = dataGridView2.Rows[CurrentRowIndex].Cells["IdEmploye"].Value.ToString();
-            label1.Text = $"Выбранный сотрудник: {dataGridView2.Rows[CurrentRowIndex].Cells["ФИО сотрудника"].Value.ToString()}, +{dataGridView2.Rows[CurrentRowIndex].Cells["Phone"].Value.ToString()}, {dataGridView2.Rows[CurrentRowIndex].Cells["Post_name"].Value.ToString()}";
-            CheckData();
-        }
 
         //Проверка заполнености обязательных полей
         void CheckData()
         {
             //Если что то поменялось и при этом не равно пустоте
-            if ( (Id_Employe != userSystem.Id_Employe || textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (Id_Employe != "-1" && textBox5.Text.Trim() != ""))
+            if ( (textBox5.Text.Trim() != userSystem.Login || textBox4.Text.Trim().Length != 0 || comboBox1.SelectedValue.ToString() != userSystem.Id_Role) && (textBox5.Text.Trim() != ""))
             {
                 //если поменяли все таки пароль, то он должен быть 8 цифр
                 if( textBox4.Text.Trim().Length > 0 && textBox4.Text.Trim().Length != 8)
@@ -177,9 +130,9 @@ namespace Kyrsach2WINFORM
 
             string CMD;
             if (Password != "") //Если что то внесли в строку с паролем, меняем пароль
-                CMD = $"UPDATE User SET Id_Employe='{Id_Employe}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}', Password = '{Password}' WHERE IdUser = '{userSystem.IdUser}';";
+                CMD = $"UPDATE User SET Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}', Password = '{Password}' WHERE IdUser = '{userSystem.IdUser}';";
             else
-                CMD = $"UPDATE User SET Id_Employe='{Id_Employe}', Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}' WHERE IdUser = '{userSystem.IdUser}';";
+                CMD = $"UPDATE User SET Id_Role='{Role}', Login = '{textBox5.Text.ToString().Trim()}' WHERE IdUser = '{userSystem.IdUser}';";
 
             try
             {
@@ -227,52 +180,8 @@ namespace Kyrsach2WINFORM
             }
             else { e.Handled = false; }
         }
-        // Поиск
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            DataView dv = DtEmploey.DefaultView;
-            string search = textBox1.Text.Trim();
-
-            if (string.IsNullOrEmpty(search))
-            {
-                dv.RowFilter = "";  // Показать все
-            }
-            else
-            {
-                // Поиск по колонкам
-                dv.RowFilter = "[ФИО сотрудника] LIKE '%" + search + "%'";
-            }
-
-            dataGridView2.Refresh();  // Обновить вид
-            SelectRow();
-        }
-        //Отображаем сотрудника
-        void SelectRow()
-        {
-            if (Id_Employe != "-1") // Если выбран ранее, отображаем
-            {
-                bool rowFound = false; // Для отслеживания, нашли ли мы строку
-
-                foreach (DataGridViewRow row in dataGridView2.Rows)
-                {
-                    // Проверяем, совпадает ли ID сотрудника с ID в строке
-                    if (row.Cells["IdEmploye"].Value.ToString() == Id_Employe)
-                    {
-                        dataGridView2.CurrentCell = row.Cells[1]; // Устанавливаем текущую ячейку
-                        rowFound = true; // Отмечаем, что строка найдена
-                        row.Selected = true; // Подсвечиваем строку
-                        break;
-                    }
-                }
-
-                if (!rowFound)
-                    dataGridView2.ClearSelection(); // Если строка не найдена, очищаем выделение
-            }
-            else
-            {
-                dataGridView2.ClearSelection(); // Если не выбран клиент, очищаем выделение
-            }
-        }
+       
+        
         //Роль
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -332,7 +241,10 @@ namespace Kyrsach2WINFORM
             this.Close();
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 
 }
