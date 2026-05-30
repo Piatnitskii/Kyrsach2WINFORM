@@ -51,7 +51,7 @@ namespace Kyrsach2WINFORM
         }
 
         string CMD = @"SELECT IdPayment as ID, IdRecord as 'Номер записи', 
-                        CONCAT('К: ',CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic), '\nМ: ', CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic)) as 'Клиент-Мастер', 
+                        CONCAT('К: ',CONCAT_WS(' ',  Client.Surname, Client.Name, Client.Patronymic), '\nМ: ', CONCAT_WS(' ', Employe.Surname, Employe.Name, Employe.Patronymic)) as 'Клиент-Мастер', 
                         CONCAT(DATE_FORMAT(Date_Record, '%d.%m.%Y'), '\n', DATE_FORMAT(Time_Record, '%H:%i')) as 'Время',
                         Payment_Time 'Время оплаты', Amount as 'Сумма', Discount as 'Скидка' 
                         

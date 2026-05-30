@@ -35,7 +35,7 @@ namespace Kyrsach2WINFORM
             try
             {
                 string CMD = "SELECT * FROM Role;";
-                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО сотрудника', Phone, Post.Name as 'Post_name'  FROM Employe INNER JOIN Post ON Id_Post = IdPost";
+                string CMD2 = "SELECT IdEmploye, CONCAT_WS(' ', Employe.Surname, Employe.Name, Employe.Patronymic) AS 'ФИО сотрудника', Phone, Post.Name as 'Post_name'  FROM Employe INNER JOIN Post ON Id_Post = IdPost";
 
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {

@@ -34,7 +34,7 @@ namespace Kyrsach2WINFORM
 
 
         DataTable DtForClient = new DataTable();
-        string CMD = "Select IdClient as ID, CONCAT_WS(' ', Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон'  FROM Client";
+        string CMD = "Select IdClient as ID, CONCAT_WS(' ', Surname, Name, Patronymic) AS 'ФИО', Phone as 'Телефон'  FROM Client";
 
         //Заполняет ДатаГрид данными
         void FillDataGrid()

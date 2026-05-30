@@ -63,7 +63,7 @@ namespace Kyrsach2WINFORM
         }
 
         // IdUser, Name, Surname, Patronymic, Password, Login, Id_Role, Id_Employe
-        string CMD = $@"Select IdUser as ID, CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) AS 'ФИО', Employe.Phone as 'Телефон', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole', Id_Employe, Post.Name as 'Должность'
+        string CMD = $@"Select IdUser as ID, CONCAT_WS(' ',  Employe.Surname, Employe.Name, Employe.Patronymic) AS 'ФИО', Employe.Phone as 'Телефон', Password as 'Пароль', Login as 'Логин', Role.Name as 'Роль', Id_Role as 'idrole', Id_Employe, Post.Name as 'Должность'
                         FROM User 
                         INNER JOIN Role ON Id_Role = IdRole 
                         INNER JOIN Employe ON Id_Employe = IdEmploye
@@ -116,16 +116,16 @@ namespace Kyrsach2WINFORM
             if (ShowText)
             {// делаем так, чтобы раскрывалась только та строка, на которую указали мышкой
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО" && e.RowIndex != ThisRow)
-                {
                     Optimize.HideMyFio(e);
-                }
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "Телефон" && e.RowIndex != ThisRow)
+                    Optimize.HideMyPhone(e);
             }
             else
             {// прячем все
                 if (dataGridView2.Columns[e.ColumnIndex].Name == "ФИО")
-                {
                     Optimize.HideMyFio(e);
-                }
+                if (dataGridView2.Columns[e.ColumnIndex].Name == "Телефон")
+                    Optimize.HideMyPhone(e);
             }
         }
 

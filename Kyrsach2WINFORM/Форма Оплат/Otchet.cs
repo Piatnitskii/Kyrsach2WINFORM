@@ -106,9 +106,9 @@ namespace Kyrsach2WINFORM
             var Emploey = new List<EmploeyRevenue>();
 
             string query = $@"
-                SELECT 
+                SELECT
 
-	            CONCAT(Employe.Name, ' ', Employe.Surname, ' ', Employe.Patronymic) as ФИО_Работника,
+	            CONCAT(Employe.Surname, ' ', Employe.Name, ' ', Employe.Patronymic) as ФИО_Работника,
                 Employe.Phone as Номер_Телефона,
                 COUNT(*) as Количество_Записей,
                 SUM( Payment.Amount - Payment.Discount) as Выручка,

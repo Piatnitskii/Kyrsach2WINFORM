@@ -141,7 +141,7 @@ namespace Kyrsach2WINFORM
 
         //только БАРБЕРЫ
         DataTable DtForMaster = new DataTable();
-        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe INNER JOIN Post ON Id_Post = IdPost WHERE BarberPost = 1";
+        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Surname, Employe.Name,Patronymic) AS 'ФИО', Phone as 'Телефон', Photo  FROM Employe INNER JOIN Post ON Id_Post = IdPost WHERE BarberPost = 1";
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {

@@ -61,7 +61,7 @@ namespace Kyrsach2WINFORM
         }
 
         // Employe.Name as 'Имя', Surname as 'Фамилия', Patronymic as 'Отчество',
-        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Employe.Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон', Birthday as 'Дата рождения', Post.Name as 'Должность', Photo as 'фото', Id_Post as 'Id_Post' FROM Employe INNER JOIN Post ON Id_Post = IdPost";
+        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Surname, Employe.Name, Patronymic) AS 'ФИО', Phone as 'Телефон', Birthday as 'Дата рождения', Post.Name as 'Должность', Photo as 'фото', Id_Post as 'Id_Post' FROM Employe INNER JOIN Post ON Id_Post = IdPost";
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {
@@ -85,7 +85,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["ID"].Visible = false;
                     dataGridView2.Columns["фото"].Visible = false;
                     dataGridView2.Columns["Id_Post"].Visible = false;
-
+                    dataGridView2.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -110,8 +110,8 @@ namespace Kyrsach2WINFORM
         private void button1_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
-            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
             string Birthday = dataGridView2.Rows[CurrentRowIndex].Cells["Дата рождения"].Value.ToString();
@@ -139,8 +139,8 @@ namespace Kyrsach2WINFORM
         private void deleteEmploye_Click(object sender, EventArgs e)
         {
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
-            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
 
             string CMD = $"DELETE FROM Employe WHERE IdEmploye = {ID};";

@@ -283,9 +283,9 @@ namespace Kyrsach2WINFORM
 
         // Строка запроса default
         string CMD = @"SELECT IdRecord as '№', Client.IdClient as 'IDClient', Employe.IdEmploye 'IDMaser',
-        CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic) as 'ФИО клиента',
-        CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic) as 'ФИО мастера',
-		CONCAT('К: ',CONCAT_WS(' ', Client.Name, Client.Surname, Client.Patronymic), '\nМ: ', CONCAT_WS(' ', Employe.Name, Employe.Surname, Employe.Patronymic)) as 'Клиент-Мастер' ,
+        CONCAT_WS(' ',  Client.Surname, Client.Name, Client.Patronymic) as 'ФИО клиента',
+        CONCAT_WS(' ',  Employe.Surname, Employe.Name, Employe.Patronymic) as 'ФИО мастера',
+		CONCAT('К: ',CONCAT_WS(' ',  Client.Surname, Client.Name, Client.Patronymic), '\nМ: ', CONCAT_WS(' ',  Employe.Surname, Employe.Name, Employe.Patronymic)) as 'Клиент-Мастер' ,
 		Client.Phone as 'Телефон',  
                 Status.Name as 'Статус', 
                 DATE_FORMAT(Date_Record, '%d.%m.%Y') as 'Дата записи',

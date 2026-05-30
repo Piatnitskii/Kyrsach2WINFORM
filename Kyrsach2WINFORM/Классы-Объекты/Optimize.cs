@@ -85,9 +85,9 @@ namespace Kyrsach2WINFORM
                 //Формируем новый внешний вид данных в колонке данной строки [Имя] [Фамилия] [Отчество]
                 string Result;
                 if (Val.Length == 3 && Val[2].Trim() != "")
-                    Result = Val[0] + " " + Val[2] + " " + (Val[1])[0] + ".";
+                    Result = Val[1] + " " + Val[2] + " " + (Val[0])[0] + ".";
                 else
-                    Result = Val[0] + " " + (Val[1])[0] + ".";
+                    Result = Val[1] + " " + (Val[0])[0] + ".";
 
                 e.Value = Result;
             }

@@ -42,7 +42,7 @@ namespace Kyrsach2WINFORM
         }
 
         // IdClient, Name, Surname, Phone
-        string CMD = "Select IdClient as ID, CONCAT_WS(' ', Name, Surname, Patronymic) AS 'ФИО', Phone as 'Телефон'  FROM Client";
+        string CMD = "Select IdClient as ID, CONCAT_WS(' ', Surname, Name, Patronymic) AS 'ФИО', Phone as 'Телефон'  FROM Client";
 
         //Заполняет ДатаГрид данными
         void FillDataGrid()
@@ -65,6 +65,7 @@ namespace Kyrsach2WINFORM
 
                     //Настройка полей
                     dataGridView2.Columns["ID"].Visible = false;
+                    dataGridView2.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
 
@@ -118,8 +119,8 @@ namespace Kyrsach2WINFORM
         {
             // Создаем клиента для передачи
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
-            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
 
@@ -132,8 +133,8 @@ namespace Kyrsach2WINFORM
         private void button6_Click(object sender, EventArgs e)
         {
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
-            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
+            string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
 
             string CMD = $"DELETE FROM Client WHERE IdClient = {ID};";
