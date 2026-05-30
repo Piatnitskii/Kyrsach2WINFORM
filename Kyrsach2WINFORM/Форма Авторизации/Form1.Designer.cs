@@ -193,7 +193,7 @@ namespace Kyrsach2WINFORM
             this.button4.Size = new System.Drawing.Size(52, 37);
             this.button4.TabIndex = 14;
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.rerolCaptcha);
             // 
             // pictureBox1
             // 
@@ -218,7 +218,7 @@ namespace Kyrsach2WINFORM
             this.button2.TabIndex = 8;
             this.button2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.button2.Click += new System.EventHandler(this.OpenSettings);
             // 
             // button1
             // 
@@ -237,7 +237,7 @@ namespace Kyrsach2WINFORM
             this.button1.Text = "ВОЙТИ";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.OpenMenu);
             // 
             // timer1
             // 

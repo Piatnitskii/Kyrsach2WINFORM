@@ -49,7 +49,7 @@ namespace Kyrsach2WINFORM
         
 
         // Импортирование данных
-        private void button3_Click(object sender, EventArgs e)
+        private void importData_Click(object sender, EventArgs e)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Kyrsach2WINFORM
                     case "Категории услуг":
 
                         //Проверка csv
-                        if (checkData(FullText, 2) == false)
+                        if (checkData(FullText, 1) == false)
                         {
                             MessageBox.Show("Ошибка соответствия необходимого количества колонок с действительным!", "Ошибка импорта", MessageBoxButtons.OK);
                             return;
@@ -178,7 +178,7 @@ namespace Kyrsach2WINFORM
         }
 
         //ЭКСПОРТИРОВАНИЕ
-        private void button2_Click(object sender, EventArgs e)
+        private void exportData_Click(object sender, EventArgs e)
         {
             try
             {

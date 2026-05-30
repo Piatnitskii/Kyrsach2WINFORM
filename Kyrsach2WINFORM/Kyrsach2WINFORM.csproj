@@ -140,6 +140,7 @@
     <Compile Include="AdminAdminForm.Designer.cs">
       <DependentUpon>AdminAdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Классы-Объекты\ActivityMessageFilter.cs" />
     <Compile Include="Форма Расписания\Schedule.cs">
       <SubType>Form</SubType>
     </Compile>

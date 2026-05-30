@@ -17,7 +17,7 @@ namespace Kyrsach2WINFORM
         public static int remainingTime; // оставшееся время в секундах
         static public bool isFormClosing = false;  // ← ГЛАВНЫЙ ФЛАГ
         static public bool isUpdatingTimer = false;  // ← ФЛАГ ЗАЩИТЫ
-
+        static public Form daughterForm = null;
         //Остановка таймера
         public static void Offtimer()
         {
@@ -30,27 +30,26 @@ namespace Kyrsach2WINFORM
         {
             remainingTime = 180;
             Optimize.isFormClosing = false;
-
             Optimize.inactivityTimer.Enabled = true; 
-            Optimize.movementDetectTimer.Enabled = true;
-
             inactivityTimer.Start();
-            movementDetectTimer.Start();
+
+            //Optimize.movementDetectTimer.Enabled = true;
+            //movementDetectTimer.Start();
         }
 
         //Безопасная остановка таймеров
         static public void StopTimerSafely()
         {
-                Optimize.isFormClosing = true;  // ← БЛОКИРУЕМ Tick
+            Optimize.isFormClosing = true;  // ← БЛОКИРУЕМ Tick
 
-                Optimize.inactivityTimer.Enabled = false;  // БЫСТРОЕ ОСТАНОВЛЕНИЕ
-                Optimize.movementDetectTimer.Enabled = false;
+            Optimize.inactivityTimer.Enabled = false;  // БЫСТРОЕ ОСТАНОВЛЕНИЕ
 
-                Optimize.inactivityTimer.Stop();
-                Optimize.movementDetectTimer.Stop();
+            Optimize.inactivityTimer.Stop();
 
-                Optimize.inactivityTimer.Dispose();
-                Optimize.movementDetectTimer.Dispose();
+            Optimize.inactivityTimer.Dispose();
+                //Optimize.movementDetectTimer.Stop();
+                //Optimize.movementDetectTimer.Enabled = false;
+                // Optimize.movementDetectTimer.Dispose();
         }
 
 

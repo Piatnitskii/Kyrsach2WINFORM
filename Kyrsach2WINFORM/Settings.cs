@@ -20,7 +20,7 @@ namespace Kyrsach2WINFORM
         }
 
         //Проверка соединения
-        private void button1_Click(object sender, EventArgs e)
+        private void CheckConncet(object sender, EventArgs e)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace Kyrsach2WINFORM
             }
         }
         //Сохранить
-        private void button2_Click(object sender, EventArgs e)
+        private void SaveData(object sender, EventArgs e)
         {
             try
             {

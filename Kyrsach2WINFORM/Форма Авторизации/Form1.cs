@@ -76,7 +76,7 @@ namespace Kyrsach2WINFORM
         }
 
         // Кнопка ВОЙТИ
-        private void button1_Click(object sender, EventArgs e)
+        private void OpenMenu(object sender, EventArgs e)
         {
             try
             {
@@ -324,7 +324,7 @@ namespace Kyrsach2WINFORM
         }
 
         // Кнопка для изменения изображеня Captcha
-        private void button4_Click(object sender, EventArgs e)
+        private void rerolCaptcha(object sender, EventArgs e)
         {
             pictureBox1.Image = CreateImage(pictureBox1.Width, pictureBox1.Height);
         }
@@ -425,7 +425,7 @@ namespace Kyrsach2WINFORM
             ConnectAndData.BackUpCopy("Auto");
         }
         //Настройки
-        private void button2_Click_1(object sender, EventArgs e)
+        private void OpenSettings(object sender, EventArgs e)
         {
             try
             {

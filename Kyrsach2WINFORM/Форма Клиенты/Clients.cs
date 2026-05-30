@@ -21,9 +21,6 @@ namespace Kyrsach2WINFORM
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
-            button3.Click += MenuAdmin.UserActivityDetected;
-            dataGridView2.CellClick += MenuAdmin.UserActivityDetected;
-
             //Прячем от админа некоторый функционал
             if (ConnectAndData.Role == "1")
             {
@@ -111,17 +108,14 @@ namespace Kyrsach2WINFORM
         //Добавить
         private void button2_Click(object sender, EventArgs e)
         {
-            Optimize.StopTimerSafely();
             AddClient FormA = new AddClient();
             FormA.ShowDialog();
             FillDataGrid();
-            Optimize.Ontimer();
         }
 
         //Редактировать
         private void button1_Click(object sender, EventArgs e)
         {
-            Optimize.StopTimerSafely();
             // Создаем клиента для передачи
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
@@ -132,13 +126,11 @@ namespace Kyrsach2WINFORM
             RedactClient FormA = new RedactClient(new Client(ID, Name, Surname, Patronymic, Phone));
             FormA.ShowDialog();
             FillDataGrid();
-            Optimize.Ontimer();
         }
 
         //Удаление
         private void button6_Click(object sender, EventArgs e)
         {
-            Optimize.StopTimerSafely();
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
@@ -168,7 +160,6 @@ namespace Kyrsach2WINFORM
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Optimize.Ontimer();
         }
 
         //Скрываем персональные данные ФИО и номер телефона

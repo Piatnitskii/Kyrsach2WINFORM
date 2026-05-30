@@ -11,6 +11,11 @@ using System.Runtime.InteropServices;
 
 namespace Kyrsach2WINFORM
 {
+
+
+
+
+
     public partial class MenuAdmin : Form
     {
         #region Title bar
@@ -33,15 +38,8 @@ namespace Kyrsach2WINFORM
         // Открытая форма
         private Form ActiveForm = null;
 
-        //Таймер
-        static Point lastMousePos;      // Последняя позиция
-       
-
-        private const double MOVEMENT_THRESHOLD = 0.1;  // Пикселей для "движения"
-
         // ЛОК
         static readonly object timerLock = new object(); 
-        private readonly object mouseLock = new object();
 
         public void MenuAdmin_Load(object sender, EventArgs e)
         {
@@ -51,37 +49,8 @@ namespace Kyrsach2WINFORM
         //При закрытии формы останавливаем таймеры
         private void MenuAdmin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Optimize.StopTimerSafely();  
-        }
-
-        //Тикет таймера на движение мыши
-        private void MovementDetectTimer_Tick(object sender, EventArgs e)
-        {
-
-                if (Optimize.isFormClosing) return;
-
-                lock (mouseLock)  // ← ЗАЩИТА
-                {
-                    Point currentScreenPos = Cursor.Position;
-                    Point currentFormPos = PointToClient(currentScreenPos);  // ← КЛЮЧ!
-
-                    // Проверяем только внутри формы
-                    if (ClientRectangle.Contains(currentFormPos))
-                    {
-                        int deltaX = Math.Abs(currentFormPos.X - lastMousePos.X);
-                        int deltaY = Math.Abs(currentFormPos.Y - lastMousePos.Y);
-
-                        if (deltaX > MOVEMENT_THRESHOLD || deltaY > MOVEMENT_THRESHOLD)
-                        {
-                            label5.Text = $"🖱️ ДВИЖЕТСЯ: ΔX={deltaX}, ΔY={deltaY}";
-
-                            if (Optimize.isFormClosing) return;
-                            UserActivityDetected(null, null);
-                        }
-                    }
-
-                    lastMousePos = currentFormPos;
-                }
+            Application.RemoveMessageFilter(_activityFilter);
+            Optimize.StopTimerSafely();
         }
 
 
@@ -98,7 +67,7 @@ namespace Kyrsach2WINFORM
                 Optimize.isUpdatingTimer = true;
 
                 Optimize.inactivityTimer.Stop();
-                Optimize.remainingTime = 10;
+                Optimize.remainingTime = 180;
                 Optimize.UpdateRemainingTimeLabel(MenuAdmin.Instance?.label4);
                 Optimize.inactivityTimer.Start();
 
@@ -127,6 +96,8 @@ namespace Kyrsach2WINFORM
                     {
                         Optimize.inactivityTimer.Stop();
                         if (Optimize.isFormClosing) return;
+                        if (Optimize.daughterForm != null)
+                            Optimize.daughterForm?.Close();
                         Application.OpenForms["MenuAdmin"]?.Close();
                     }
                 }
@@ -135,7 +106,7 @@ namespace Kyrsach2WINFORM
 
         // СТАТИЧЕСКАЯ ссылка на единственный инстанс
         public static MenuAdmin Instance { get; private set; }
-
+        private ActivityMessageFilter _activityFilter;
         public MenuAdmin()
         {
             InitializeComponent();
@@ -143,24 +114,32 @@ namespace Kyrsach2WINFORM
             this.BackColor = SystemColors.InactiveCaption;
 
             Optimize.isFormClosing = false;
-
+            
             // устанавливаем Instance при создании формы
             Instance = this;
-
-            
-
-            LeftBorderPBTN = new Panel();
-            LeftBorderPBTN.Size = new Size(7, 60);
-            MainPanel.Controls.Add(LeftBorderPBTN);
 
             // Настройка таймера 
             Optimize.inactivityTimer = new Timer();
             Optimize.inactivityTimer.Interval = 1000;
             Optimize.inactivityTimer.Tick += InactivityTimer_Tick;
+            Optimize.remainingTime = 180; // Устанавливаем оставшееся время в секундах (3 минуты)
+            Optimize.inactivityTimer.Start(); // Стартуем таймеры
 
-            // Таймер: если 1 сек без движения → "застыл"
-            Optimize.movementDetectTimer = new Timer { Interval = 1000 };
-            Optimize.movementDetectTimer.Tick += MovementDetectTimer_Tick;
+            _activityFilter = new ActivityMessageFilter(() =>
+            {
+                if (this.IsHandleCreated && !this.IsDisposed)
+                    UserActivityDetected(null, EventArgs.Empty);
+            });
+
+            Application.AddMessageFilter(_activityFilter);
+
+
+            LeftBorderPBTN = new Panel();
+            LeftBorderPBTN.Size = new Size(7, 60);
+            MainPanel.Controls.Add(LeftBorderPBTN);
+
+            
+
 
             if (ConnectAndData.Role == "2")
             {
@@ -171,19 +150,6 @@ namespace Kyrsach2WINFORM
                 openSchedule.Visible = false; //расписание
                 label1.Text = "Меню менеджера";
                 this.Text = "BARBERSHOP | Терминал менеджера";
-
-                this.OpenEmploey.Click += UserActivityDetected;
-                this.OpenClient.Click += UserActivityDetected;
-                this.OpenOplata.Click += UserActivityDetected;
-                this.OpenOrder.Click += UserActivityDetected;
-                this.OpenYslygi.Click += UserActivityDetected;
-
-
-                Optimize.remainingTime = 180; // Устанавливаем оставшееся время в секундах (3 минуты)
-                Optimize.inactivityTimer.Start(); // Стартуем таймеры
-                Optimize.movementDetectTimer.Start();
-
-                lastMousePos = PointToClient(Cursor.Position);
             }
             else if(ConnectAndData.Role == "3")
             {

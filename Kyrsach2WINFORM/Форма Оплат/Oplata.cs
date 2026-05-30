@@ -22,8 +22,6 @@ namespace Kyrsach2WINFORM
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
-            button2.Click += MenuAdmin.UserActivityDetected;
-            dataGridView2.CellClick += MenuAdmin.UserActivityDetected;
 
             //Настройка полей
             dataGridView2.Columns.Add("ID", "ID");
@@ -124,23 +122,19 @@ namespace Kyrsach2WINFORM
         // Сформировать отчет
         private void button4_Click(object sender, EventArgs e)
         {
-            Optimize.StopTimerSafely();
             Otchet FormA = new Otchet();
             FormA.ShowDialog();
-            Optimize.Ontimer();
         }
 
 
         // Сформировать чек
         private void createCheck_Click(object sender, EventArgs e)
         {
-            Optimize.StopTimerSafely();
             //Получаем ID записи в оплате
             string RecordID = dataGridView2.Rows[CurrentRowIndex].Cells["Номер записи"].Value.ToString();
             CreateWord.CheckCreator(RecordID);
             dataGridView2.ClearSelection(); //Очистка выделения
             button3.Enabled = false;
-            Optimize.Ontimer();
         }
 
         //Закрыть
