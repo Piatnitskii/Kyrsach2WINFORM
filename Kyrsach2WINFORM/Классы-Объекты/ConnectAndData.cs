@@ -30,7 +30,7 @@ namespace Kyrsach2WINFORM
         static string Password = ConfigurationManager.AppSettings["Password"];
 
         //Соединяемся с базой
-        public static string Сonnect = $"host={host};uid={User};pwd={Password};database={ConfigurationManager.AppSettings["DbName"]}";
+        public static string Сonnect = $"host={host};uid={User};pwd={Password};database={ConfigurationManager.AppSettings["DbName"]};AllowLoadLocalInfile=True;CharSet=utf8mb4";
         //Попытка подключения
         public static string TryConnect = $"host={host};uid={User};pwd={Password};";
 
@@ -41,7 +41,7 @@ namespace Kyrsach2WINFORM
             User = ConfigurationManager.AppSettings["UserName"];
             Password = ConfigurationManager.AppSettings["Password"];
 
-            Сonnect = $"host={host};uid={User};pwd={Password};database={ConfigurationManager.AppSettings["DbName"]};";
+            Сonnect = $"host={host};uid={User};pwd={Password};database={ConfigurationManager.AppSettings["DbName"]};AllowLoadLocalInfile=True;CharSet=utf8mb4";
             TryConnect = $"host={host};uid={User};pwd={Password};";
         }
 
@@ -111,7 +111,7 @@ namespace Kyrsach2WINFORM
                     if (process.ExitCode == 0)
                         MessageBox.Show("Резервная копия успешно создана!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     else
-                        MessageBox.Show($"Ошибка в операции создания Бэкапа {error}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Ошибка в операции создания Бэкапа: {error}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

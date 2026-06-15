@@ -55,8 +55,7 @@ namespace Kyrsach2WINFORM
                     //Проверяем на дубликат
                     if (!CheckPost(NamePost))
                     {
-                        MessageBox.Show("Эта должность уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        textBox1.Text = "";    // Очистка
+                        MessageBox.Show($"Данная должность: {textBox1.Text} уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -69,7 +68,7 @@ namespace Kyrsach2WINFORM
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("должность была успешно добавлена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Должность была успешно добавлена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     textBox1.Text = "";    // Очистка
                 }
                 else

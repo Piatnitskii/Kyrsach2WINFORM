@@ -96,5 +96,56 @@ namespace Kyrsach2WINFORM
             MenuAdmin.DisableButton();
             this.Close();
         }
+
+        int CurrentRowIndex; // Индекс выбранной строки
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CurrentRowIndex = e.RowIndex;
+
+            if (CurrentRowIndex == -1)
+            {
+                dataGridView2.ClearSelection();
+                return;
+            }
+
+            //Формируем нашу запись в объект
+            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["Номер"].Value.ToString();
+            string IDClient = dataGridView2.Rows[CurrentRowIndex].Cells["IDClient"].Value.ToString();
+            string IdMaster = dataGridView2.Rows[CurrentRowIndex].Cells["IDMaser"].Value.ToString();
+
+            string FIOClient = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО клиента"].Value.ToString();
+            string FIOMaster = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО мастера"].Value.ToString();
+            string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
+            string Status = dataGridView2.Rows[CurrentRowIndex].Cells["Статус"].Value.ToString();
+            string Time = dataGridView2.Rows[CurrentRowIndex].Cells["Время записи"].Value.ToString();
+            string Dration = dataGridView2.Rows[CurrentRowIndex].Cells["Продолжительность, мин."].Value.ToString();
+            string Price = dataGridView2.Rows[CurrentRowIndex].Cells["Сумма записи"].Value.ToString();
+            string Date = dataGridView2.Rows[CurrentRowIndex].Cells["Дата записи"].Value.ToString();
+
+            string PhoneMaster = dataGridView2.Rows[CurrentRowIndex].Cells["PhoneMaster"].Value.ToString();
+
+            zapici Zapici = new zapici(ID, IDClient, IdMaster, FIOClient, FIOMaster, Phone, Status, Price, Time, Date, Dration, PhoneMaster);
+
+            RedactZapici FormA = new RedactZapici(Zapici, false);
+            Optimize.daughterForm = FormA;
+            FormA.ShowDialog();
+            Optimize.daughterForm = null;
+            FillDataGrid();
+        }
+
+        private void dataGridView2_Sorted(object sender, EventArgs e)
+        {
+            dataGridView2.ClearSelection();
+        }
+
+        private void Schedule_Load(object sender, EventArgs e)
+        {
+            dataGridView2.ClearSelection();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            FillDataGrid();
+        }
     }
 }

@@ -40,9 +40,6 @@ namespace Kyrsach2WINFORM
             // Путь до корня проекта
             ProjectFolderPath = Directory.GetCurrentDirectory();
 
-            if (ProjectFolderPath.Contains("bin\\Debug") || ProjectFolderPath.Contains("bin\\Release"))
-                ProjectFolderPath = string.Join("\\", ProjectFolderPath.Split('\\').TakeWhile(el => el != "bin"));
-
             //Настройка Диалога выбора файла
             openFileDialog1.Filter = "JPG - файлы(*.jpg) | *.jpg|PNG - файлы(*.png) | *.png";
             openFileDialog1.FileName = "";
@@ -63,6 +60,9 @@ namespace Kyrsach2WINFORM
 
             //Отображаем фотографию
             pictureBox1.ImageLocation = MainImagePath;     // 54_СергейП.Ю.png
+
+            if(!File.Exists(MainImagePath))
+                pictureBox1.ImageLocation = $@"{ProjectFolderPath}\photo\picture.png";
 
             //Подставляем остальные данные
             textBox1.Text = emploey.Surname;
@@ -154,7 +154,7 @@ namespace Kyrsach2WINFORM
                 return; // никаких манипуляций
 
             //переименовываем старый файл, разумеется если была замена и если это не заглушка
-            if (MainImagePath != $@"{ProjectFolderPath}\photo\picture.png" && PhotoRedact)
+            if (MainImagePath != $@"{ProjectFolderPath}\photo\picture.png" && PhotoRedact && File.Exists(MainImagePath))
                 File.Move(MainImagePath, newOldPhotoPath);
             
             //Копируем, если это не заглушка из нашего хранилища и картинка была выбрана
@@ -235,8 +235,7 @@ namespace Kyrsach2WINFORM
                     //Проверяем на дубликат
                     if (!CheckEmploey(NumberPhone))
                     {
-                        MessageBox.Show("Работник, с этим номером телефона уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Clear();    // Очистка
+                        MessageBox.Show("Работник, с указаным номером телефона уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -251,7 +250,7 @@ namespace Kyrsach2WINFORM
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("Сотрудник был успешно обновлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Сотрудник: {emploey.Surname + " " + emploey.Name + " " + emploey.Patronymic} был успешно обновлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else

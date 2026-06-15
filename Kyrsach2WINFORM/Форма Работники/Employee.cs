@@ -61,7 +61,7 @@ namespace Kyrsach2WINFORM
         }
 
         // Employe.Name as 'Имя', Surname as 'Фамилия', Patronymic as 'Отчество',
-        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Surname, Employe.Name, Patronymic) AS 'ФИО', Phone as 'Телефон', Birthday as 'Дата рождения', Post.Name as 'Должность', Photo as 'фото', Id_Post as 'Id_Post' FROM Employe INNER JOIN Post ON Id_Post = IdPost";
+        string CMD = "Select IdEmploye as ID, CONCAT_WS(' ', Surname, Employe.Name, Patronymic) AS 'ФИО', Phone as 'Телефон', Birthday as 'Дата рождения', Post.Name as 'Должность', Photo as 'фото', Id_Post as 'Id_Post' FROM Employe INNER JOIN Post ON Id_Post = IdPost ORDER BY Post.Name ASC";
         //Заполняет ДатаГрид данными
         void FillDataGrid()
         {
@@ -122,7 +122,9 @@ namespace Kyrsach2WINFORM
             Emploey emploey = new Emploey(ID, Name, Surname, Patronymic, Phone, Birthday, Post, Photo, null, null, Id_Post); // Наш сотрудник в коде
 
             RedactEmp FormA = new RedactEmp(emploey);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -132,6 +134,7 @@ namespace Kyrsach2WINFORM
             AddEmp FormA = new AddEmp();
             Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -165,7 +168,10 @@ namespace Kyrsach2WINFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка удаления сотрудника", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Contains("Cannot delete or update a parent row: a foreign key"))
+                    MessageBox.Show($"Данный сотрудник: {Surname + " " + Name + " " + Patronymic}, не может быть удален, так так учавствует в других записях", "Ошибка удаления сотрудника", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка удаления сотрудника", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

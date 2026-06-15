@@ -156,7 +156,9 @@ namespace Kyrsach2WINFORM
             string ID = dataGridView1.Rows[CurrentRowIndex2].Cells["ID"].Value.ToString();
             string Name = dataGridView1.Rows[CurrentRowIndex2].Cells["Название"].Value.ToString();
             RedactCategory FormA = new RedactCategory(ID, Name);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -167,7 +169,9 @@ namespace Kyrsach2WINFORM
             string BarberPost = dataGridView2.Rows[CurrentRowIndex].Cells["BarberPost"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["Название"].Value.ToString();
             RedactRoly FormA = new RedactRoly(ID, Name, BarberPost);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -175,7 +179,9 @@ namespace Kyrsach2WINFORM
         private void button2_Click(object sender, EventArgs e)
         {
             AddCategory FormA = new AddCategory();
-            FormA.ShowDialog(); 
+            Optimize.daughterForm = FormA;
+            FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -183,7 +189,9 @@ namespace Kyrsach2WINFORM
         private void button4_Click(object sender, EventArgs e)
         {
             AddRol FormA = new AddRol();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -215,7 +223,10 @@ namespace Kyrsach2WINFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Contains("Cannot delete or update a parent row: a foreign key"))
+                    MessageBox.Show($"Данная категория: {Name}, не может быть удалена, так так учавствует в других записях", "Ошибка удаления категории", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка удаления категории", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -247,7 +258,10 @@ namespace Kyrsach2WINFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Contains("Cannot delete or update a parent row: a foreign key"))
+                    MessageBox.Show($"Данная должность: {Name}, не может быть удалена, так так учавствует в других записях", "Ошибка удаления должности", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка удаления должности", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

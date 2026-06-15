@@ -37,12 +37,12 @@ namespace Kyrsach2WINFORM
             // 
             // textBox1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Verdana", 20.25F);
+            this.textBox1.Font = new System.Drawing.Font("Comic Sans MS", 18F);
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox1.Location = new System.Drawing.Point(35, 69);
+            this.textBox1.Location = new System.Drawing.Point(12, 75);
             this.textBox1.MaxLength = 100;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(503, 40);
+            this.textBox1.Size = new System.Drawing.Size(543, 41);
             this.textBox1.TabIndex = 79;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
@@ -50,11 +50,11 @@ namespace Kyrsach2WINFORM
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(31, 43);
+            this.label2.Location = new System.Drawing.Point(7, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 23);
+            this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 78;
             this.label2.Text = "Название";
             // 

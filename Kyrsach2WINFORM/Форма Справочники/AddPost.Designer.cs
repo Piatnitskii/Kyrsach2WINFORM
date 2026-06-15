@@ -29,6 +29,7 @@ namespace Kyrsach2WINFORM
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddRol));
             this.button8 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@ namespace Kyrsach2WINFORM
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(30, 37);
+            this.label2.Location = new System.Drawing.Point(12, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 67;
@@ -118,6 +119,7 @@ namespace Kyrsach2WINFORM
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddRol";

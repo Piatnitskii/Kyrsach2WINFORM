@@ -94,6 +94,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["Пароль"].Visible = false;
                     dataGridView2.Columns["Id_Employe"].Visible = false;
                     dataGridView2.Columns["Должность"].Visible = false;
+                    dataGridView2.Columns["ФИО"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
                         column.MinimumWidth = 100;
@@ -150,7 +151,9 @@ namespace Kyrsach2WINFORM
             UserSystem user = new UserSystem(ID, Id_Employe, Login, Id_Role, RoleName, null, post, phone, fio);
 
             RedactUser FormA = new RedactUser(user);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -158,7 +161,9 @@ namespace Kyrsach2WINFORM
         private void button2_Click(object sender, EventArgs e)
         {
             AddUser FormA = new AddUser();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 

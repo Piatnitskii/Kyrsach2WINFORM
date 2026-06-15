@@ -138,18 +138,22 @@ namespace Kyrsach2WINFORM
         {
             try
             {
+                dataGridView2.Rows.Clear();
                 // Общий запрос без LIMIT
                 string countSql = $"SELECT COUNT(*) FROM ({CMD} {having}) AS t";
-
+               
+                
                 using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
                     Con.Open();
                     using (MySqlCommand cmd = new MySqlCommand(countSql, Con))
                     {
                         object result = cmd.ExecuteScalar();
+                        label4.Text = $"Кол-во записей: {Convert.ToInt64(result ?? 0)}";
                         return countRow = Convert.ToInt64(result ?? 0);
                     }
                 }
+                
             }
             catch
             {
@@ -175,7 +179,7 @@ namespace Kyrsach2WINFORM
                     MySqlCommand cmd = new MySqlCommand(fullSql, Con);
                     MySqlDataReader RDR = cmd.ExecuteReader();
 
-                    label4.Text = $"Кол-во записей: {countRow}";
+                    
 
                     //Заполняем данными
                     while (RDR.Read())
@@ -218,8 +222,10 @@ namespace Kyrsach2WINFORM
 
             zapici Zapici = new zapici(ID, IDClient, IdMaster, FIOClient, FIOMaster, Phone, Status, Price, Time, Date, Dration, PhoneMaster);
 
-            RedactZapici FormA = new RedactZapici(Zapici);
+            RedactZapici FormA = new RedactZapici(Zapici, true);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             textBox2_TextChanged(textBox2, EventArgs.Empty);
         }
 
@@ -277,7 +283,9 @@ namespace Kyrsach2WINFORM
         private void button2_Click(object sender, EventArgs e)
         {
             AddZapicWiz FormA = new AddZapicWiz();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             textBox2_TextChanged(textBox2, EventArgs.Empty);
         }
 
@@ -322,17 +330,17 @@ namespace Kyrsach2WINFORM
             if (textBox2.Text.Length == 0)
                 having = "";
             else
-                having = $" HAVING IdRecord LIKE '%{textBox2.Text}%'";
+                having = $" HAVING IdRecord LIKE '%{textBox2.Text}%' OR `Клиент-Мастер` LIKE '%{textBox2.Text}%' ";
 
             _pag.VPagRunOrRefresh();
         }
 
 
 
-        //Поиск - Только цифры
+        //Поиск - Только цифры и русские буквы
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsWhiteSpace(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) || (e.KeyChar >= 'a' && e.KeyChar <= 'z') || (e.KeyChar >= 'A' && e.KeyChar <= 'Z'))
                 e.Handled = true;
 
             else { e.Handled = false; }
@@ -370,6 +378,33 @@ namespace Kyrsach2WINFORM
         {
             MenuAdmin.DisableButton();
             this.Close();
+        }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Формируем нашу запись в объект
+            string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
+            string IDClient = dataGridView2.Rows[CurrentRowIndex].Cells["IDClient"].Value.ToString();
+            string IdMaster = dataGridView2.Rows[CurrentRowIndex].Cells["IDMaser"].Value.ToString();
+
+            string FIOClient = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО клиента"].Value.ToString();
+            string FIOMaster = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО мастера"].Value.ToString();
+            string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
+            string Status = dataGridView2.Rows[CurrentRowIndex].Cells["Статус"].Value.ToString();
+            string Time = dataGridView2.Rows[CurrentRowIndex].Cells["Время записи"].Value.ToString();
+            string Dration = dataGridView2.Rows[CurrentRowIndex].Cells["Продолжительность, мин."].Value.ToString();
+            string Price = dataGridView2.Rows[CurrentRowIndex].Cells["Сумма"].Value.ToString();
+            string Date = dataGridView2.Rows[CurrentRowIndex].Cells["Дата записи"].Value.ToString();
+
+            string PhoneMaster = dataGridView2.Rows[CurrentRowIndex].Cells["PhoneMaster"].Value.ToString();
+
+            zapici Zapici = new zapici(ID, IDClient, IdMaster, FIOClient, FIOMaster, Phone, Status, Price, Time, Date, Dration, PhoneMaster);
+
+            RedactZapici FormA = new RedactZapici(Zapici, false);
+            Optimize.daughterForm = FormA;
+            FormA.ShowDialog();
+            Optimize.daughterForm = null;
+            textBox2_TextChanged(textBox2, EventArgs.Empty);
         }
     }
 }

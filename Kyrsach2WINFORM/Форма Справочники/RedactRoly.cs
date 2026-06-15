@@ -61,7 +61,6 @@ namespace Kyrsach2WINFORM
                     if (!CheckPost(textBox1.Text.Trim()))
                     {
                         MessageBox.Show("Должность с данным названием уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        textBox1.Text = Name;
                         return;
                     }
 

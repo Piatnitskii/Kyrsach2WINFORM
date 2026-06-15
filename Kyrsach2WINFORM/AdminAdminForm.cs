@@ -18,35 +18,25 @@ namespace Kyrsach2WINFORM
 {
     public partial class AdminAdminForm : Form
     {
-        public AdminAdminForm()
+        public AdminAdminForm(bool isAdmin)
         {
             InitializeComponent();
 
+            this.isAdmin = isAdmin;
+
             // Настройка диалога
             openFileDialog1.Filter = "CSV - файлы(*.csv) | *.csv";
+            openFileDialog1.Title = "Выберите файл для импорта";
             openFileDialog1.FileName = "";
 
             openFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             openFileDialog1.CheckPathExists = true;
             openFileDialog1.CheckFileExists = true;
+
         }
 
-
-        // Проверка csv
-        private bool checkData(string[] text, int oneValue)
-        {
-            // Проверка количества колонок в импортируемом файле
-            for (int i = 1; i < text.Length; i++)
-            {
-                string[] ItemInline = text[i].Split(';');
-
-                if (ItemInline.Length != oneValue)
-                    return false;
-            }
-            return true;
-        }
-        
+        bool isAdmin = false;
 
         // Импортирование данных
         private void importData_Click(object sender, EventArgs e)
@@ -56,100 +46,28 @@ namespace Kyrsach2WINFORM
                 if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                     return;
 
-                MySqlTransaction transaction = null;
+
                 string filename = openFileDialog1.FileName;                     //Имя файла
-                string[] FullText = File.ReadAllLines(filename, Encoding.UTF8);
 
-                switch (comboBox1.SelectedItem.ToString())
+
+                using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
                 {
-                    case "Категории услуг":
+                    Con.Open();
 
-                        //Проверка csv
-                        if (checkData(FullText, 1) == false)
-                        {
-                            MessageBox.Show("Ошибка соответствия необходимого количества колонок с действительным!", "Ошибка импорта", MessageBoxButtons.OK);
-                            return;
-                        }
+                    var bulkLoader = new MySqlBulkLoader(Con)
+                    {
+                        Local = true,
+                        TableName = comboBox1.SelectedItem.ToString(),
+                        FieldTerminator = ";",
+                        FileName = filename,
+                        LineTerminator = "\n",
+                        NumberOfLinesToSkip = 1, // Заголовок уже пропущен
+                    };
 
-                        using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
-                        {
-                            try
-                            {
-                                Con.Open();
-                                // Начало транзакции
-                                transaction = Con.BeginTransaction();
+                    int count = bulkLoader.Load();
 
-                                MySqlCommand cmd;
-                                int Count = 0;
+                    MessageBox.Show($"Импортированно записей: {count}", "Импорт завершён", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                for (int i = 1; i < FullText.Length; i++)
-                                {
-                                    string[] ItemInline = FullText[i].Split(';');
-                                    cmd = new MySqlCommand($"INSERT INTO Category (Name) VALUES (@name);", Con);
-                                    cmd.Transaction = transaction;
-                                    cmd.Parameters.AddWithValue("@name", ItemInline[0].Trim());
-                                    cmd.ExecuteNonQuery();
-                                    Count++;
-                                }
-
-                                //Подтверждаем транзакцию
-                                transaction.Commit();
-                                MessageBox.Show($"Импортированно записей: {Count}", "Импорт завершён", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch(Exception ex)
-                            {
-                                // Откат транзакции при ошибке
-                                transaction?.Rollback();
-                                MessageBox.Show(ex.Message, "Ошибка транзакции добавления записей", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-
-                        break;
-
-
-                    case "Услуги":
-                        if (checkData(FullText, 5) == false)
-                        {
-                            MessageBox.Show("Ошибка соответствия необходимого количества колонок с действительным!", "Ошибка импорта", MessageBoxButtons.OK);
-                            return;
-                        }
-
-                        using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))
-                        {
-                            try
-                            {
-                                Con.Open();
-                                // Начало транзакции
-                                transaction = Con.BeginTransaction();
-                                MySqlCommand cmd;
-                                int Count = 0;
-                                for (int i = 1; i < FullText.Length; i++)
-                                {
-                                    string[] ItemInline = FullText[i].Split(';');
-                                    cmd = new MySqlCommand($"INSERT INTO Service (Name, Description, Id_Category, Cost, Duration) VALUES (@name, @desc, @id_cat, @cost, @duration);", Con);
-                                    cmd.Transaction = transaction;
-                                    cmd.Parameters.AddWithValue("@name", ItemInline[0].Trim());
-                                    cmd.Parameters.AddWithValue("@desc", ItemInline[1].Trim());
-                                    cmd.Parameters.AddWithValue("@id_cat", ItemInline[2].Trim());
-                                    cmd.Parameters.AddWithValue("@cost", ItemInline[3].Trim());
-                                    cmd.Parameters.AddWithValue("@duration", ItemInline[4].Trim());
-                                    cmd.ExecuteNonQuery();
-                                    Count++;
-                                }
-
-                                //Подтверждаем транзакцию
-                                transaction.Commit();
-                                MessageBox.Show($"Импортированно записей: {Count}", "Импорт завершён", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            catch(Exception ex)
-                            {
-                                // Откат транзакции при ошибке
-                                transaction?.Rollback();
-                                MessageBox.Show(ex.Message, "Ошибка транзакции добавления записей", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-
-                        break;
                 }
             }
             catch (Exception ex)
@@ -159,22 +77,84 @@ namespace Kyrsach2WINFORM
                 else if (ex.Message.Contains("Cannot add or update a child row"))
                     MessageBox.Show($"Отсутствуют необходимые данные во второстепенной таблице: {ex.Message}", "Ошибка импорта", MessageBoxButtons.OK);
                 else
-                    MessageBox.Show(ex.Message, "Ошибка Импорта", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Не удалось импортировать данные: {ex.Message}", "Ошибка Импорта", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // Добавляем таблицы
         private void AdminAdminForm_Load(object sender, EventArgs e)
         {
-            comboBox1.Items.Add("Услуги");
-            comboBox1.Items.Add("Категории услуг");
-            comboBox2.Items.Add("Услуги");
-            comboBox2.Items.Add("Категории услуг");
+            try
+            {
+                List<string> tables = new List<string>();
+
+                tables.Add("не выбрано");
+
+                using (MySqlConnection conn = new MySqlConnection(ConnectAndData.Сonnect))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("SHOW TABLES;", conn);
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            tables.Add(dr.GetValue(0).ToString());
+                        }
+                    }
+                }
+                
+                comboBox1.DataSource = tables;
+                comboBox1.SelectedItem = "не выбрано";
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"Не удалось загрузить таблицы\nОшибка: {exc.Message}", "Предупреждение-ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            button1.Enabled = true;
+            
+            switch (comboBox1.SelectedItem)
+            {
+                case "не выбрано":
+                    dataGridView1.DataSource = null;
+                    button1.Enabled = false;
+                    button2.Enabled = false;
+                    break;
+                default:
+                    FillData(comboBox1.SelectedItem.ToString());
+                    button1.Enabled = true;
+                    button2.Enabled = true;
+                    break;
+            }
+        }
+
+        private void FillData(string table)
+        {
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(ConnectAndData.Сonnect))
+                {
+                    conn.Open();
+                    
+                    MySqlCommand cmd = new MySqlCommand($"show columns from `{table}`;", conn);
+                    DataTable dt = new DataTable();
+
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            dt.Columns.Add(dr.GetValue(0).ToString());
+                        }
+                    }
+                    dataGridView1.DataSource = dt.AsDataView();
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"Не удалось загрузить таблицы: {exc.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //ЭКСПОРТИРОВАНИЕ
@@ -182,13 +162,11 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                switch (comboBox2.SelectedItem.ToString())
-                {
-                    case "Услуги":
+              
                         // 1. Открываем диалог выбора пути сохранения
                         using (var saveFileDialog = new SaveFileDialog())
                         {
-                            saveFileDialog.Title = "Сохранить CSV";
+                            saveFileDialog.Title = "Выберите файл для экспорта";
                             saveFileDialog.Filter = "CSV файлы (*.csv)|*.csv|Все файлы (*.*)|*.*";
                             saveFileDialog.DefaultExt = "csv";
                             saveFileDialog.AddExtension = true;
@@ -198,7 +176,7 @@ namespace Kyrsach2WINFORM
 
                             // 2. Загружаем данные в DataTable
                             var dataTable = new DataTable();
-                            using (var da = new MySqlDataAdapter("SELECT * FROM Service", ConnectAndData.Сonnect))
+                            using (var da = new MySqlDataAdapter($"SELECT * FROM `{comboBox1.SelectedItem.ToString()}`", ConnectAndData.Сonnect))
                             {
                                 da.Fill(dataTable);
                             }
@@ -206,38 +184,9 @@ namespace Kyrsach2WINFORM
                             // 3. Пишем в выбранный файл через StreamWriter
                             WriteMyData(saveFileDialog, dataTable);
 
-                            MessageBox.Show($"CSV успешно сохранён в:\n{saveFileDialog.FileName}",
+                            MessageBox.Show($"Файл с данными успешно сохранён в:\n{saveFileDialog.FileName}",
                                             "Экспорт завершён", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        break;
-
-                    case "Категории услуг":
-                        // 1. Открываем диалог выбора пути сохранения
-                        using (var saveFileDialog = new SaveFileDialog())
-                        {
-                            saveFileDialog.Title = "Сохранить CSV";
-                            saveFileDialog.Filter = "CSV файлы (*.csv)|*.csv|Все файлы (*.*)|*.*";
-                            saveFileDialog.DefaultExt = "csv";
-                            saveFileDialog.AddExtension = true;
-
-                            if (saveFileDialog.ShowDialog() != DialogResult.OK)
-                                return;
-
-                            // 2. Загружаем данные в DataTable
-                            var dataTable = new DataTable();
-                            using (var da = new MySqlDataAdapter("SELECT * FROM Category", ConnectAndData.Сonnect))
-                            {
-                                da.Fill(dataTable);
-                            }
-
-                            // 3. Пишем в выбранный файл через StreamWriter
-                            WriteMyData(saveFileDialog, dataTable);
-
-                            MessageBox.Show($"CSV успешно сохранён в:\n{saveFileDialog.FileName}",
-                                            "Экспорт завершён", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        break;
-                }
             }
             catch(Exception ex)
             {
@@ -252,7 +201,7 @@ namespace Kyrsach2WINFORM
             using (var writer = new StreamWriter(saveFileDialog.FileName, false, Encoding.UTF8))
             {
                 // Заголовок (по именам колонок из DataTable)
-                for (int i = 1; i < dataTable.Columns.Count; i++)
+                for (int i = 0; i < dataTable.Columns.Count; i++)
                 {
                     writer.Write(dataTable.Columns[i].ColumnName);
                     if (i < dataTable.Columns.Count - 1)
@@ -263,13 +212,38 @@ namespace Kyrsach2WINFORM
                 // Данные
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    for (int i = 1; i < dataTable.Columns.Count; i++)
+                    for (int i = 0; i < dataTable.Columns.Count; i++)
                     {
                         object val = row[i];
-                        string s = val == DBNull.Value ? "" : val.ToString();
+                        string s;
 
-                        // Экранирование ';' и кавычек при необходимости
-                        s = s.Replace(";", " ");
+                        // Обработка NULL
+                        if (val == DBNull.Value)
+                        {
+                            s = ""; 
+                        }
+                        else if (val is DateTime date)
+                        {
+                            s = date.ToString("yyyy-MM-dd HH:mm");  // формат даты
+                        }
+                        else if (val is byte[])
+                        {
+                            s = "";  // бинарные данные (например, картинки) → пропускаем
+                            continue;  // не записываем в CSV
+                        }
+                        else
+                        {
+                            s = val.ToString();  // остальные типы → строка
+                        }
+
+                        // Удаление лишнего `\r`
+                        s = s.Replace("\r", "");
+
+                        // экранирование через кавычки 
+                        s = s.Replace("\"", "\"\"");  // экранирование кавычек
+                        if (s.Contains(";") || s.Contains("\n"))
+                            s = $"\"{s}\"";  // обёртка в кавычки
+
                         writer.Write(s);
 
                         if (i < dataTable.Columns.Count - 1)
@@ -290,6 +264,83 @@ namespace Kyrsach2WINFORM
         {
             MenuAdmin.DisableButton();
             this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string File;
+                OpenFileDialog openFileDialog2 = new OpenFileDialog();
+                openFileDialog2.Filter = "SQL - файлы(*.sql) | *.sql";
+                openFileDialog2.Title = "Выберите файл для восстановления базы";
+                openFileDialog2.FileName = "";
+
+                openFileDialog2.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+                openFileDialog2.CheckPathExists = true;
+                openFileDialog2.CheckFileExists = true;
+                if (openFileDialog2.ShowDialog() == DialogResult.Cancel)
+                    return;
+
+                string filename = openFileDialog2.FileName;
+
+                using (StreamReader Reader = new StreamReader(filename))
+                {
+                    File = Reader.ReadToEnd();
+                }
+
+                using (MySqlConnection Con = new MySqlConnection(ConnectAndData.TryConnect))
+                {
+                    Con.Open();
+
+                    MySqlCommand cmd = new MySqlCommand($"{File}", Con);
+                    cmd.ExecuteNonQuery();
+                }
+                if (isAdmin)
+                {
+                    MessageBox.Show("База данных успешно восстановлена, сейчас будет выполен переход на форму авторизации", "Операция восстановления базы данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                    Application.OpenForms["MenuAdmin"]?.Close();
+                }
+                else
+                    MessageBox.Show("База данных успешно восстановлена", "Операция восстановления базы данных", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не удалось восстановить базу данных: {ex.Message}", "Ошибка Чтение или Записи", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string> tables = new List<string>();
+
+                tables.Add("не выбрано");
+
+                using (MySqlConnection conn = new MySqlConnection(ConnectAndData.Сonnect))
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand("SHOW TABLES;", conn);
+                    using (MySqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            tables.Add(dr.GetValue(0).ToString());
+                        }
+                    }
+                }
+
+                comboBox1.DataSource = tables;
+                comboBox1.SelectedItem = "не выбрано";
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show($"Не удалось загрузить таблицы\nОшибка: {exc.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

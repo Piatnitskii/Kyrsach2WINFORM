@@ -153,7 +153,7 @@ namespace Kyrsach2WINFORM
             this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSeaGreen;
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Verdana", 15.75F);
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Location = new System.Drawing.Point(548, 393);
             this.button2.Name = "button2";

@@ -71,8 +71,7 @@ namespace Kyrsach2WINFORM
                     //Проверяем на дубликат
                     if (!CheckClient(NumberPhone, Name, Surname, Patronymic))
                     {
-                        MessageBox.Show("Данный клиент уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Clear();    // Очистка
+                        MessageBox.Show("Клиент с указанным номером телефона уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -84,7 +83,7 @@ namespace Kyrsach2WINFORM
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("Клиент был успешно добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Клиент: {Surname + " " + Name + " " + Patronymic} был успешно добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();    // Очистка
                 }
                 else

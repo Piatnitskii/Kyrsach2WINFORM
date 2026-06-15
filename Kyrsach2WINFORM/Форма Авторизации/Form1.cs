@@ -80,21 +80,14 @@ namespace Kyrsach2WINFORM
         {
             try
             {
-                //Проверяем заполненость полей
-                if(textBox1.Text.Trim() == "" || textBox2.Text.Trim() == "")
-                {
-                    label1.Text = "Не заполнено одно из полей!";
-                    label1.Visible = true;
-                    return;
-                }
-
                 // Проверяем капчу
                 if (ResultAvtorize)
                 {
                     //капча пустая - выходим
-                    if (textBox3.Text == "")
+                    if (textBox3.Text == "" || textBox1.Text.Trim() == "" || textBox2.Text.Trim() == "")
                     {
                         label1.Text = "Не заполнено одно из полей!";
+                        label1.Visible = true;
                         return;
                     }
                     else if (!(textBox3.Text == Text)) // капча неверная - выводим сообщение о блокировке
@@ -108,6 +101,16 @@ namespace Kyrsach2WINFORM
                     }
                 }
 
+                //Проверяем заполненость полей
+                if (textBox1.Text.Trim() == "" || textBox2.Text.Trim() == "")
+                {
+                    label1.Text = "Не заполнено одно из полей!";
+                    label1.Visible = true;
+                    return;
+                }
+
+                
+
                 string Login = textBox1.Text;
                 string Password = textBox2.Text;
 
@@ -119,7 +122,7 @@ namespace Kyrsach2WINFORM
                     Try_Connect();
 
                     this.Visible = false;
-                    AdminAdminForm Form = new AdminAdminForm();
+                    AdminAdminForm Form = new AdminAdminForm(false);
                     Form.ShowDialog();
 
                     // не важно была ли капча

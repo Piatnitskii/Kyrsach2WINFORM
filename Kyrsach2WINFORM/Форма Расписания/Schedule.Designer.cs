@@ -35,6 +35,7 @@ namespace Kyrsach2WINFORM
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,6 +114,29 @@ namespace Kyrsach2WINFORM
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.Size = new System.Drawing.Size(1201, 511);
             this.dataGridView2.TabIndex = 59;
+            this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
+            this.dataGridView2.Sorted += new System.EventHandler(this.dataGridView2_Sorted);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(116)))), ((int)(((byte)(102)))));
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightSalmon;
+            this.button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button4.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_доступные_обновления_25;
+            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.Location = new System.Drawing.Point(998, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(215, 48);
+            this.button4.TabIndex = 91;
+            this.button4.Text = "Обновить таблицу";
+            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Schedule
             // 
@@ -120,6 +144,7 @@ namespace Kyrsach2WINFORM
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(1225, 600);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label3);
@@ -128,6 +153,7 @@ namespace Kyrsach2WINFORM
             this.MinimizeBox = false;
             this.Name = "Schedule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.Schedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -139,5 +165,6 @@ namespace Kyrsach2WINFORM
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button button4;
     }
 }

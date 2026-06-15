@@ -68,7 +68,7 @@ namespace Kyrsach2WINFORM
 
                 Optimize.inactivityTimer.Stop();
                 Optimize.remainingTime = 180;
-                Optimize.UpdateRemainingTimeLabel(MenuAdmin.Instance?.label4);
+                //Optimize.UpdateRemainingTimeLabel(MenuAdmin.Instance?.label4);
                 Optimize.inactivityTimer.Start();
 
                 Optimize.isUpdatingTimer = false;
@@ -90,14 +90,18 @@ namespace Kyrsach2WINFORM
                     if (Optimize.remainingTime > 0)
                     {
                         Optimize.remainingTime--;
-                    Optimize.UpdateRemainingTimeLabel(this.label4);
+                    //Optimize.UpdateRemainingTimeLabel(this.label4);
                     }
                     else
                     {
                         Optimize.inactivityTimer.Stop();
                         if (Optimize.isFormClosing) return;
+
+                        MessageBox.Show($"Извините, но из за длительного бездействия приложение будет заблокировано и перезапущено!", "Завершение работы", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         if (Optimize.daughterForm != null)
                             Optimize.daughterForm?.Close();
+
                         Application.OpenForms["MenuAdmin"]?.Close();
                     }
                 }
@@ -330,8 +334,12 @@ namespace Kyrsach2WINFORM
         {
             if (!(CurrentBTN == sender))
             {
-                ActiveButton(sender, RGBColors.color1);
-                OpenChildForm(new AdminAdminForm());
+                
+                AdminAdminForm admin =  new AdminAdminForm(true);
+
+                Optimize.daughterForm = admin;
+                admin.ShowDialog();
+                Optimize.daughterForm = null;
             }
         }
 
@@ -343,7 +351,5 @@ namespace Kyrsach2WINFORM
                 OpenChildForm(new Schedule());
             }
         }
-
-
     }
 }

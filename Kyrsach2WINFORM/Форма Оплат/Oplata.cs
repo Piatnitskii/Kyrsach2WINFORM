@@ -123,7 +123,9 @@ namespace Kyrsach2WINFORM
         private void button4_Click(object sender, EventArgs e)
         {
             Otchet FormA = new Otchet();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
         }
 
 

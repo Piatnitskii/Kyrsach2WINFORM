@@ -904,6 +904,12 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\dampDataStruct.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\dampStruct.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="MysqlDump\libcrypto-1_1-x64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -931,6 +937,14 @@
     <None Include="Resources\icons8-знак-цирюльника-48.png" />
     <None Include="Resources\icons8-знак-цирюльника-96.png" />
     <None Include="Resources\icons8-знак-цирюльника-48.ico" />
+    <None Include="Resources\icons8-базы-данных-49.png" />
+    <None Include="Resources\icons8-экспорт-в-csv-50.png" />
+    <None Include="Resources\icons8-импорт-из-csv-50.png" />
+    <None Include="Resources\icons8-базы-данных-25.png" />
+    <None Include="Resources\icons8-экспорт-в-csv-25.png" />
+    <None Include="Resources\icons8-импорт-из-csv-25.png" />
+    <None Include="Resources\icons8-export-csv-25.png" />
+    <None Include="Resources\icons8-доступные-обновления-25.png" />
     <Content Include="Resources\Structure.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

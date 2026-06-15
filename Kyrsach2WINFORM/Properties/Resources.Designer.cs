@@ -93,6 +93,16 @@ namespace Kyrsach2WINFORM.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_export_csv_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_export_csv_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_plus_24 {
             get {
                 object obj = ResourceManager.GetObject("icons8_plus_24", resourceCulture);
@@ -156,6 +166,16 @@ namespace Kyrsach2WINFORM.Properties {
         internal static System.Drawing.Bitmap icons8_аватар_пользователя_65__1_ {
             get {
                 object obj = ResourceManager.GetObject("icons8_аватар_пользователя_65__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_базы_данных_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_базы_данных_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -296,6 +316,16 @@ namespace Kyrsach2WINFORM.Properties {
         internal static System.Drawing.Bitmap icons8_дата_70 {
             get {
                 object obj = ResourceManager.GetObject("icons8_дата_70", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_доступные_обновления_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_доступные_обновления_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -486,6 +516,26 @@ namespace Kyrsach2WINFORM.Properties {
         internal static System.Drawing.Bitmap icons8_идея_настроек_60 {
             get {
                 object obj = ResourceManager.GetObject("icons8_идея_настроек_60", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_импорт_из_csv_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_импорт_из_csv_25", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_импорт_из_csv_50 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_импорт_из_csv_50", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1136,6 +1186,16 @@ namespace Kyrsach2WINFORM.Properties {
         internal static System.Drawing.Bitmap icons8_усы_100 {
             get {
                 object obj = ResourceManager.GetObject("icons8_усы_100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_экспорт_в_csv_25 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_экспорт_в_csv_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

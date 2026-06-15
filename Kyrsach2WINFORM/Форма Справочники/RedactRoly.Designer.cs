@@ -53,7 +53,7 @@ namespace Kyrsach2WINFORM
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label2.Location = new System.Drawing.Point(31, 43);
+            this.label2.Location = new System.Drawing.Point(12, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 57;

@@ -44,22 +44,22 @@ namespace Kyrsach2WINFORM
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label3.Location = new System.Drawing.Point(82, 19);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(257, 29);
+            this.label3.Size = new System.Drawing.Size(250, 38);
             this.label3.TabIndex = 23;
             this.label3.Text = "Выберите период";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label1.Location = new System.Drawing.Point(23, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(377, 29);
+            this.label1.Size = new System.Drawing.Size(368, 38);
             this.label1.TabIndex = 24;
             this.label1.Text = "для формирования отчета";
             // 
@@ -89,7 +89,7 @@ namespace Kyrsach2WINFORM
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkSeaGreen;
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkSeaGreen;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Verdana", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(91, 367);
             this.button1.Name = "button1";
@@ -134,10 +134,10 @@ namespace Kyrsach2WINFORM
             // radioButton1
             // 
             this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton1.Location = new System.Drawing.Point(43, 240);
+            this.radioButton1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.radioButton1.Location = new System.Drawing.Point(43, 231);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(349, 50);
+            this.radioButton1.Size = new System.Drawing.Size(349, 61);
             this.radioButton1.TabIndex = 74;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Отчет по платежам с подсчетом дохода (PDF)";
@@ -145,10 +145,10 @@ namespace Kyrsach2WINFORM
             // 
             // radioButton2
             // 
-            this.radioButton2.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.radioButton2.Location = new System.Drawing.Point(43, 287);
+            this.radioButton2.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
+            this.radioButton2.Location = new System.Drawing.Point(43, 288);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(349, 54);
+            this.radioButton2.Size = new System.Drawing.Size(357, 61);
             this.radioButton2.TabIndex = 75;
             this.radioButton2.Text = "Отчет с диаграммами рейтинга оказываемых услуг (Excel)";
             this.radioButton2.UseVisualStyleBackColor = true;

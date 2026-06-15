@@ -18,12 +18,33 @@ namespace Kyrsach2WINFORM
         //Fields 
         zapici zapici;  // Выбранная запись
         double Discount = 0;
-        public RedactZapici(zapici zapici)
+        bool redact;
+        public RedactZapici(zapici zapici, bool redact)
         {
             InitializeComponent();
 
             // Включаем двойную буферизацию для DataGridView
             Optimize.SetDoubleBuffered(dataGridView1);
+            this.redact = redact;
+            if (ConnectAndData.Role == "3" && redact == false)
+            {
+                panel1.Visible = false;
+                button1.Visible = false;
+                pictureBox1.Visible = false;
+                tableLayoutPanel3.Visible = false;
+                pictureBox3.Location = new Point(3, 42);
+                panel3.Size = new Size(417, 74);
+                label10.Location = new Point(45, 42);
+                panel3.Location = new Point(12, 135);
+                button8.Location = new Point(12, 310);
+                this.Size = new Size(887, 411);
+                this.Text = "Просмотр записи на услуги";
+            }
+            else if(ConnectAndData.Role == "2" && redact == false)
+            {
+                this.Text = "Просмотр записи на услуги";
+                button1.Visible = false;
+            }
 
             this.zapici = zapici;
 
@@ -67,6 +88,8 @@ namespace Kyrsach2WINFORM
             label7.Text = zapici.PhoneMaster;
         }
 
+        
+
         //Заполняем услугами ДатаГрид
         void FillDataGrid1()
         {
@@ -75,8 +98,13 @@ namespace Kyrsach2WINFORM
                 var Str = zapici.ID;
                 //IdService as ID, Service.Name as 'Название', Cost 'Стоимость', Duration as 'Продолжительность',
                 //CONCAT(Service.Name, '\n     ', Cost, ' руб. | ', Duration, ' мин.') as `Информация о услуге`
+
                 string CMD = $@"Select  
                                     Service.IdService as ID,  CONCAT( Service.Name,'\n     ',Cost,' руб. | ', Duration, ' мин.' ) as `Информация о услуге`
+                                     FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService  WHERE Id_Record = {zapici.ID};";
+                if (ConnectAndData.Role == "3" && redact == false)
+                    CMD = $@"Select  
+                                    Service.IdService as ID,  CONCAT( Service.Name,'\n   ', Duration, ' мин.' ) as `Информация о услуге`
                                      FROM Service_In_Record INNER JOIN Service ON Id_Service = IdService  WHERE Id_Record = {zapici.ID};";
 
 

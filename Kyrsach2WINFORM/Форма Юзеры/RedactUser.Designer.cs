@@ -46,7 +46,7 @@ namespace Kyrsach2WINFORM
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F);
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(82, 217);
+            this.comboBox1.Location = new System.Drawing.Point(77, 280);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(366, 37);
             this.comboBox1.TabIndex = 85;
@@ -57,7 +57,7 @@ namespace Kyrsach2WINFORM
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label5.Location = new System.Drawing.Point(77, 188);
+            this.label5.Location = new System.Drawing.Point(72, 251);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 26);
             this.label5.TabIndex = 82;
@@ -105,7 +105,7 @@ namespace Kyrsach2WINFORM
             // 
             this.textBox4.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox4.Location = new System.Drawing.Point(82, 141);
+            this.textBox4.Location = new System.Drawing.Point(77, 204);
             this.textBox4.MaxLength = 8;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(366, 37);
@@ -118,7 +118,7 @@ namespace Kyrsach2WINFORM
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label3.Location = new System.Drawing.Point(77, 112);
+            this.label3.Location = new System.Drawing.Point(72, 175);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(209, 26);
             this.label3.TabIndex = 108;
@@ -128,7 +128,7 @@ namespace Kyrsach2WINFORM
             // 
             this.textBox5.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox5.Location = new System.Drawing.Point(82, 59);
+            this.textBox5.Location = new System.Drawing.Point(77, 122);
             this.textBox5.MaxLength = 20;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(366, 37);
@@ -141,7 +141,7 @@ namespace Kyrsach2WINFORM
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label6.Location = new System.Drawing.Point(77, 30);
+            this.label6.Location = new System.Drawing.Point(72, 93);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 26);
             this.label6.TabIndex = 106;
@@ -151,7 +151,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(12, 270);
+            this.label1.Location = new System.Drawing.Point(12, 1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(509, 92);
             this.label1.TabIndex = 111;

@@ -24,6 +24,27 @@ namespace Kyrsach2WINFORM
             Optimize.SetDoubleBuffered(dataGridView2);
             dataGridView2.CellBorderStyle = DataGridViewCellBorderStyle.None;
 
+
+            dataGridView2.Columns.Add("Number", "Номер");       // Прячем
+            dataGridView2.Columns["Number"].Visible = false;    //
+
+            dataGridView2.Columns.Add("Name", "Название");
+            dataGridView2.Columns.Add("Description", "Описание");
+            dataGridView2.Columns.Add("NameCategory", "Категория");
+            dataGridView2.Columns.Add("Cost", "Сумма");
+            dataGridView2.Columns.Add("Duration", "Время (мин.)");
+            dataGridView2.Columns.Add("Id_Category", "");
+            dataGridView2.Columns["Id_Category"].Visible = false;
+
+            dataGridView2.Columns["Description"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
+            dataGridView2.Columns[0].Width = 130;
+            dataGridView2.Columns["Description"].Width = 350;
+            dataGridView2.Columns["NameCategory"].Width = 250;
+
+
+            foreach (DataGridViewColumn column in dataGridView2.Columns)
+                column.MinimumWidth = 100;
+
             //Убираем для админа некоторый функционал
             if (ConnectAndData.Role == "1")
             {
@@ -120,21 +141,8 @@ namespace Kyrsach2WINFORM
                     MySqlDataReader RDR = cmd.ExecuteReader();
 
                     dataGridView2.Rows.Clear();
-                    dataGridView2.Columns.Clear();
 
-                    dataGridView2.Columns.Add("Number", "Номер");       // Прячем
-                    dataGridView2.Columns["Number"].Visible = false;    //
 
-                    dataGridView2.Columns.Add("Name", "Название");
-                    dataGridView2.Columns.Add("Description", "Описание");
-                    dataGridView2.Columns.Add("NameCategory", "Категория");
-                    dataGridView2.Columns.Add("Cost", "Стоимость (руб.)");
-                    dataGridView2.Columns.Add("Duration", "Продолжительность (мин.)");
-                    dataGridView2.Columns.Add("Id_Category", "");
-                    dataGridView2.Columns["Id_Category"].Visible = false;
-
-                    foreach (DataGridViewColumn column in dataGridView2.Columns)
-                        column.MinimumWidth = 100;
 
                     //Заполняем данными
                     while (RDR.Read())
@@ -240,7 +248,9 @@ namespace Kyrsach2WINFORM
             Service service = new Service(ID, Name, Cost, Duration, Description, Id_Category, NameCategory);
 
             ReadctYslyg FormA = new ReadctYslyg(service);
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid(LastCMD);
         }
 
@@ -248,7 +258,9 @@ namespace Kyrsach2WINFORM
         private void button2_Click(object sender, EventArgs e)
         {
             AddYslyga FormA = new AddYslyga();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid(LastCMD);
         }
 
@@ -280,7 +292,10 @@ namespace Kyrsach2WINFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Contains("Cannot delete or update a parent row: a foreign key"))
+                    MessageBox.Show($"Данная услуга: {Name}, не может быть удалена, так так учавствует в других записях", "Ошибка удаления услуги", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка удаления услуги", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

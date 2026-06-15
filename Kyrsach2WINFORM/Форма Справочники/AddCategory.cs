@@ -45,8 +45,7 @@ namespace Kyrsach2WINFORM
                 //Проверяем на дубликат
                 if (!CheckCategoty(NameCategoty))
                 {
-                    MessageBox.Show("Эта категория уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    textBox1.Text = Name;    // Очистка
+                    MessageBox.Show($"Данная категория: {textBox1.Text} уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

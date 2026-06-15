@@ -110,7 +110,9 @@ namespace Kyrsach2WINFORM
         private void button2_Click(object sender, EventArgs e)
         {
             AddClient FormA = new AddClient();
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -125,7 +127,9 @@ namespace Kyrsach2WINFORM
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
 
             RedactClient FormA = new RedactClient(new Client(ID, Name, Surname, Patronymic, Phone));
+            Optimize.daughterForm = FormA;
             FormA.ShowDialog();
+            Optimize.daughterForm = null;
             FillDataGrid();
         }
 
@@ -159,7 +163,10 @@ namespace Kyrsach2WINFORM
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Message.Contains("Cannot delete or update a parent row: a foreign key"))
+                    MessageBox.Show($"Данный клиент: {Surname + " " + Name + " " + Patronymic}, не может быть удален, так так учавствует в других записях", "Ошибка удаления клиента", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(ex.Message, "Ошибка удаления клиента", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

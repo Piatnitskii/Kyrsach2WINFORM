@@ -86,6 +86,7 @@ namespace Kyrsach2WINFORM
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "label4";
+            this.label4.Visible = false;
             // 
             // openSchedule
             // 
@@ -136,7 +137,7 @@ namespace Kyrsach2WINFORM
             this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightCoral;
             this.button8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightCoral;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Verdana", 12F);
+            this.button8.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button8.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button8.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_выход_50;
             this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -306,6 +307,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label3.Location = new System.Drawing.Point(86, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(142, 77);
@@ -317,7 +319,7 @@ namespace Kyrsach2WINFORM
             // 
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(86, 9);
+            this.label2.Location = new System.Drawing.Point(89, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 23);
             this.label2.TabIndex = 11;

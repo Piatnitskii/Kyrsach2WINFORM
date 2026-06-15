@@ -248,7 +248,7 @@ namespace Kyrsach2WINFORM
             this.button8.Font = new System.Drawing.Font("Verdana", 12F);
             this.button8.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.button8.Image = global::Kyrsach2WINFORM.Properties.Resources.icons8_double_left_30;
-            this.button8.Location = new System.Drawing.Point(11, 371);
+            this.button8.Location = new System.Drawing.Point(12, 368);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(57, 52);
             this.button8.TabIndex = 47;
@@ -331,7 +331,7 @@ namespace Kyrsach2WINFORM
             this.panel3.Font = new System.Drawing.Font("Comic Sans MS", 14.25F);
             this.panel3.Location = new System.Drawing.Point(12, 246);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(421, 116);
+            this.panel3.Size = new System.Drawing.Size(417, 116);
             this.panel3.TabIndex = 69;
             // 
             // tableLayoutPanel3

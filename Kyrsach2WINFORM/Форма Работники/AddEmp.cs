@@ -202,8 +202,7 @@ namespace Kyrsach2WINFORM
                     //Проверяем на дубликат
                     if (!CheckEmploey(NumberPhone))
                     {
-                        MessageBox.Show("Данный работник уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        Clear();    // Очистка
+                        MessageBox.Show("Работник, с указаным номером телефона уже существует в базе", "Ошибка операции", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -224,7 +223,7 @@ namespace Kyrsach2WINFORM
                         cmd.ExecuteNonQuery();
                     }
 
-                    MessageBox.Show("Работник был успешно добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Работник: {Surname + " " + Name + " " + Patronymic} был успешно добавлен!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Clear();    // Очистка
                 }
                 else
