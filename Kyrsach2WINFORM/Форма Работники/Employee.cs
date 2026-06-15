@@ -112,7 +112,12 @@ namespace Kyrsach2WINFORM
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+            string Patronymic = "";
+
+
+            if (dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ').Length > 2)
+                Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
             string Birthday = dataGridView2.Rows[CurrentRowIndex].Cells["Дата рождения"].Value.ToString();
             string Post = dataGridView2.Rows[CurrentRowIndex].Cells["Должность"].Value.ToString();
@@ -144,7 +149,10 @@ namespace Kyrsach2WINFORM
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+            string Patronymic = "";
+             
+            if(dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ').Length > 2)
+                Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
 
             string CMD = $"DELETE FROM Employe WHERE IdEmploye = {ID};";
             try

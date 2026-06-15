@@ -382,6 +382,9 @@ namespace Kyrsach2WINFORM
 
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (CurrentRowIndex == -1)
+                return;
+
             //Формируем нашу запись в объект
             string ID = dataGridView2.Rows[CurrentRowIndex].Cells["№"].Value.ToString();
             string IDClient = dataGridView2.Rows[CurrentRowIndex].Cells["IDClient"].Value.ToString();

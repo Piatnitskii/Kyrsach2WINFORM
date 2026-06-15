@@ -144,10 +144,19 @@ namespace Kyrsach2WINFORM
         }
 
         //Сохраняем новое фото
-        void SafePhoto(string NewFileName)
+        void SafePhoto(string NewFileName, string NumberPhone)
         {
             string PhotoName = DateTime.Now.ToString("G").Replace(" ", "").Replace(":", "") + "_" + emploey.Photo;    //Составляем новое имя -> 15062006132533_54_СергейП.Ю.png
             string newOldPhotoPath = Path.Combine($@"{ProjectFolderPath}/photo/", PhotoName);
+
+            if(NumberPhone != emploey.Phone && PhotoRedact != true && (emploey.Photo != "" && emploey.Photo != "picture.png"))
+            {
+                if (File.Exists(MainImagePath))
+                {
+                    File.Move( $@"{ProjectFolderPath}\photo\" + emploey.Photo,   $@"{ProjectFolderPath}\photo\" + NewFileName);
+                    MainImagePath = $@"{ProjectFolderPath}\photo\" + NewFileName;
+                }
+            }
 
             //Проверяем, вдруг выбрали файл из нашей файловой базы данных, который установлен в данный момент, и если это не заглушка
             if (MainImagePath == FullPathToNewPhoto && PhotoRedact && MainImagePath != $@"{ProjectFolderPath}\photo\picture.png")
@@ -164,7 +173,7 @@ namespace Kyrsach2WINFORM
                 if (File.Exists($@"{ProjectFolderPath}/photo/" + NewFileName))
                     File.Delete($@"{ProjectFolderPath}/photo/" + NewFileName);
 
-                File.Copy(FullPathToNewPhoto, $@"{ProjectFolderPath}/photo/" + NewFileName);     // 54_СергейП.Ю.png
+                File.Copy(FullPathToNewPhoto, $@"{ProjectFolderPath}/photo/" + NewFileName);     // 76564564_СергейП.Ю.png
             }
         }
 
@@ -184,24 +193,35 @@ namespace Kyrsach2WINFORM
         }
 
         //Формируем новое имя фотки
-        string SayMyFileName( string Name, string Surname, string Patronymic)
+        string SayMyFileName(string numberPhone, string Name, string Surname, string Patronymic, string NumberPhone)
         {
             string NewFileName = "picture.png";
 
             //Проверяем  была ли замена и не явлвяется ли выбранная фотка нашей заглушкой
             if (PhotoRedact && FullPathToNewPhoto != $@"{ProjectFolderPath}\photo\picture.png")
             {
-                NewFileName = emploey.IdEmploey + "_" + Name + Surname[0] + '.';
+                NewFileName = numberPhone + "_" + Name + Surname[0] + '.';
 
-                if (Patronymic != null || Patronymic.Trim() != "")
+                if (Patronymic != null && Patronymic.Trim() != "")
+                    NewFileName += Patronymic[0];
+
+                string FormatFile = (new FileInfo(MainImagePath)).Extension;
+
+                NewFileName += FormatFile;
+            }else if (NumberPhone != emploey.Phone  && MainImagePath != $@"{ProjectFolderPath}\photo\picture.png")
+            {
+                NewFileName = numberPhone + "_" + Name + Surname[0] + '.';
+
+                if (Patronymic != null && Patronymic.Trim() != "")
                     NewFileName += Patronymic[0];
 
                 string FormatFile = (new FileInfo(MainImagePath)).Extension;
 
                 NewFileName += FormatFile;
             }
+            
 
-            return NewFileName; // 54_СергейП.Ю.png
+            return NewFileName; // 734234234_СергейП.Ю.png
         }
 
 
@@ -218,9 +238,24 @@ namespace Kyrsach2WINFORM
                 string Date = dateTimePicker1.Value.ToString("yyyy-MM-dd");
                 string Id_Post = comboBox1.SelectedValue.ToString();
 
+                string CMD = "";
+                string NewFileName = "";
                 //Формируем новое имя фотки, если выбрали
-                string NewFileName = SayMyFileName(Name, Surname, Patronymic);
-                string CMD = $"UPDATE Employe SET Name ='{Name}', Surname = '{Surname}', Patronymic = '{Patronymic}', Phone = '{NumberPhone}', Birthday = '{Date}', Id_Post = '{Id_Post}', Photo = '{NewFileName}' WHERE IdEmploye = '{emploey.IdEmploey}';";
+                if (PhotoRedact)
+                {
+                    NewFileName = SayMyFileName(NumberPhone, Name, Surname, Patronymic, NumberPhone);
+                    CMD = $"UPDATE Employe SET Name ='{Name}', Surname = '{Surname}', Patronymic = '{Patronymic}', Phone = '{NumberPhone}', Birthday = '{Date}', Id_Post = '{Id_Post}', Photo = '{NewFileName}' WHERE IdEmploye = '{emploey.IdEmploey}';";
+                }
+                else if(NumberPhone != emploey.Phone)
+                {
+                    NewFileName = SayMyFileName(NumberPhone, Name, Surname, Patronymic, NumberPhone);
+                    CMD = $"UPDATE Employe SET Name ='{Name}', Surname = '{Surname}', Patronymic = '{Patronymic}', Phone = '{NumberPhone}', Birthday = '{Date}', Id_Post = '{Id_Post}', Photo = '{NewFileName}' WHERE IdEmploye = '{emploey.IdEmploey}';";
+                }
+                else
+                {
+                    CMD = $"UPDATE Employe SET Name ='{Name}', Surname = '{Surname}', Patronymic = '{Patronymic}', Phone = '{NumberPhone}', Birthday = '{Date}', Id_Post = '{Id_Post}' WHERE IdEmploye = '{emploey.IdEmploey}';";
+                }
+
 
                 DialogResult dialogResult = MessageBox.Show("Изменить данные сотрудника?", "Предупреждение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
@@ -240,7 +275,7 @@ namespace Kyrsach2WINFORM
                     }
 
                     //Сохраняем фото
-                    SafePhoto(NewFileName);
+                    SafePhoto(NewFileName, NumberPhone);
 
                     //Редактируем строку
                     using (MySqlConnection Con = new MySqlConnection(ConnectAndData.Сonnect))

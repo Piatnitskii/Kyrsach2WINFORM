@@ -22,7 +22,7 @@ namespace Kyrsach2WINFORM
         string MainImagePath;           //путь до фото
         bool PhotoAdd = false;          //было ли изменение фото
 
-        string EmploeyId;
+
 
         public AddEmp()
         {
@@ -145,16 +145,16 @@ namespace Kyrsach2WINFORM
 
 
         //Формируем новое имя фотки 
-        string SayMyFileName(string EmploeyId, string Name, string Surname, string Patronymic)
+        string SayMyFileName(string NumberPhone, string Name, string Surname, string Patronymic)
         {
             string NewFileName = "picture.png";     // По дефолту заглушка
-                            
+             
             //Проверяем  была ли замена и не явлвяется ли выбранная фотка нашей заглушкой
             if (PhotoAdd && MainImagePath != $@"{ProjectFolderPath}\photo\picture.png")
             {
-                 NewFileName = EmploeyId + "_" + Name + Surname[0] + '.';
+                 NewFileName = NumberPhone + "_" + Name + Surname[0] + '.';
 
-                if (Patronymic != null || Patronymic.Trim() != "")
+                if (Patronymic != null && Patronymic.Trim() != "")
                     NewFileName += Patronymic[0];
 
                 string FormatFile = (new FileInfo(MainImagePath)).Extension;
@@ -212,11 +212,11 @@ namespace Kyrsach2WINFORM
                         Con.Open();
                         
                         // 1. Получаем максимальный ID  ///////////////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        MySqlCommand cmd = new MySqlCommand(@"SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'BarBer' AND TABLE_NAME = 'Employe'; ", Con);
-                        EmploeyId = cmd.ExecuteScalar().ToString();
+                        MySqlCommand cmd = new MySqlCommand(@"", Con);
+                        
 
                         // 1.5 Сохраняем фото
-                        NewFileName = SayMyFileName(EmploeyId, Name, Surname, Patronymic);
+                        NewFileName = SayMyFileName(NumberPhone, Name, Surname, Patronymic);
 
                         // 2. Добавляем в таблицу нашего сотрудника
                         cmd.CommandText = CMD +  $" '{NewFileName}'); ";

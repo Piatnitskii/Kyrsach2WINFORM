@@ -123,7 +123,11 @@ namespace Kyrsach2WINFORM
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+
+            string Patronymic = "";
+            if(dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ').Length > 2)
+                Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+
             string Phone = dataGridView2.Rows[CurrentRowIndex].Cells["Телефон"].Value.ToString();
 
             RedactClient FormA = new RedactClient(new Client(ID, Name, Surname, Patronymic, Phone));
@@ -139,7 +143,10 @@ namespace Kyrsach2WINFORM
             var ID = dataGridView2.Rows[CurrentRowIndex].Cells["ID"].Value.ToString();
             string Name = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[1];
             string Surname = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[0];
-            string Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
+            string Patronymic = "";
+
+            if(dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ').Length > 2)
+                Patronymic = dataGridView2.Rows[CurrentRowIndex].Cells["ФИО"].Value.ToString().Split(' ')[2];
 
             string CMD = $"DELETE FROM Client WHERE IdClient = {ID};";
             try

@@ -84,7 +84,7 @@ namespace Kyrsach2WINFORM
         void ConfigurePath()
         {
             // Подставляем соответсвующую фотку
-            if (emploey.Photo.Trim() == "" || emploey.Photo == "picture.png")
+            if (emploey.Photo?.Trim() == "" || emploey.Photo == "picture.png" || emploey.Photo == null)
                 MainImagePath = $@"{ProjectFolderPath}\photo\picture.png";
             else
                 MainImagePath = $@"{ProjectFolderPath}\photo\" + emploey.Photo;

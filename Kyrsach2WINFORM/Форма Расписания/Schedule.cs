@@ -41,7 +41,8 @@ namespace Kyrsach2WINFORM
                     INNER JOIN `Employe` ON IdEmploye = Id_Employe  
                     INNER JOIN `Status` ON IdStatus = Id_Status
 
-                WHERE Employe.IdEmploye = {ConnectAndData.Id_Employe} AND Status.Name = 'Ожидается'";
+                WHERE Employe.IdEmploye = {ConnectAndData.Id_Employe} AND Status.Name = 'Ожидается'
+                ORDER BY Date_Record ASC, Time_Record ASC ";
 
         // Заполняет данными таблицу
         void FillDataGrid()
@@ -74,6 +75,7 @@ namespace Kyrsach2WINFORM
                     dataGridView2.Columns["IDMaser"].Visible = false;
                     dataGridView2.Columns["ФИО мастера"].Visible = false;
                     dataGridView2.Columns["PhoneMaster"].Visible = false;
+                    dataGridView2.Columns["ФИО клиента"].DefaultCellStyle.Padding = new Padding(5, 10, 0, 10);
                     dataGridView2.Columns["Продолжительность, мин."].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                     foreach (DataGridViewColumn column in dataGridView2.Columns)
@@ -146,6 +148,23 @@ namespace Kyrsach2WINFORM
         private void button4_Click(object sender, EventArgs e)
         {
             FillDataGrid();
+        }
+
+
+        private void dataGridView2_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
+        private void dataGridView2_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex > -1)
+            {
+                dataGridView2.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGray;
+            }
         }
     }
 }
